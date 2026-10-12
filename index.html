@@ -8,28 +8,33 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome 아이콘 CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
 </head>
-<body class="bg-slate-100 font-sans text-slate-800 min-h-screen flex flex-col justify-between">
+<body id="body-tag" class="bg-slate-100 dark:bg-slate-900 font-sans text-slate-800 dark:text-slate-100 min-h-screen flex flex-col justify-between transition-colors duration-200">
 
     <!-- 네비게이션 바 -->
-    <nav class="bg-indigo-600 text-white shadow-md sticky top-0 z-50">
+    <nav class="bg-indigo-600 dark:bg-indigo-900 text-white shadow-md sticky top-0 z-50 transition-colors duration-200">
         <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-4">
                 <h1 class="text-xl font-bold tracking-tight cursor-pointer" onclick="showPage('home')">
                     <i class="fa-solid fa-flag-checkered mr-2"></i> 한가람 체육활동
                 </h1>
-                <!-- 실시간 접속자 수 표시 -->
-                <span class="bg-indigo-700 text-indigo-100 text-xs font-semibold px-2.5 py-1 rounded-full hidden sm:inline-block">
+                <span class="bg-indigo-700 dark:bg-indigo-950 text-indigo-100 text-xs font-semibold px-2.5 py-1 rounded-full hidden sm:inline-block">
                     <i class="fa-solid fa-users mr-1"></i> 접속자 <span id="online-count">1</span>명
                 </span>
             </div>
-            <div class="space-x-2 sm:space-x-4 text-xs sm:text-sm font-medium">
+            <div class="space-x-2 sm:space-x-4 text-xs sm:text-sm font-medium flex items-center">
                 <button onclick="showPage('home')" class="hover:text-indigo-200 transition">홈</button>
                 <button onclick="showPage('score')" class="hover:text-indigo-200 transition">점수판</button>
                 <button onclick="showPage('schedule')" class="hover:text-indigo-200 transition">상세일정</button>
                 <button onclick="showPage('bracket')" class="hover:text-indigo-200 transition">대진표</button>
                 <button onclick="showPage('poll')" class="hover:text-indigo-200 transition">투표</button>
                 <button onclick="showPage('board')" class="hover:text-indigo-200 transition">게시판</button>
+                <button onclick="showPage('settings')" class="hover:text-indigo-200 transition text-base" title="설정"><i class="fa-solid fa-gear"></i></button>
             </div>
         </div>
     </nav>
@@ -44,27 +49,27 @@
                 <h2 class="text-4xl sm:text-5xl font-black mt-4 mb-2 tracking-tight">한가람 체육활동 및 한마당</h2>
             </div>
 
-            <div class="bg-white rounded-3xl shadow-md p-8 sm:p-10 space-y-6 text-slate-700 leading-relaxed">
+            <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-md p-8 sm:p-10 space-y-6 text-slate-700 dark:text-slate-200 leading-relaxed transition-colors duration-200">
                 <div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-2 flex items-center">
-                        <i class="fa-solid fa-circle-info text-indigo-600 mr-2"></i> 행사 안내
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center">
+                        <i class="fa-solid fa-circle-info text-indigo-600 dark:text-indigo-400 mr-2"></i> 행사 안내
                     </h3>
-                    <p class="text-sm sm:text-base text-slate-600">
-                        환영합니다! 2026년 10월 16일 금요일에 개최되는 한가람 체육활동 공식 웹사이트입니다. 본 사이트에서는 당일 진행되는 실시간 점수 확인, 상세 타임테이블, 종목별 세부 대진표 및 규칙, 승부 예측 투표와 디스코드 스타일의 자유게시판을 이용하실 수 있습니다.
+                    <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300">
+                        환영합니다! 2026년 10월 16일 금요일에 개최되는 한가람 체육활동 공식 웹사이트입니다. 본 사이트에서는 실시간 점수 확인, 상세 타임테이블, 종목별 대진표, 투표 및 디스코드 스타일의 자유게시판과 환경 설정 기능을 이용하실 수 있습니다.
                     </p>
                 </div>
 
-                <div class="border-t border-slate-100 pt-5">
-                    <h3 class="text-xl font-bold text-slate-900 mb-2 flex items-center">
-                        <i class="fa-solid fa-compass text-indigo-600 mr-2"></i> 이용 방법
+                <div class="border-t border-slate-100 dark:border-slate-700 pt-5">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2 flex items-center">
+                        <i class="fa-solid fa-compass text-indigo-600 dark:text-indigo-400 mr-2"></i> 이용 방법
                     </h3>
-                    <p class="text-sm sm:text-base text-slate-600">
-                        상단에 위치한 네비게이션 메뉴바(점수판, 상세일정, 대진표, 투표, 게시판)를 클릭하여 각 세부 페이지로 이동하실 수 있습니다.
+                    <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300">
+                        상단 네비게이션 메뉴바를 통해 각 페이지로 이동할 수 있으며, 우측 상단의 설정 아이콘을 눌러 테마와 닉네임을 변경할 수 있습니다.
                     </p>
                 </div>
 
-                <div class="border-t border-slate-100 pt-5 text-center bg-indigo-50 p-4 rounded-2xl border border-indigo-100">
-                    <p class="text-indigo-900 text-sm font-semibold">
+                <div class="border-t border-slate-100 dark:border-slate-700 pt-5 text-center bg-indigo-50 dark:bg-indigo-950/50 p-4 rounded-2xl border border-indigo-100 dark:border-indigo-900">
+                    <p class="text-indigo-900 dark:text-indigo-300 text-sm font-semibold">
                         "달리자, 외치자, 하나되자! 열정과 협동이 빛나는 한가람의 축제"
                     </p>
                 </div>
@@ -72,33 +77,33 @@
         </div>
 
         <!-- 1. 실시간 점수판 페이지 -->
-        <section id="page-score" class="hidden bg-white rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full">
-            <div class="flex items-center justify-between border-b pb-4">
-                <h3 class="text-2xl font-bold text-slate-900"><i class="fa-solid fa-trophy text-indigo-600 mr-2"></i>실시간 점수판</h3>
-                <button onclick="showPage('home')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-bold transition"><i class="fa-solid fa-arrow-left mr-1"></i> 홈으로</button>
+        <section id="page-score" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full transition-colors duration-200">
+            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-4">
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-trophy text-indigo-600 dark:text-indigo-400 mr-2"></i>실시간 점수판</h3>
+                <button onclick="showPage('home')" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-sm font-bold transition"><i class="fa-solid fa-arrow-left mr-1"></i> 홈으로</button>
             </div>
-            <p class="text-slate-500 text-sm text-center">경기가 진행될 때마다 점수가 실시간으로 반영됩니다.</p>
+            <p class="text-slate-500 dark:text-slate-400 text-sm text-center">경기가 진행될 때마다 점수가 실시간으로 반영됩니다.</p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-                <div class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-6 text-center flex flex-col justify-between">
+                <div class="bg-blue-50 dark:bg-blue-950/40 border-2 border-blue-200 dark:border-blue-800 rounded-2xl p-6 text-center flex flex-col justify-between">
                     <div>
                         <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">TEAM BLUE</span>
-                        <h4 class="text-3xl font-black text-blue-700 mt-3">청 팀</h4>
-                        <div class="text-6xl font-extrabold text-blue-800 my-6" id="blue-score">0</div>
+                        <h4 class="text-3xl font-black text-blue-700 dark:text-blue-400 mt-3">청 팀</h4>
+                        <div class="text-6xl font-extrabold text-blue-800 dark:text-blue-300 my-6" id="blue-score">0</div>
                     </div>
                     <div id="blue-buttons" class="flex justify-center space-x-3">
-                        <button onclick="updateScore('blue', -10)" class="bg-blue-200 hover:bg-blue-300 text-blue-800 font-bold px-4 py-2 rounded-xl transition">-10</button>
+                        <button onclick="updateScore('blue', -10)" class="bg-blue-200 dark:bg-blue-900 hover:bg-blue-300 text-blue-800 dark:text-blue-200 font-bold px-4 py-2 rounded-xl transition">-10</button>
                         <button onclick="updateScore('blue', 10)" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 rounded-xl transition">+10</button>
                     </div>
                 </div>
-                <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-6 text-center flex flex-col justify-between">
+                <div class="bg-rose-50 dark:bg-rose-950/40 border-2 border-rose-200 dark:border-rose-800 rounded-2xl p-6 text-center flex flex-col justify-between">
                     <div>
                         <span class="bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full">TEAM WHITE</span>
-                        <h4 class="text-3xl font-black text-rose-700 mt-3">백 팀</h4>
-                        <div class="text-6xl font-extrabold text-rose-800 my-6" id="white-score">0</div>
+                        <h4 class="text-3xl font-black text-rose-700 dark:text-rose-400 mt-3">백 팀</h4>
+                        <div class="text-6xl font-extrabold text-rose-800 dark:text-rose-300 my-6" id="white-score">0</div>
                     </div>
                     <div id="white-buttons" class="flex justify-center space-x-3">
-                        <button onclick="updateScore('white', -10)" class="bg-rose-200 hover:bg-rose-300 text-rose-800 font-bold px-4 py-2 rounded-xl transition">-10</button>
+                        <button onclick="updateScore('white', -10)" class="bg-rose-200 dark:bg-rose-900 hover:bg-rose-300 text-rose-800 dark:text-rose-200 font-bold px-4 py-2 rounded-xl transition">-10</button>
                         <button onclick="updateScore('white', 10)" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-6 py-2 rounded-xl transition">+10</button>
                     </div>
                 </div>
@@ -106,108 +111,108 @@
         </section>
 
         <!-- 2. 경기 일정 페이지 -->
-        <section id="page-schedule" class="hidden bg-white rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full">
-            <div class="flex items-center justify-between border-b pb-4">
-                <h3 class="text-2xl font-bold text-slate-900"><i class="fa-solid fa-calendar-days text-indigo-600 mr-2"></i>상세 타임테이블</h3>
-                <button onclick="showPage('home')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-bold transition"><i class="fa-solid fa-arrow-left mr-1"></i> 홈으로</button>
+        <section id="page-schedule" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full transition-colors duration-200">
+            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-4">
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-calendar-days text-indigo-600 dark:text-indigo-400 mr-2"></i>상세 타임테이블</h3>
+                <button onclick="showPage('home')" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-sm font-bold transition"><i class="fa-solid fa-arrow-left mr-1"></i> 홈으로</button>
             </div>
             
             <div class="space-y-4 pt-2">
-                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <span class="bg-indigo-100 text-indigo-700 font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">08:50 ~ 09:00</span>
-                    <div><h4 class="font-bold text-slate-800">각반 출석체크 및 운동장 집결 완료</h4><p class="text-slate-600 text-sm">출석 확인 후 지정 구역 집결</p></div>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
+                    <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">08:50 ~ 09:00</span>
+                    <div><h4 class="font-bold text-slate-800 dark:text-slate-200">각반 출석체크 및 운동장 집결 완료</h4><p class="text-slate-600 dark:text-slate-400 text-sm">출석 확인 후 지정 구역 집결</p></div>
                 </div>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <span class="bg-indigo-100 text-indigo-700 font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">09:00 ~ 09:20</span>
-                    <div><h4 class="font-bold text-slate-800">[전체 운동장 집결] 개회선언 및 준비운동 후 이동</h4></div>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
+                    <span class="bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">09:00 ~ 09:20</span>
+                    <div><h4 class="font-bold text-slate-800 dark:text-slate-200">[전체 운동장 집결] 개회선언 및 준비운동 후 이동</h4></div>
                 </div>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-indigo-50/50 dark:bg-indigo-950/30 p-4 rounded-xl border border-indigo-100 dark:border-indigo-900">
                     <span class="bg-indigo-600 text-white font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">09:20 ~ 10:20</span>
-                    <div><h4 class="font-bold text-slate-900">1부 순환 경기</h4><p class="text-slate-700 text-sm mt-1">[운동장] 단체 경기 / [체육관] 피구 경기 / [각반교실] 협동 챌린지</p></div>
+                    <div><h4 class="font-bold text-slate-900 dark:text-slate-100">1부 순환 경기</h4><p class="text-slate-700 dark:text-slate-300 text-sm mt-1">[운동장] 단체 경기 / [체육관] 피구 경기 / [각반교실] 협동 챌린지</p></div>
                 </div>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <span class="bg-slate-200 text-slate-700 font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">10:20 ~ 10:30</span>
-                    <div><h4 class="font-bold text-slate-800">휴식시간 및 이동 (보조 준비운동 실시)</h4></div>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
+                    <span class="bg-slate-200 dark:bg-slate-600 text-slate-700 dark:text-slate-200 font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">10:20 ~ 10:30</span>
+                    <div><h4 class="font-bold text-slate-800 dark:text-slate-200">휴식시간 및 이동 (보조 준비운동 실시)</h4></div>
                 </div>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-indigo-50/50 dark:bg-indigo-950/30 p-4 rounded-xl border border-indigo-100 dark:border-indigo-900">
                     <span class="bg-indigo-600 text-white font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">10:30 ~ 11:30</span>
-                    <div><h4 class="font-bold text-slate-900">2부 순환 경기</h4><p class="text-slate-700 text-sm mt-1">[체육관] 피구 경기 / [각반교실] 협동 챌린지 / [운동장] 단체 경기</p></div>
+                    <div><h4 class="font-bold text-slate-900 dark:text-slate-100">2부 순환 경기</h4><p class="text-slate-700 dark:text-slate-300 text-sm mt-1">[체육관] 피구 경기 / [각반교실] 협동 챌린지 / [운동장] 단체 경기</p></div>
                 </div>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <span class="bg-slate-200 text-slate-700 font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">11:30 ~ 11:40</span>
-                    <div><h4 class="font-bold text-slate-800">휴식시간 및 이동 (보조 준비운동 실시)</h4></div>
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
+                    <span class="bg-slate-200 dark:bg-slate-600 text-slate-700 dark:text-slate-200 font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">11:30 ~ 11:40</span>
+                    <div><h4 class="font-bold text-slate-800 dark:text-slate-200">휴식시간 및 이동 (보조 준비운동 실시)</h4></div>
                 </div>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-indigo-50/50 dark:bg-indigo-950/30 p-4 rounded-xl border border-indigo-100 dark:border-indigo-900">
                     <span class="bg-indigo-600 text-white font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">11:40 ~ 12:40</span>
-                    <div><h4 class="font-bold text-slate-900">3부 순환 경기</h4><p class="text-slate-700 text-sm mt-1">[각반교실] 협동 챌린지 / [운동장] 단체 경기 / [체육관] 피구 경기</p></div>
+                    <div><h4 class="font-bold text-slate-900 dark:text-slate-100">3부 순환 경기</h4><p class="text-slate-700 dark:text-slate-300 text-sm mt-1">[각반교실] 협동 챌린지 / [운동장] 단체 경기 / [체육관] 피구 경기</p></div>
                 </div>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-amber-50 p-4 rounded-xl border border-amber-200">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-amber-50 dark:bg-amber-950/30 p-4 rounded-xl border border-amber-200 dark:border-amber-900">
                     <span class="bg-amber-500 text-white font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">12:40 ~ 13:30</span>
-                    <div><h4 class="font-bold text-amber-900">점심시간 및 휴식 및 이동</h4><p class="text-amber-700 text-sm">(체육관: 학생자치회 스포츠부스 운영)</p></div>
+                    <div><h4 class="font-bold text-amber-900 dark:text-amber-300">점심시간 및 휴식 및 이동</h4><p class="text-amber-700 dark:text-amber-400 text-sm">(체육관: 학생자치회 스포츠부스 운영)</p></div>
                 </div>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-violet-50 p-4 rounded-xl border border-violet-200">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-violet-50 dark:bg-violet-950/30 p-4 rounded-xl border border-violet-200 dark:border-violet-900">
                     <span class="bg-violet-600 text-white font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">13:30 ~ 14:15</span>
-                    <div><h4 class="font-bold text-violet-900">[전교생 운동장 집결] 피날레</h4><p class="text-violet-700 text-sm mt-1">• 축하공연(댄스동아리) / 학년별 단체 줄넘기 / 이어달리기 결승 / 시상 및 마무리</p></div>
+                    <div><h4 class="font-bold text-violet-900 dark:text-violet-300">[전교생 운동장 집결] 피날레</h4><p class="text-violet-700 dark:text-violet-400 text-sm mt-1">• 축하공연(댄스동아리) / 학년별 단체 줄넘기 / 이어달리기 결승 / 시상 및 마무리</p></div>
                 </div>
-                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 p-4 rounded-xl border border-slate-100">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-100 dark:border-slate-700">
                     <span class="bg-slate-600 text-white font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">14:15 ~ 15:00</span>
-                    <div><h4 class="font-bold text-slate-800">교내정화활동 (봉사)</h4></div>
+                    <div><h4 class="font-bold text-slate-800 dark:text-slate-200">교내정화활동 (봉사)</h4></div>
                 </div>
             </div>
         </section>
 
         <!-- 3. 종목별 대진표 및 규칙 페이지 -->
-        <section id="page-bracket" class="hidden bg-white rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full">
-            <div class="flex items-center justify-between border-b pb-4">
-                <h3 class="text-2xl font-bold text-slate-900"><i class="fa-solid fa-sitemap text-indigo-600 mr-2"></i>종목별 대진표 및 규칙</h3>
-                <button onclick="showPage('home')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-bold transition"><i class="fa-solid fa-arrow-left mr-1"></i> 홈으로</button>
+        <section id="page-bracket" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full transition-colors duration-200">
+            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-4">
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-sitemap text-indigo-600 dark:text-indigo-400 mr-2"></i>종목별 대진표 및 규칙</h3>
+                <button onclick="showPage('home')" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-sm font-bold transition"><i class="fa-solid fa-arrow-left mr-1"></i> 홈으로</button>
             </div>
             
             <div class="space-y-6 pt-2">
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                    <h4 class="font-bold text-indigo-700 text-base mb-2"><i class="fa-solid fa-people-pulling mr-2"></i>달리는 줄다리기 (학급 전체)[cite: 3]</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">
+                <div class="bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-5">
+                    <h4 class="font-bold text-indigo-700 dark:text-indigo-400 text-base mb-2"><i class="fa-solid fa-people-pulling mr-2"></i>달리는 줄다리기 (학급 전체)[cite: 3]</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                         • 학급 간 예선전(토너먼트) 및 결승전 진행[cite: 3]<br>
                         • 신호총 소리에 여학생은 줄다리기 줄을 당기고, 남학생은 정해진 거리에서 대기하다가 신호총 소리와 함께 뛰어가 여학생들을 도와서 줄을 당긴다[cite: 3].<br>
                         • 제한시간은 30초이며 3판 2선승제[cite: 3].
                     </p>
                 </div>
 
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                    <h4 class="font-bold text-indigo-700 text-base mb-2"><i class="fa-solid fa-ring mr-2"></i>공&후프 릴레이 (학급 전체)[cite: 3]</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">
+                <div class="bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-5">
+                    <h4 class="font-bold text-indigo-700 dark:text-indigo-400 text-base mb-2"><i class="fa-solid fa-ring mr-2"></i>공&후프 릴레이 (학급 전체)[cite: 3]</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                         • 첫 번째 학생은 달려가 공을 가져와서 공을 옆으로 전달하여 다음 학생에게 남겨주어 마지막 학생에게 공이 도착하면 마지막 학생은 공을 가지고 앞으로 온다[cite: 3].<br>
                         • 후프를 통과하여 출발선에 있는 고무에 후프를 거는 순서대로 순위를 매긴다[cite: 3].
                     </p>
                 </div>
 
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                    <h4 class="font-bold text-indigo-700 text-base mb-2"><i class="fa-solid fa-person-running mr-2"></i>이어달리기 (남학생 4명, 여학생 4명)[cite: 3]</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">
+                <div class="bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-5">
+                    <h4 class="font-bold text-indigo-700 dark:text-indigo-400 text-base mb-2"><i class="fa-solid fa-person-running mr-2"></i>이어달리기 (남학생 4명, 여학생 4명)[cite: 3]</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                         • 여-남-여-남-여-남-여-남 순서로 실시 (배턴을 떨어뜨리지 않고 결승선에 먼저 들어오는 반이 승리)[cite: 3].<br>
                         • 예선전 상위 1, 2위 결승 진출[cite: 3].
                     </p>
                 </div>
 
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                    <h4 class="font-bold text-indigo-700 text-base mb-2"><i class="fa-solid fa-arrows-spin mr-2"></i>학년별 단체 줄넘기[cite: 3]</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">
+                <div class="bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-5">
+                    <h4 class="font-bold text-indigo-700 dark:text-indigo-400 text-base mb-2"><i class="fa-solid fa-arrows-spin mr-2"></i>학년별 단체 줄넘기[cite: 3]</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                         • 1, 2학년은 최소인원 20명 / 3학년은 모두 줄 돌리는 인원 포함[cite: 3].<br>
                         • 제한시간 2분 동안 동시에 실시하여 횟수를 측정하여 순위 결정[cite: 3].
                     </p>
                 </div>
 
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                    <h4 class="font-bold text-indigo-700 text-base mb-2"><i class="fa-solid fa-basketball mr-2"></i>피구 경기 (남학생 8명, 여학생 8명)[cite: 3]</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">
+                <div class="bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-5">
+                    <h4 class="font-bold text-indigo-700 dark:text-indigo-400 text-base mb-2"><i class="fa-solid fa-basketball mr-2"></i>피구 경기 (남학생 8명, 여학생 8명)[cite: 3]</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                         • 포커스, 헤드샷, 더블패스(외곽간 패스 인정), 더블 아웃은 허용하지 않음[cite: 3].<br>
                         • 전학년 조별 토너먼트 및 7분 단세트로 진행[cite: 3].
                     </p>
                 </div>
 
-                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                    <h4 class="font-bold text-indigo-700 text-base mb-2"><i class="fa-solid fa-puzzle-piece mr-2"></i>협동 챌린지 (20명)[cite: 3]</h4>
-                    <p class="text-xs text-slate-600 leading-relaxed">
+                <div class="bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-5">
+                    <h4 class="font-bold text-indigo-700 dark:text-indigo-400 text-base mb-2"><i class="fa-solid fa-puzzle-piece mr-2"></i>협동 챌린지 (20명)[cite: 3]</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                         • 30분간 연습 후 3인조 측정하여 가장 좋은 기록으로 한다[cite: 3].<br>
                         • 제기차기 5개, 공굴리기 나무가지로 옮기기, 콩집기 등 순환 미션 수행[cite: 3].
                     </p>
@@ -216,63 +221,117 @@
         </section>
 
         <!-- 4. 투표 페이지 -->
-        <section id="page-poll" class="hidden bg-white rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full">
-            <div class="flex items-center justify-between border-b pb-4">
-                <h3 class="text-2xl font-bold text-slate-900"><i class="fa-solid fa-square-poll-vertical text-indigo-600 mr-2"></i>실시간 투표소</h3>
-                <button onclick="showPage('home')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-bold transition"><i class="fa-solid fa-arrow-left mr-1"></i> 홈으로</button>
+        <section id="page-poll" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full transition-colors duration-200">
+            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-4">
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-square-poll-vertical text-indigo-600 dark:text-indigo-400 mr-2"></i>실시간 투표소</h3>
+                <button onclick="showPage('home')" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-sm font-bold transition"><i class="fa-solid fa-arrow-left mr-1"></i> 홈으로</button>
             </div>
             
             <div class="max-w-xl mx-auto space-y-4 pt-4">
-                <p class="text-slate-500 text-sm text-center">이번 한가람 체육활동 최종 우승팀은 어디가 될까요?</p>
-                <button onclick="vote('blue')" class="w-full bg-blue-50 hover:bg-blue-100 border-2 border-blue-200 p-4 rounded-2xl flex justify-between items-center transition">
-                    <span class="font-bold text-blue-800 text-lg"><i class="fa-solid fa-shield text-blue-600 mr-2"></i>청팀 우승 예상</span>
+                <p class="text-slate-500 dark:text-slate-400 text-sm text-center">이번 한가람 체육활동 최종 우승팀은 어디가 될까요?</p>
+                <button onclick="vote('blue')" class="w-full bg-blue-50 dark:bg-blue-950/40 hover:bg-blue-100 dark:hover:bg-blue-900/50 border-2 border-blue-200 dark:border-blue-800 p-4 rounded-2xl flex justify-between items-center transition">
+                    <span class="font-bold text-blue-800 dark:text-blue-300 text-lg"><i class="fa-solid fa-shield text-blue-600 dark:text-blue-400 mr-2"></i>청팀 우승 예상</span>
                     <span id="blue-votes" class="bg-blue-600 text-white px-3 py-1 rounded-full font-bold text-sm">0표 (0%)</span>
                 </button>
-                <button onclick="vote('white')" class="w-full bg-rose-50 hover:bg-rose-100 border-2 border-rose-200 p-4 rounded-2xl flex justify-between items-center transition">
-                    <span class="font-bold text-rose-800 text-lg"><i class="fa-solid fa-shield text-rose-600 mr-2"></i>백팀 우승 예상</span>
+                <button onclick="vote('white')" class="w-full bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 border-2 border-rose-200 dark:border-rose-800 p-4 rounded-2xl flex justify-between items-center transition">
+                    <span class="font-bold text-rose-800 dark:text-rose-300 text-lg"><i class="fa-solid fa-shield text-rose-600 dark:text-rose-400 mr-2"></i>백팀 우승 예상</span>
                     <span id="white-votes" class="bg-rose-600 text-white px-3 py-1 rounded-full font-bold text-sm">0표 (0%)</span>
                 </button>
             </div>
         </section>
 
         <!-- 5. 자유게시판 페이지 -->
-        <section id="page-board" class="hidden bg-white rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full">
-            <div class="flex items-center justify-between border-b pb-4">
-                <h3 class="text-2xl font-bold text-slate-900"><i class="fa-brands fa-discord text-indigo-600 mr-2"></i>포스트 자유게시판</h3>
-                <button onclick="showPage('home')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-sm font-bold transition"><i class="fa-solid fa-arrow-left mr-1"></i> 홈으로</button>
+        <section id="page-board" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full transition-colors duration-200">
+            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-4">
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white"><i class="fa-brands fa-discord text-indigo-600 dark:text-indigo-400 mr-2"></i>포스트 자유게시판</h3>
+                <button onclick="showPage('home')" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-sm font-bold transition"><i class="fa-solid fa-arrow-left mr-1"></i> 홈으로</button>
             </div>
 
             <!-- 글 작성 폼 -->
-            <form id="board-form" onsubmit="addPost(event)" class="space-y-4 bg-slate-50 p-4 sm:p-6 rounded-2xl border border-slate-200">
+            <form id="board-form" onsubmit="addPost(event)" class="space-y-4 bg-slate-50 dark:bg-slate-700/50 p-4 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-700">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <input type="text" id="post-author" placeholder="닉네임 (또는 학급)" required class="flex-1 border border-slate-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
-                    <label class="flex items-center space-x-2 text-sm text-slate-700 cursor-pointer select-none">
+                    <input type="text" id="post-author" placeholder="닉네임 (또는 학급)" required class="flex-1 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                    <label class="flex items-center space-x-2 text-sm text-slate-700 dark:text-slate-300 cursor-pointer select-none">
                         <input type="checkbox" id="is-anonymous" onchange="toggleAnonymous()" class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
                         <span>익명으로 작성</span>
                     </label>
                 </div>
-                <input type="text" id="post-title" placeholder="포스트 제목" required class="w-full border border-slate-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
-                <textarea id="post-content" placeholder="포스트 내용을 입력하세요..." rows="3" required class="w-full border border-slate-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"></textarea>
+                <input type="text" id="post-title" placeholder="포스트 제목" required class="w-full border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                <textarea id="post-content" placeholder="포스트 내용을 입력하세요..." rows="3" required class="w-full border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"></textarea>
                 <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl transition text-sm">포스트 생성하기</button>
             </form>
 
-            <!-- 포스트 목록 (처음에는 깨끗하게 비워둠) -->
             <div id="post-list" class="space-y-6 pt-2">
+            </div>
+        </section>
+
+        <!-- 6. 설정 페이지 -->
+        <section id="page-settings" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full transition-colors duration-200">
+            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-4">
+                <h3 class="text-2xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-gear text-indigo-600 dark:text-indigo-400 mr-2"></i>환경 설정</h3>
+                <button onclick="showPage('home')" class="bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-sm font-bold transition"><i class="fa-solid fa-arrow-left mr-1"></i> 홈으로</button>
+            </div>
+
+            <div class="space-y-6 pt-2">
+                <!-- 테마 설정 -->
+                <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <div>
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-base"><i class="fa-solid fa-moon mr-2 text-indigo-600 dark:text-indigo-400"></i>화면 테마 설정</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">다크 모드 또는 라이트 모드를 전환합니다.</p>
+                    </div>
+                    <button onclick="toggleTheme()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition">
+                        테마 전환
+                    </button>
+                </div>
+
+                <!-- 프로필 닉네임 설정 -->
+                <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl border border-slate-200 dark:border-slate-700 space-y-3">
+                    <div>
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-base"><i class="fa-solid fa-user mr-2 text-indigo-600 dark:text-indigo-400"></i>기본 닉네임 설정</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">게시판이나 댓글 작성 시 기본으로 사용할 닉네임을 지정합니다.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="text" id="settings-nickname" placeholder="닉네임 입력 (예: 3반 홍길동)" class="flex-1 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                        <button onclick="saveNickname()" class="bg-slate-800 dark:bg-slate-600 hover:bg-slate-900 text-white px-4 py-2 rounded-xl text-xs font-bold transition">저장</button>
+                    </div>
+                </div>
+
+                <!-- 알림 설정 -->
+                <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <div>
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-base"><i class="fa-solid fa-bell mr-2 text-indigo-600 dark:text-indigo-400"></i>활동 알림 받기</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">새로운 댓글 및 공지사항 알림을 활성화합니다.</p>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" id="notification-toggle" onchange="toggleNotification()" class="sr-only peer" checked>
+                        <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer dark:bg-slate-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                    </label>
+                </div>
+
+                <!-- 데이터 초기화 -->
+                <div class="flex items-center justify-between p-4 bg-rose-50 dark:bg-rose-950/30 rounded-xl border border-rose-200 dark:border-rose-900">
+                    <div>
+                        <h4 class="font-bold text-rose-800 dark:text-rose-300 text-base"><i class="fa-solid fa-triangle-exclamation mr-2"></i>웹사이트 데이터 초기화</h4>
+                        <p class="text-xs text-rose-600 dark:text-rose-400">저장된 게시글, 점수, 설정 등을 모두 초기 상태로 되돌립니다.</p>
+                    </div>
+                    <button onclick="resetData()" class="bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition">
+                        초기화
+                    </button>
+                </div>
             </div>
         </section>
 
     </main>
 
     <!-- 푸터 -->
-    <footer class="bg-slate-800 text-slate-400 text-center py-6 mt-10 text-sm">
+    <footer class="bg-slate-800 dark:bg-slate-950 text-slate-400 text-center py-6 mt-10 text-sm transition-colors duration-200">
         <p>&copy; 2026 한가람 체육활동 운영 위원회. All rights reserved.</p>
     </footer>
 
     <!-- 자바스크립트 기능 구현 -->
     <script>
-        // 페이지 전환 함수
         function showPage(pageId) {
-            const pages = ['home', 'score', 'schedule', 'bracket', 'poll', 'board'];
+            const pages = ['home', 'score', 'schedule', 'bracket', 'poll', 'board', 'settings'];
             const mainContainer = document.querySelector('main');
             
             pages.forEach(id => {
@@ -293,27 +352,76 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 실시간 접속자 수 시뮬레이션
         function initOnlineCount() {
-            const baseCount = Math.floor(Math.random() * 15) + 38; // 38~52명 사이 랜덤 접속자
+            const baseCount = Math.floor(Math.random() * 15) + 38;
             document.getElementById('online-count').innerText = baseCount;
         }
 
-        // 점수판 관리 로직 (초기값 0점)
         let scores = { blue: 0, white: 0 };
 
         window.onload = function() {
             initOnlineCount();
             showPage('home');
             updatePollUI();
+
+            // 저장된 설정 불러오기
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+
+            const savedNickname = localStorage.getItem('user_nickname');
+            if (savedNickname) {
+                document.getElementById('settings-nickname').value = savedNickname;
+                document.getElementById('post-author').value = savedNickname;
+            }
         };
+
+        // 테마 전환 함수
+        function toggleTheme() {
+            const htmlTag = document.documentElement;
+            if (htmlTag.classList.contains('dark')) {
+                htmlTag.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                alert("라이트 모드로 전환되었습니다.");
+            } else {
+                htmlTag.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                alert("다크 모드로 전환되었습니다.");
+            }
+        }
+
+        // 닉네임 저장 함수
+        function saveNickname() {
+            const nickname = document.getElementById('settings-nickname').value.trim();
+            if (!nickname) {
+                alert("닉네임을 입력해주세요!");
+                return;
+            }
+            localStorage.setItem('user_nickname', nickname);
+            document.getElementById('post-author').value = nickname;
+            alert("기본 닉네임이 저장되었습니다!");
+        }
+
+        // 알림 토글 함수
+        function toggleNotification() {
+            const isChecked = document.getElementById('notification-toggle').checked;
+            alert(isChecked ? "활동 알림이 켜졌습니다." : "활동 알림이 꺼졌습니다.");
+        }
+
+        // 데이터 초기화 함수
+        function resetData() {
+            if (confirm("정말로 모든 데이터를 초기화하시겠습니까?")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
 
         function updateScore(team, delta) {
             scores[team] = Math.max(0, scores[team] + delta);
             document.getElementById(`${team}-score`).innerText = scores[team];
         }
 
-        // 투표 로직 (초기값 0표)
         let pollData = { blue: 0, white: 0 };
 
         function updatePollUI() {
@@ -331,22 +439,21 @@
             alert("투표가 완료되었습니다!");
         }
 
-        // 익명 체크박스 핸들러
         function toggleAnonymous() {
             const checkbox = document.getElementById('is-anonymous');
             const authorInput = document.getElementById('post-author');
             if (checkbox.checked) {
                 authorInput.value = '익명';
                 authorInput.disabled = true;
-                authorInput.classList.add('bg-slate-100', 'text-slate-400');
+                authorInput.classList.add('bg-slate-100', 'dark:bg-slate-700', 'text-slate-400');
             } else {
-                authorInput.value = '';
+                const savedNick = localStorage.getItem('user_nickname') || '';
+                authorInput.value = savedNick;
                 authorInput.disabled = false;
-                authorInput.classList.remove('bg-slate-100', 'text-slate-400');
+                authorInput.classList.remove('bg-slate-100', 'dark:bg-slate-700', 'text-slate-400');
             }
         }
 
-        // 포스트 등록 로직
         let postIdCounter = 0;
         function addPost(event) {
             event.preventDefault();
@@ -363,24 +470,24 @@
             const initialChar = author.charAt(0);
 
             const newPost = document.createElement('div');
-            newPost.className = 'bg-slate-50 border border-slate-200 rounded-2xl p-5 shadow-sm';
+            newPost.className = 'bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 shadow-sm';
             newPost.innerHTML = `
                 <div class="flex justify-between items-center mb-2">
                     <div class="flex items-center space-x-2">
                         <div class="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold text-sm">${initialChar}</div>
-                        <span class="font-bold text-sm text-slate-800">${author}</span>
+                        <span class="font-bold text-sm text-slate-800 dark:text-slate-200">${author}</span>
                     </div>
                     <span class="text-xs text-slate-400">방금 전</span>
                 </div>
-                <h4 class="font-bold text-indigo-600 text-lg mb-1">${title}</h4>
-                <p class="text-slate-700 text-sm mb-4">${content}</p>
+                <h4 class="font-bold text-indigo-600 dark:text-indigo-400 text-lg mb-1">${title}</h4>
+                <p class="text-slate-700 dark:text-slate-300 text-sm mb-4">${content}</p>
                 
-                <div class="border-t border-slate-200 pt-4 mt-4 space-y-3">
-                    <div class="text-xs font-bold text-slate-500 mb-2"><i class="fa-solid fa-comments mr-1"></i> 댓글 0개</div>
+                <div class="border-t border-slate-200 dark:border-slate-600 pt-4 mt-4 space-y-3">
+                    <div class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-2"><i class="fa-solid fa-comments mr-1"></i> 댓글 0개</div>
                     <div class="space-y-2" id="${commentContainerId}"></div>
                     <div class="flex gap-2 mt-3">
-                        <input type="text" id="${commentInputId}" placeholder="댓글을 입력하세요..." class="flex-1 border border-slate-300 rounded-xl px-3 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500 bg-white">
-                        <button onclick="addComment('${commentContainerId}', '${commentInputId}')" class="bg-slate-800 hover:bg-slate-900 text-white px-4 py-1.5 rounded-xl text-xs font-bold transition">등록</button>
+                        <input type="text" id="${commentInputId}" placeholder="댓글을 입력하세요..." class="flex-1 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 rounded-xl px-3 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500">
+                        <button onclick="addComment('${commentContainerId}', '${commentInputId}')" class="bg-slate-800 dark:bg-slate-600 hover:bg-slate-900 text-white px-4 py-1.5 rounded-xl text-xs font-bold transition">등록</button>
                     </div>
                 </div>
             `;
@@ -389,10 +496,11 @@
             document.getElementById('board-form').reset();
             
             document.getElementById('post-author').disabled = false;
-            document.getElementById('post-author').classList.remove('bg-slate-100', 'text-slate-400');
+            document.getElementById('post-author').classList.remove('bg-slate-100', 'dark:bg-slate-700', 'text-slate-400');
+            const savedNick = localStorage.getItem('user_nickname') || '';
+            document.getElementById('post-author').value = savedNick;
         }
 
-        // 댓글 추가 함수
         function addComment(containerId, inputId) {
             const inputField = document.getElementById(inputId);
             const commentText = inputField.value.trim();
@@ -403,15 +511,16 @@
             }
 
             const container = document.getElementById(containerId);
+            const savedNick = localStorage.getItem('user_nickname') || '익명방문자';
             
             const commentItem = document.createElement('div');
-            commentItem.className = 'bg-white p-3 rounded-xl border border-slate-100 text-sm';
+            commentItem.className = 'bg-white dark:bg-slate-800 p-3 rounded-xl border border-slate-100 dark:border-slate-700 text-sm';
             commentItem.innerHTML = `
                 <div class="flex justify-between items-center mb-1">
-                    <span class="font-bold text-xs text-indigo-900">익명방문자</span>
+                    <span class="font-bold text-xs text-indigo-900 dark:text-indigo-300">${savedNick}</span>
                     <span class="text-[10px] text-slate-400">방금 전</span>
                 </div>
-                <p class="text-slate-600">${commentText}</p>
+                <p class="text-slate-600 dark:text-slate-300">${commentText}</p>
             `;
 
             container.appendChild(commentItem);
