@@ -2,431 +2,186 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026학년도 덕소중학교 한가람 체육활동 안내</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome 아이콘 CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-        }
-    </script>
+    <title>2026 한가람 체육활동 시스템</title>
     <style>
         body {
-            font-family: 'Malgun Gothic', 'Dotum', sans-serif;
-            background-color: #d1d5db;
+            background-color: #ffffff;
+            color: #000000;
+            font-family: monospace, sans-serif;
+            margin: 15px;
+            padding: 0;
         }
-        .dark body {
-            background-color: #111827;
-        }
-        /* 눈이 편안한 미색 아이보리 종이 질감 */
-        .official-paper {
-            background-color: #fcfbf7;
-            color: #262626;
-            border: 2px solid #292524;
-        }
-        .dark .official-paper {
-            background-color: #1f2937;
-            color: #f3f4f6;
-            border: 2px solid #9ca3af;
-        }
-        .doc-table {
+        table {
+            border: 1px solid #000000;
             border-collapse: collapse;
             width: 100%;
+            margin-bottom: 10px;
         }
-        .doc-table th, .doc-table td {
-            border: 1px solid #292524;
-            padding: 6px 8px;
-            text-align: center;
-            font-size: 13px;
-        }
-        .dark .doc-table th, .dark .doc-table td {
-            border: 1px solid #9ca3af;
-        }
-        .doc-table th {
-            background-color: #f3f0e6;
-            color: #1c1917;
-        }
-        .dark .doc-table th {
-            background-color: #374151;
-            color: #f9fafb;
-        }
-        .doc-btn {
-            border: 1px solid #292524;
-            background: #f5f2eb;
-            color: #1c1917;
-            padding: 4px 10px;
-            font-weight: bold;
+        th, td {
+            border: 1px solid #000000;
+            padding: 5px;
             font-size: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #dddddd;
+        }
+        input, textarea, button {
+            font-family: monospace, sans-serif;
+            font-size: 12px;
+            border: 1px solid #000000;
+            background: #ffffff;
+            padding: 3px 6px;
+        }
+        button {
+            background: #e0e0e0;
             cursor: pointer;
         }
-        .dark .doc-btn {
-            border: 1px solid #9ca3af;
-            background: #374151;
-            color: #f9fafb;
+        button:hover {
+            background: #cccccc;
         }
-        .doc-btn:hover {
-            background: #e6e2d6;
+        .box {
+            border: 1px solid #000000;
+            padding: 10px;
+            margin-bottom: 10px;
         }
-
-        /* 카카오톡 대화창 스타일 */
-        .kakao-bg {
-            background-color: #b2c7d9;
-        }
-        .kakao-balloon-other {
-            background-color: #ffffff;
-            color: #111111;
-            border-radius: 2px 12px 12px 12px;
-        }
-        .kakao-balloon-me {
-            background-color: #fee500;
-            color: #111111;
-            border-radius: 12px 2px 12px 12px;
+        .hidden {
+            display: none;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between p-2 sm:p-6">
+<body>
 
-    <!-- 상단 공문서 네비게이션 툴바 -->
-    <nav class="max-w-4xl mx-auto w-full bg-[#fcfbf7] dark:bg-slate-900 border-2 border-slate-800 dark:border-slate-300 p-2 mb-4 flex flex-wrap justify-between items-center text-xs font-bold">
-        <div class="flex items-center space-x-2">
-            <span class="bg-slate-800 text-white px-2 py-0.5 text-[11px]">공문서 포털</span>
-            <span>덕소중학교 한가람 체육활동</span>
+    <!-- 상단 텍스트 메뉴 바 -->
+    <div class="box">
+        <strong>[ 시스템 메뉴 ]</strong> 
+        <a href="#" onclick="showTab('home')">HOME</a> | 
+        <a href="#" onclick="showTab('score')">SCORE</a> | 
+        <a href="#" onclick="showTab('schedule')">SCHEDULE</a> | 
+        <a href="#" onclick="showTab('bracket')">BRACKET</a> | 
+        <a href="#" onclick="showTab('poll')">POLL</a> | 
+        <a href="#" onclick="showTab('chat')">CHAT</a> | 
+        <a href="#" onclick="showTab('board')">BOARD</a> | 
+        <a href="#" onclick="showTab('tools')">TOOLS</a>
+    </div>
+
+    <!-- 1. HOME 탭 -->
+    <div id="tab-home" class="box">
+        <h3>[ HOME ] 2026학년도 한가람 체육활동 안내</h3>
+        <p>기존의 화려한 디자인을 모두 제거하고 날것의 텍스트와 테이블로 구성된 시스템입니다.</p>
+        <table>
+            <tr><th>행사 일시</th><td>2026. 10. 16. (금) 09:00 ~ 15:00[cite: 1, 6]</td></tr>
+            <tr><th>개최 장소</th><td>본교 운동장, 체육관, 각반 교실[cite: 6]</td></tr>
+            <tr><th>담당 부서</th><td>체육보건부 (찬조금/간식 일절 사절)[cite: 6]</td></tr>
+        </table>
+    </div>
+
+    <!-- 2. SCORE 탭 -->
+    <div id="tab-score" class="box hidden">
+        <h3>[ SCORE ] 실시간 점수판</h3>
+        <table>
+            <tr>
+                <th>청 팀 점수: <span id="blue-score">0</span></th>
+                <td>
+                    <button onclick="addScore('blue', -10)">-10</button>
+                    <button onclick="addScore('blue', 10)">+10</button>
+                </td>
+            </tr>
+            <tr>
+                <th>백 팀 점수: <span id="white-score">0</span></th>
+                <td>
+                    <button onclick="addScore('white', -10)">-10</button>
+                    <button onclick="addScore('white', 10)">+10</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 3. SCHEDULE 탭 -->
+    <div id="tab-schedule" class="box hidden">
+        <h3>[ SCHEDULE ] 상세 타임테이블</h3>
+        <table>
+            <tr><th>시간</th><th>내용</th></tr>
+            <tr><td>08:50 ~ 09:00</td><td>각반 출석체크 및 운동장 집결 완료[cite: 3]</td></tr>
+            <tr><td>09:00 ~ 09:20</td><td>개회선언 및 준비운동[cite: 3]</td></tr>
+            <tr><td>09:20 ~ 12:40</td><td>1~3부 순환 경기 진행 (운동장, 체육관, 교실)[cite: 3]</td></tr>
+            <tr><td>12:40 ~ 13:30</td><td>점심시간 및 스포츠 부스 운영[cite: 3]</td></tr>
+            <tr><td>13:30 ~ 15:00</td><td>피날레 행사이벤트 및 교내정화[cite: 3, 6]</td></tr>
+        </table>
+    </div>
+
+    <!-- 4. BRACKET 탭 -->
+    <div id="tab-bracket" class="box hidden">
+        <h3>[ BRACKET ] 종목별 규칙 및 대진</h3>
+        <table>
+            <tr><th>종목</th><th>규칙 설명</th></tr>
+            <tr><td>달리는 줄다리기</td><td>제한시간 30초, 3판 2선승제 토너먼트[cite: 3]</td></tr>
+            <tr><td>공&후프 릴레이</td><td>공 전달 후 후프 통과하여 고무에 후프 걸기[cite: 3]</td></tr>
+            <tr><td>이어달리기</td><td>남녀 교대(여-남-여-남...) 8명 주자[cite: 3]</td></tr>
+            <tr><td>피구 경기</td><td>남녀 각 8명, 포커스/헤드샷/더블아웃 금지[cite: 3]</td></tr>
+        </table>
+    </div>
+
+    <!-- 5. POLL 탭 -->
+    <div id="tab-poll" class="box hidden">
+        <h3>[ POLL ] 우승팀 예측 투표</h3>
+        <p>예상하는 우승팀을 선택하세요.</p>
+        <button onclick="vote('blue')">[ 청팀 투표 ]</button> <span id="blue-votes">0표 (0%)</span><br><br>
+        <button onclick="vote('white')">[ 백팀 투표 ]</button> <span id="white-votes">0표 (0%)</span>
+    </div>
+
+    <!-- 6. CHAT 탭 -->
+    <div id="tab-chat" class="box hidden">
+        <h3>[ CHAT ] 실시간 소통방</h3>
+        <div style="margin-bottom: 5px;">
+            닉네임: <input type="text" id="chat-nickname" value="익명" style="width: 100px;">
         </div>
-        <div class="space-x-1 flex flex-wrap gap-y-1">
-            <button onclick="showPage('home')" class="doc-btn">가정통신문</button>
-            <button onclick="showPage('score')" class="doc-btn">실시간점수</button>
-            <button onclick="showPage('schedule')" class="doc-btn">세부일정</button>
-            <button onclick="showPage('bracket')" class="doc-btn">대진표</button>
-            <button onclick="showPage('poll')" class="doc-btn">투표</button>
-            <button onclick="showPage('chat')" class="doc-btn bg-yellow-200 dark:text-slate-900"><i class="fa-solid fa-comment mr-1"></i>카톡 소통방</button>
-            <button onclick="showPage('board')" class="doc-btn">게시판</button>
-            <button onclick="showPage('tools')" class="doc-btn">도구함</button>
-            <button onclick="showPage('settings')" class="doc-btn"><i class="fa-solid fa-gear"></i></button>
+        <div id="chat-log" style="border:1px solid #000; height:180px; overflow-y:scroll; padding:5px; margin-bottom:5px; font-size:11px; background:#fafafa;">
+            [시스템] 소통방에 접속했습니다. 대화 기록은 비어있습니다.<br>
         </div>
-    </nav>
+        <input type="text" id="chat-msg" placeholder="메시지 입력 후 엔터" style="width:80%;" onkeypress="if(event.key==='Enter') sendChat()">
+        <button onclick="sendChat()">전송</button>
+    </div>
 
-    <!-- 메인 공문서 용지 영역 -->
-    <main class="max-w-4xl mx-auto w-full flex-1 flex items-center justify-center">
-
-        <!-- 0. 가정통신문 홈 화면 -->
-        <div id="page-home" class="official-paper w-full p-6 sm:p-10 space-y-6 shadow-md">
-            
-            <!-- 공문서 상단 헤더 표 -->
-            <table class="doc-table">
-                <tr>
-                    <td class="w-16 font-bold text-[11px]">참여와 소통으로 함께 성장하는 행복한 학교</td>
-                    <td class="text-center">
-                        <div class="text-sm font-bold">&lt; 덕소중학교 가정통신문 &gt;</div>
-                        <div class="text-lg font-black my-1">2026학년도 한가람 체육활동 안내[cite: 6]</div>
-                    </td>
-                    <td class="w-16 text-[10px]">QR코드<br>안내</td>
-                </tr>
-            </table>
-
-            <!-- 담당부서 및 연락처 -->
-            <div class="flex justify-between items-center text-xs border-b-2 border-slate-800 dark:border-slate-300 pb-2">
-                <span><strong>담당부서 :</strong> 체육보건부[cite: 6]</span>
-                <span><strong>문의 :</strong> 031)577-0714 / <strong>Fax :</strong> 031)577-4886[cite: 6]</span>
-            </div>
-
-            <!-- 본문 인사말 -->
-            <div class="text-xs sm:text-sm leading-relaxed space-y-3">
-                <p><strong>학부모님께</strong>[cite: 6]</p>
-                <p>단풍의 계절을 맞이하여 학부모님 가정에 행복과 건강이 가득하시길 기원합니다. 평소 본교 교육 발전을 위해 애써 주시는 학부모님께 감사드리며, 한가람 체육활동이 안전히 진행될 수 있도록 협조해주시면 감사하겠습니다. 또한 <span class="text-rose-700 dark:text-rose-400 font-bold">덕소중학교 한가람 체육활동에 학부모님들의 찬조금이나 간식 제공은 일절 받지 않으니 협조 부탁드립니다.</span>[cite: 6]</p>
-                
-                <div class="pl-4 space-y-1 text-xs font-bold">
-                    <p>1. 일 시 : 2026. 10. 16.(금) 09:00 ~ 15:00[cite: 6]</p>
-                    <p>2. 장 소 : 본교 운동장 및 체육관, 각반 교실[cite: 6]</p>
-                    <p>3. 일정 안내</p>
-                </div>
-            </div>
-
-            <!-- 세부 일정 표 -->
-            <table class="doc-table">
-                <thead>
-                    <tr>
-                        <th class="w-12">순서</th>
-                        <th class="w-28">시간</th>
-                        <th>3학년</th>
-                        <th>2학년</th>
-                        <th>1학년</th>
-                    </tr>
-                </thead>
-                <tbody class="text-xs">
-                    <tr>
-                        <td>-</td>
-                        <td>08:50 ~ 09:00</td>
-                        <td colspan="3">각반 출석체크 및 운동장 집결 완료[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>09:00 ~ 09:20</td>
-                        <td colspan="3">&lt;전체 운동장 집결&gt; 개회선언, 준비운동 후 이동[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>09:20 ~ 10:20</td>
-                        <td>&lt;운동장&gt;<br>단체 경기[cite: 3]</td>
-                        <td>&lt;체육관&gt;<br>피구 경기[cite: 3]</td>
-                        <td>&lt;각반교실&gt;<br>협동 챌린지[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>10:20 ~ 10:30</td>
-                        <td colspan="3">휴식시간 및 이동 (경기시작 전 보조준비운동실시)[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>10:30 ~ 11:30</td>
-                        <td>&lt;체육관&gt;<br>피구 경기[cite: 3]</td>
-                        <td>&lt;각반교실&gt;<br>협동 챌린지[cite: 3]</td>
-                        <td>&lt;운동장&gt;<br>단체 경기[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>11:30 ~ 11:40</td>
-                        <td colspan="3">휴식시간 및 이동 (경기시작 전 보조준비운동실시)[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>11:40 ~ 12:40</td>
-                        <td>&lt;각반교실&gt;<br>협동 챌린지[cite: 3]</td>
-                        <td>&lt;운동장&gt;<br>단체 경기[cite: 3]</td>
-                        <td>&lt;체육관&gt;<br>피구 경기[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>12:40 ~ 13:30</td>
-                        <td colspan="3">점심시간 및 휴식시간 (체육관: 학생자치회 스포츠부스 운영)[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>13:30 ~ 14:15</td>
-                        <td colspan="3">&lt;전교생 운동장 집결&gt;<br>본교 체육동아리 축하공연(댄스동아리) / 학년별 단체 줄넘기 / 이어달리기 결승 / 시상 및 마무리[cite: 6]</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>14:15 ~ 15:00</td>
-                        <td colspan="3">교내정화활동 (봉사)[cite: 3]</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="text-[11px]">
-                ※ 단체 경기 : 달리는 줄다리기, 공&후프 릴레이, 이어달리기[cite: 6]
-            </div>
-
-            <!-- 하단 날짜 및 직인 -->
-            <div class="text-center pt-4 space-y-4">
-                <div class="text-sm font-bold">2026. 10. 1.[cite: 6]</div>
-                <div class="text-xl font-black tracking-widest">덕 소 중 학 교 장</div>
-                <div class="inline-block border border-slate-800 dark:border-slate-300 px-4 py-1 text-xs font-bold">
-                    직인생략[cite: 6]
-                </div>
-            </div>
-
-            <!-- 바로가기 버튼 모음 -->
-            <div class="border-t-2 border-slate-800 dark:border-slate-300 pt-4 grid grid-cols-2 sm:grid-cols-4 gap-2">
-                <button onclick="showPage('score')" class="doc-btn py-2">실시간 점수판</button>
-                <button onclick="showPage('bracket')" class="doc-btn py-2">종목별 규칙 보기</button>
-                <button onclick="showPage('poll')" class="doc-btn py-2">우승팀 예측 투표</button>
-                <button onclick="showPage('chat')" class="doc-btn py-2 bg-yellow-100 dark:text-slate-900">카톡 소통방</button>
-            </div>
+    <!-- 7. BOARD 탭 -->
+    <div id="tab-board" class="box hidden">
+        <h3>[ BOARD ] 자유 게시판</h3>
+        <div style="margin-bottom: 10px;">
+            <input type="text" id="board-author" placeholder="작성자" style="width: 100px;">
+            <input type="text" id="board-title" placeholder="제목" style="width: 200px;">
+            <br>
+            <textarea id="board-content" placeholder="내용 입력" style="width: 310px; height: 40px; margin-top: 3px;"></textarea>
+            <br>
+            <button onclick="addPost()">글 등록</button>
         </div>
+        <div id="board-list"></div>
+    </div>
 
-        <!-- 1. 실시간 점수판 페이지 -->
-        <section id="page-score" class="hidden official-paper p-6 sm:p-8 space-y-6 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 실시간 점수 집계표 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="official-paper p-4 text-center space-y-3">
-                    <h4 class="font-bold text-blue-700 dark:text-blue-400 text-lg">청 팀</h4>
-                    <div class="text-5xl font-black" id="blue-score">0</div>
-                    <div class="space-x-2">
-                        <button onclick="updateScore('blue', -10)" class="doc-btn">-10</button>
-                        <button onclick="updateScore('blue', 10)" class="doc-btn">+10</button>
-                    </div>
-                </div>
-                <div class="official-paper p-4 text-center space-y-3">
-                    <h4 class="font-bold text-rose-700 dark:text-rose-400 text-lg">백 팀</h4>
-                    <div class="text-5xl font-black" id="white-score">0</div>
-                    <div class="space-x-2">
-                        <button onclick="updateScore('white', -10)" class="doc-btn">-10</button>
-                        <button onclick="updateScore('white', 10)" class="doc-btn">+10</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- 8. TOOLS 탭 -->
+    <div id="tab-tools" class="box hidden">
+        <h3>[ TOOLS ] 편의 도구함</h3>
+        <p><strong>랜덤 팀 추첨기:</strong></p>
+        <input type="text" id="tool-input" placeholder="이름1, 이름2, 이름3" style="width:250px;">
+        <button onclick="runTool()">추첨</button>
+        <div id="tool-result" style="margin-top:5px; font-weight:bold;"></div>
 
-        <!-- 2. 세부 일정 페이지 -->
-        <section id="page-schedule" class="hidden official-paper p-6 sm:p-8 space-y-6 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 세부 타임테이블 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            <div class="text-xs space-y-2">
-                <div class="official-paper p-3 flex justify-between"><span>08:50 ~ 09:00</span><span>각반 출석체크 및 운동장 집결 완료[cite: 3]</span></div>
-                <div class="official-paper p-3 flex justify-between"><span>09:00 ~ 09:20</span><span>개회선언 및 준비운동[cite: 3]</span></div>
-                <div class="official-paper p-3 flex justify-between"><span>09:20 ~ 12:40</span><span>1~3부 순환 경기[cite: 3]</span></div>
-                <div class="official-paper p-3 flex justify-between"><span>12:40 ~ 13:30</span><span>점심시간 및 스포츠 부스[cite: 3]</span></div>
-                <div class="official-paper p-3 flex justify-between"><span>13:30 ~ 15:00</span><span>피날레 공연 및 정화활동[cite: 6]</span></div>
-            </div>
-        </section>
+        <p style="margin-top: 15px;"><strong>개인 메모장:</strong></p>
+        <textarea id="quick-memo" oninput="saveMemo()" placeholder="메모를 입력하세요..." style="width:250px; height:60px;"></textarea>
+    </div>
 
-        <!-- 3. 대진표 및 규칙 페이지 -->
-        <section id="page-bracket" class="hidden official-paper p-6 sm:p-8 space-y-6 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 종목별 규칙 및 규정 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            <div class="text-xs space-y-3">
-                <div class="official-paper p-3"><strong>달리는 줄다리기:</strong> 제한시간 30초, 3판 2선승제 토너먼트[cite: 3]</div>
-                <div class="official-paper p-3"><strong>공&후프 릴레이:</strong> 공 전달 후 후프 통과하여 고무에 후프 걸기[cite: 3]</div>
-                <div class="official-paper p-3"><strong>이어달리기:</strong> 남녀 교대(여-남-여-남...) 8명 주자[cite: 3]</div>
-                <div class="official-paper p-3"><strong>피구 경기:</strong> 남녀 각 8명, 포커스/헤드샷/더블아웃 금지[cite: 3]</div>
-            </div>
-        </section>
-
-        <!-- 4. 투표 페이지 -->
-        <section id="page-poll" class="hidden official-paper p-6 sm:p-8 space-y-6 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 우승팀 예측 투표소 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            <div class="max-w-md mx-auto space-y-3 text-xs">
-                <button onclick="vote('blue')" class="official-paper w-full p-3 flex justify-between font-bold">
-                    <span>청팀 우승 예상</span>
-                    <span id="blue-votes">0표 (0%)</span>
-                </button>
-                <button onclick="vote('white')" class="official-paper w-full p-3 flex justify-between font-bold">
-                    <span>백팀 우승 예상</span>
-                    <span id="white-votes">0표 (0%)</span>
-                </button>
-            </div>
-        </section>
-
-        <!-- 5. 카카오톡 스타일 소통방 페이지 (빈 대화창) -->
-        <section id="page-chat" class="hidden official-paper p-6 sm:p-8 space-y-4 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 한가람 체육활동 오픈 소통방 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            
-            <!-- 닉네임 설정 영역 -->
-            <div class="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800 p-2 rounded text-xs">
-                <span class="font-bold">내 대화명:</span>
-                <input type="text" id="chat-nickname" placeholder="이름 (예: 3반 홍길동)" class="border border-slate-300 rounded px-2 py-1 bg-white text-slate-900 flex-1 text-xs">
-                <button onclick="saveChatNickname()" class="doc-btn py-1">설정</button>
-            </div>
-
-            <!-- 카톡 채팅방 영역 (완전히 빈 상태로 시작) -->
-            <div class="kakao-bg border-2 border-slate-800 p-3 rounded-lg flex flex-col justify-between h-[380px]">
-                <!-- 대화 내용 영역 (초기엔 안내 문구만 표시) -->
-                <div id="kakao-chat-box" class="overflow-y-auto space-y-3 pr-2 text-xs">
-                    <div class="text-center text-slate-600 text-[11px] my-2">-- 오픈 단톡방에 입장하셨습니다. 대화를 시작해보세요! --</div>
-                </div>
-
-                <!-- 카톡 하단 입력 바 -->
-                <div class="bg-white border-t border-slate-300 p-2 flex items-center space-x-2 rounded-b">
-                    <button class="text-slate-500 hover:text-slate-700 px-1"><i class="fa-solid fa-plus text-lg"></i></button>
-                    <input type="text" id="kakao-input" placeholder="메시지 입력" class="flex-1 bg-slate-100 border border-slate-300 rounded px-3 py-1.5 text-xs text-slate-900 focus:outline-none" onkeypress="if(event.key==='Enter') sendKakaoChat()">
-                    <button class="text-slate-500 hover:text-slate-700"><i class="fa-regular fa-face-smile text-lg"></i></button>
-                    <button class="text-slate-500 hover:text-slate-700 font-bold text-sm">#</button>
-                    <button onclick="sendKakaoChat()" class="bg-[#fee500] text-slate-900 font-bold px-3 py-1.5 rounded text-xs">전송</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. 게시판 페이지 -->
-        <section id="page-board" class="hidden official-paper p-6 sm:p-8 space-y-6 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 자유 게시판 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            <form id="board-form" onsubmit="addPost(event)" class="official-paper p-3 space-y-2 text-xs">
-                <div class="flex gap-2">
-                    <input type="text" id="post-author" placeholder="작성자" required class="official-paper flex-1 px-2 py-1">
-                    <label class="flex items-center space-x-1 cursor-pointer">
-                        <input type="checkbox" id="is-anonymous" onchange="toggleAnon()">
-                        <span>익명</span>
-                    </label>
-                </div>
-                <input type="text" id="post-title" placeholder="제목" required class="official-paper w-full px-2 py-1">
-                <textarea id="post-content" placeholder="내용 입력..." rows="2" required class="official-paper w-full px-2 py-1"></textarea>
-                <button type="submit" class="doc-btn w-full py-1.5 font-bold">등록</button>
-            </form>
-            <div id="post-list" class="space-y-2 text-xs"></div>
-        </section>
-
-        <!-- 7. 도구함 페이지 -->
-        <section id="page-tools" class="hidden official-paper p-6 sm:p-8 space-y-6 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 편의 도구함 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                <div class="official-paper p-4 space-y-2">
-                    <div class="font-bold">랜덤 팀 추첨기</div>
-                    <input type="text" id="team-members-input" placeholder="이름 쉼표 구분" class="official-paper w-full p-1">
-                    <button onclick="pickRandomTeam()" class="doc-btn w-full">추첨</button>
-                    <div id="team-result" class="font-bold text-center"></div>
-                </div>
-                <div class="official-paper p-4 space-y-2">
-                    <div class="font-bold">간이 메모장</div>
-                    <textarea id="quick-memo" oninput="saveMemo()" placeholder="메모..." rows="3" class="official-paper w-full p-1"></textarea>
-                </div>
-            </div>
-        </section>
-
-        <!-- 8. 설정 페이지 -->
-        <section id="page-settings" class="hidden official-paper p-6 sm:p-8 space-y-6 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 환경 설정 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            <div class="text-xs space-y-3">
-                <div class="official-paper p-3 flex justify-between items-center">
-                    <span>다크 모드 전환</span>
-                    <button onclick="toggleTheme()" class="doc-btn">전환</button>
-                </div>
-                <div class="official-paper p-3 flex justify-between items-center">
-                    <span>모든 데이터 초기화</span>
-                    <button onclick="localStorage.clear(); location.reload();" class="doc-btn">초기화</button>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- 하단 공문서 푸터 -->
-    <footer class="max-w-4xl mx-auto w-full text-center py-4 text-xs font-bold text-slate-700 dark:text-slate-300">
-        <p>덕소중학교장 [직인생략][cite: 6]</p>
-    </footer>
-
-    <!-- 자바스크립트 로직 -->
     <script>
-        function showPage(pageId) {
-            const pages = ['home', 'score', 'schedule', 'bracket', 'poll', 'chat', 'board', 'tools', 'settings'];
-            pages.forEach(id => {
-                const el = document.getElementById(`page-${id}`);
-                if (id === pageId) {
-                    el.classList.remove('hidden');
-                } else {
-                    el.classList.add('hidden');
-                }
+        function showTab(tabId) {
+            const tabs = ['home', 'score', 'schedule', 'bracket', 'poll', 'chat', 'board', 'tools'];
+            tabs.forEach(id => {
+                document.getElementById('tab-' + id).classList.add('hidden');
             });
-            window.scrollTo({ top: 0, behavior: 'auto' });
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
         }
 
         let scores = { blue: 0, white: 0 };
-        function updateScore(team, delta) {
-            scores[team] = Math.max(0, scores[team] + delta);
-            document.getElementById(`${team}-score`).innerText = scores[team];
+        function addScore(team, val) {
+            scores[team] = Math.max(0, scores[team] + val);
+            document.getElementById(team + '-score').innerText = scores[team];
         }
 
         let pollData = { blue: 0, white: 0 };
@@ -435,106 +190,54 @@
             const total = pollData.blue + pollData.white;
             document.getElementById('blue-votes').innerText = `${pollData.blue}표 (${Math.round(pollData.blue/total*100)}%)`;
             document.getElementById('white-votes').innerText = `${pollData.white}표 (${Math.round(pollData.white/total*100)}%)`;
-            alert("투표가 반영되었습니다.");
+            alert("투표 완료");
         }
 
-        // 실시간 톡방 닉네임 설정 및 메시지 전송
-        function saveChatNickname() {
-            const nick = document.getElementById('chat-nickname').value.trim();
-            if (!nick) {
-                alert("대화명을 입력해주세요!");
+        function sendChat() {
+            const nick = document.getElementById('chat-nickname').value || '익명';
+            const input = document.getElementById('chat-msg');
+            if(!input.value.trim()) return;
+            const log = document.getElementById('chat-log');
+            log.innerHTML += `[${nick}] ${input.value}<br>`;
+            input.value = '';
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function addPost() {
+            const author = document.getElementById('board-author').value || '익명';
+            const title = document.getElementById('board-title').value;
+            const content = document.getElementById('board-content').value;
+            if(!title || !content) {
+                alert("제목과 내용을 입력하세요.");
                 return;
             }
-            localStorage.setItem('chat_nickname', nick);
-            alert(`대화명이 [ ${nick} ] (으)로 설정되었습니다.`);
+            const list = document.getElementById('board-list');
+            const item = document.createElement('div');
+            item.style.border = "1px solid #000";
+            item.style.padding = "5px";
+            item.style.marginBottom = "5px";
+            item.innerHTML = `<strong>[${title}]</strong> (${author})<br>${content}`;
+            list.prepend(item);
+            document.getElementById('board-title').value = '';
+            document.getElementById('board-content').value = '';
         }
 
-        function sendKakaoChat() {
-            const input = document.getElementById('kakao-input');
-            const text = input.value.trim();
-            if (!text) return;
-
-            const nickname = localStorage.getItem('chat_nickname') || '방문자';
-            const chatBox = document.getElementById('kakao-chat-box');
-            
-            const now = new Date();
-            let hours = now.getHours();
-            let minutes = now.getMinutes();
-            const ampm = hours >= 12 ? '오후' : '오전';
-            hours = hours % 12 || 12;
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-            const timeStr = `${ampm} ${hours}:${minutes}`;
-
-            const myMsg = document.createElement('div');
-            myMsg.className = "flex flex-col items-end space-y-0.5";
-            myMsg.innerHTML = `
-                <span class="text-[10px] text-slate-700 font-bold">${nickname}</span>
-                <div class="flex items-end space-x-1">
-                    <span class="text-[9px] text-slate-600">${timeStr}</span>
-                    <div class="kakao-balloon-me p-2.5 shadow-sm max-w-xs">${text}</div>
-                </div>
-            `;
-            chatBox.appendChild(myMsg);
-            input.value = '';
-            chatBox.scrollTop = chatBox.scrollHeight;
-        }
-
-        function toggleAnon() {
-            const anon = document.getElementById('is-anonymous').checked;
-            const author = document.getElementById('post-author');
-            author.value = anon ? '익명' : '';
-            author.disabled = anon;
-        }
-
-        function addPost(event) {
-            event.preventDefault();
-            const author = document.getElementById('post-author').value;
-            const title = document.getElementById('post-title').value;
-            const content = document.getElementById('post-content').value;
-            const postList = document.getElementById('post-list');
-
-            const post = document.createElement('div');
-            post.className = 'official-paper p-2 space-y-1';
-            post.innerHTML = `<div class="font-bold">[${title}] - ${author}</div><div>${content}</div>`;
-            postList.prepend(post);
-            document.getElementById('board-form').reset();
-        }
-
-        function pickRandomTeam() {
-            const input = document.getElementById('team-members-input').value;
-            const members = input.split(',').map(m => m.trim()).filter(m => m);
-            if (members.length === 0) return;
-            const picked = members[Math.floor(Math.random() * members.length)];
-            document.getElementById('team-result').innerText = `당첨: ${picked}`;
+        function runTool() {
+            const val = document.getElementById('tool-input').value;
+            const arr = val.split(',').map(s => s.trim()).filter(s => s);
+            if(arr.length === 0) return;
+            const res = arr[Math.floor(Math.random() * arr.length)];
+            document.getElementById('tool-result').innerText = `결과: ${res}`;
         }
 
         function saveMemo() {
-            localStorage.setItem('quick_memo', document.getElementById('quick-memo').value);
-        }
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
+            localStorage.setItem('raw_memo', document.getElementById('quick-memo').value);
         }
 
         window.onload = function() {
-            showPage('home');
-            if (localStorage.getItem('theme') === 'dark') {
-                document.documentElement.classList.add('dark');
-            }
-            const memo = localStorage.getItem('quick_memo');
-            if (memo) document.getElementById('quick-memo').value = memo;
-
-            const savedNick = localStorage.getItem('chat_nickname');
-            if (savedNick) {
-                document.getElementById('chat-nickname').value = savedNick;
-            }
+            showTab('home');
+            const memo = localStorage.getItem('raw_memo');
+            if(memo) document.getElementById('quick-memo').value = memo;
         };
     </script>
 </body>
