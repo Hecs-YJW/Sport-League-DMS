@@ -3,217 +3,739 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 한가람 체육활동 포털</title>
+    <title>2026학년도 덕소중학교 한가람 체육활동 종합 포털</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 아이콘 CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col font-sans">
+    <style>
+        /* 기본 폰트 설정 및 스크롤바 커스텀 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
 
-    <!-- 상단 심플 내비게이션 -->
-    <header class="bg-white shadow-sm">
-        <div class="max-w-4xl mx-auto px-4 h-14 flex justify-between items-center">
-            <h1 class="font-bold text-base text-slate-900 cursor-pointer" onclick="switchTab('home')">
-                <i class="fa-solid fa-medal text-blue-500 mr-1.5"></i> 한가람 체육활동
-            </h1>
-            <nav class="space-x-1 sm:space-x-2 text-xs font-medium">
-                <button onclick="switchTab('home')" class="tab-btn px-3 py-1.5 rounded-md bg-slate-900 text-white">안내</button>
-                <button onclick="switchTab('score')" class="tab-btn px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-600">점수판</button>
-                <button onclick="switchTab('board')" class="tab-btn px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-600">게시판</button>
-                <button onclick="switchTab('chat')" class="tab-btn px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-600">소통방</button>
-                <button onclick="switchTab('tools')" class="tab-btn px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-600">도구함</button>
+        /* 애니메이션 효과 */
+        .fade-in {
+            animation: fadeIn 0.25s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 채팅말풍선 모던 커스텀 */
+        .chat-bubble-me {
+            background-color: #3b82f6;
+            color: #ffffff;
+            border-radius: 14px 14px 2px 14px;
+        }
+        .chat-bubble-other {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            border-radius: 14px 14px 14px 2px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-blue-100 selection:text-blue-900">
+
+    <!-- 1. 상단 내비게이션 바 -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex justify-between items-center">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
+                <div class="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold shadow-sm">
+                    <i class="fa-solid fa-trophy text-sm"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-base leading-none text-slate-900">덕소중학교 한가람 체육활동</h1>
+                    <span class="text-[11px] text-slate-500 font-medium">2026 한가람 종합 포털</span>
+                </div>
+            </div>
+
+            <!-- 데스크톱 내비게이션 -->
+            <nav class="hidden md:flex space-x-1 text-xs font-semibold">
+                <button onclick="navigateTo('home')" id="nav-home" class="nav-btn px-3 py-2 rounded-md bg-slate-900 text-white transition">홈/안내</button>
+                <button onclick="navigateTo('score')" id="nav-score" class="nav-btn px-3 py-2 rounded-md hover:bg-slate-100 text-slate-600 transition">실시간 점수</button>
+                <button onclick="navigateTo('schedule')" id="nav-schedule" class="nav-btn px-3 py-2 rounded-md hover:bg-slate-100 text-slate-600 transition">일정표</button>
+                <button onclick="navigateTo('bracket')" id="nav-bracket" class="nav-btn px-3 py-2 rounded-md hover:bg-slate-100 text-slate-600 transition">대진표/규칙</button>
+                <button onclick="navigateTo('poll')" id="nav-poll" class="nav-btn px-3 py-2 rounded-md hover:bg-slate-100 text-slate-600 transition">우승 예측</button>
+                <button onclick="navigateTo('chat')" id="nav-chat" class="nav-btn px-3 py-2 rounded-md hover:bg-slate-100 text-slate-600 transition">실시간 소통방</button>
+                <button onclick="navigateTo('board')" id="nav-board" class="nav-btn px-3 py-2 rounded-md hover:bg-slate-100 text-slate-600 transition">자유 게시판</button>
+                <button onclick="navigateTo('tools')" id="nav-tools" class="nav-btn px-3 py-2 rounded-md hover:bg-slate-100 text-slate-600 transition">도구함</button>
             </nav>
+
+            <!-- 모바일 토글 버튼 -->
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-600 hover:text-slate-900">
+                <i class="fa-solid fa-bars text-lg"></i>
+            </button>
+        </div>
+
+        <!-- 모바일 드롭다운 메뉴 -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-1 text-xs font-semibold shadow-lg">
+            <button onclick="navigateTo('home'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-slate-100">홈/안내</button>
+            <button onclick="navigateTo('score'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-slate-100">실시간 점수</button>
+            <button onclick="navigateTo('schedule'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-slate-100">일정표</button>
+            <button onclick="navigateTo('bracket'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-slate-100">대진표/규칙</button>
+            <button onclick="navigateTo('poll'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-slate-100">우승 예측</button>
+            <button onclick="navigateTo('chat'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-slate-100">실시간 소통방</button>
+            <button onclick="navigateTo('board'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-slate-100">자유 게시판</button>
+            <button onclick="navigateTo('tools'); toggleMobileMenu();" class="block w-full text-left px-3 py-2 rounded hover:bg-slate-100">도구함</button>
         </div>
     </header>
 
-    <!-- 메인 콘텐츠 영역 -->
-    <main class="max-w-4xl mx-auto px-4 py-6 flex-1 w-full space-y-4">
+    <!-- 2. 메인 콘텐츠 영역 -->
+    <main class="max-w-5xl mx-auto px-4 py-8 flex-1 w-full">
 
-        <!-- 1. 홈(안내) 탭 -->
-        <div id="content-home" class="bg-white p-6 rounded-xl shadow-sm space-y-4">
-            <h2 class="text-lg font-bold text-slate-900">2026학년도 한가람 체육활동 안내</h2>
-            <p class="text-xs text-slate-600 leading-relaxed">안전하고 즐거운 체육활동 진행을 위한 정보 안내 페이지입니다[cite: 6].</p>
-            
-            <div class="bg-slate-50 p-4 rounded-lg space-y-2 text-xs">
-                <div class="flex justify-between border-b border-slate-200 pb-2">
-                    <span class="font-bold text-slate-700">일시</span>
-                    <span class="text-slate-600">2026. 10. 16. (금) 09:00 ~ 15:00[cite: 1, 6]</span>
-                </div>
-                <div class="flex justify-between border-b border-slate-200 pb-2">
-                    <span class="font-bold text-slate-700">장소</span>
-                    <span class="text-slate-600">본교 운동장 및 체육관[cite: 6]</span>
-                </div>
-                <div class="flex justify-between pt-1">
-                    <span class="font-bold text-slate-700">참고사항</span>
-                    <span class="text-slate-600">찬조금 및 간식 제공 일절 없음[cite: 6]</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 2. 점수판 탭 -->
-        <div id="content-score" class="hidden bg-white p-6 rounded-xl shadow-sm space-y-4">
-            <h2 class="text-lg font-bold text-slate-900">실시간 점수 집계</h2>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-blue-50 border border-blue-100 p-4 rounded-lg text-center space-y-2">
-                    <div class="font-bold text-blue-600 text-sm">청 팀</div>
-                    <div class="text-4xl font-black text-blue-700" id="score-blue">0</div>
-                    <div class="space-x-1">
-                        <button onclick="updateScore('blue', -10)" class="bg-white border border-blue-200 px-2.5 py-1 rounded text-xs font-bold text-blue-600">-10</button>
-                        <button onclick="updateScore('blue', 10)" class="bg-blue-600 text-white px-3 py-1 rounded text-xs font-bold">+10</button>
-                    </div>
-                </div>
-                <div class="bg-rose-50 border border-rose-100 p-4 rounded-lg text-center space-y-2">
-                    <div class="font-bold text-rose-600 text-sm">백 팀</div>
-                    <div class="text-4xl font-black text-rose-700" id="score-white">0</div>
-                    <div class="space-x-1">
-                        <button onclick="updateScore('white', -10)" class="bg-white border border-rose-200 px-2.5 py-1 rounded text-xs font-bold text-rose-600">-10</button>
-                        <button onclick="updateScore('white', 10)" class="bg-rose-600 text-white px-3 py-1 rounded text-xs font-bold">+10</button>
+        <!-- [모듈 0] 홈 / 개요 안내 -->
+        <section id="page-home" class="space-y-6 fade-in">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-2xl p-6 sm:p-10 shadow-sm relative overflow-hidden">
+                <div class="relative z-10 space-y-3">
+                    <span class="inline-block bg-white/20 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full font-medium">2026학년도 한가람 행사</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">2026 덕소중학교 한가람 체육활동</h2>
+                    <p class="text-blue-100 text-xs sm:text-sm max-w-xl leading-relaxed">학생 여러분의 협동심과 건강한 스포츠 정신을 도모하기 위한 체육활동 포털입니다. 실시간 점수 확인 및 커뮤니티 기능을 이용해보세요.</p>
+                    <div class="pt-2 flex flex-wrap gap-2 text-xs font-medium">
+                        <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/20"><i class="fa-regular fa-calendar mr-1"></i> 2026. 10. 16. (금) 09:00 ~ 15:00</span>
+                        <span class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/20"><i class="fa-solid fa-location-dot mr-1"></i> 운동장, 체육관, 각반 교실</span>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- 3. 게시판 탭 -->
-        <div id="content-board" class="hidden bg-white p-6 rounded-xl shadow-sm space-y-4">
-            <h2 class="text-lg font-bold text-slate-900">자유 게시판</h2>
-            <form onsubmit="writePost(event)" class="space-y-3 bg-slate-50 p-4 rounded-lg border border-slate-200 text-xs">
-                <div class="flex gap-2">
-                    <input type="text" id="post-author" placeholder="작성자" required class="flex-1 bg-white border border-slate-300 rounded px-3 py-1.5 outline-none">
-                    <label class="flex items-center space-x-1 cursor-pointer">
-                        <input type="checkbox" id="post-anon" onchange="toggleAnon()">
-                        <span>익명</span>
-                    </label>
+            <!-- 주요 안내 사항 카드 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-sm mb-1">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-slate-900">유의 사항</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">체육복을 착용하고 안전에 유의하여 경기에 참여해주세요. 찬조금이나 외부 간식 제공은 받지 않습니다.</p>
                 </div>
-                <input type="text" id="post-title" placeholder="제목" required class="w-full bg-white border border-slate-300 rounded px-3 py-1.5 outline-none">
-                <textarea id="post-content" placeholder="내용을 입력하세요..." rows="2" required class="w-full bg-white border border-slate-300 rounded px-3 py-1.5 outline-none"></textarea>
-                <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded">글 등록</button>
-            </form>
-            <div id="post-list" class="space-y-2 text-xs">
-                <div class="text-center text-slate-400 py-6">등록된 게시글이 없습니다.</div>
-            </div>
-        </div>
-
-        <!-- 4. 소통방 탭 -->
-        <div id="content-chat" class="hidden bg-white p-6 rounded-xl shadow-sm space-y-4">
-            <h2 class="text-lg font-bold text-slate-900">실시간 소통방</h2>
-            <div class="flex items-center space-x-2 text-xs bg-slate-50 p-2 rounded border border-slate-200">
-                <span class="font-bold">내 닉네임:</span>
-                <input type="text" id="chat-nickname" placeholder="닉네임 입력" class="flex-1 bg-white border border-slate-300 rounded px-2 py-1 outline-none">
-                <button onclick="saveNick()" class="bg-slate-900 text-white px-3 py-1 rounded font-bold">저장</button>
-            </div>
-            <div class="bg-sky-100 border border-slate-300 rounded-lg p-3 h-64 flex flex-col justify-between">
-                <div id="chat-messages" class="overflow-y-auto space-y-2 pr-1 text-xs">
-                    <div class="text-center text-slate-500 text-[11px] my-1">소통방에 입장했습니다.</div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold text-sm mb-1">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-slate-900">실시간 소통방</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">학생 간의 원활한 소통을 위해 닉네임을 설정하고 단체 오픈 소통방에 접속할 수 있습니다.</p>
                 </div>
-                <div class="flex gap-2 pt-2 border-t border-slate-300">
-                    <input type="text" id="chat-input" placeholder="메시지 입력..." class="flex-1 bg-white border border-slate-300 rounded px-3 py-1.5 text-xs outline-none" onkeypress="if(event.key==='Enter') sendChat()">
-                    <button onclick="sendChat()" class="bg-yellow-400 font-bold px-4 py-1.5 rounded text-xs">전송</button>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-sm mb-1">
+                        <i class="fa-solid fa-square-poll-vertical"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-slate-900">우승팀 예측</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">올해 청팀과 백팀 중 어느 팀이 최종 우승을 차지할지 실시간으로 투표에 참여해 보세요.</p>
                 </div>
             </div>
-        </div>
 
-        <!-- 5. 도구함 탭 -->
-        <div id="content-tools" class="hidden bg-white p-6 rounded-xl shadow-sm space-y-4">
-            <h2 class="text-lg font-bold text-slate-900">편의 도구함</h2>
-            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-3 text-xs">
-                <div class="font-bold text-slate-700">랜덤 추첨기</div>
-                <input type="text" id="tool-names" placeholder="이름을 쉼표(,)로 구분하여 입력" class="w-full bg-white border border-slate-300 rounded px-3 py-1.5 outline-none">
-                <button onclick="runRandom()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded">추첨 실행</button>
-                <div id="tool-result" class="text-center font-bold text-blue-600 text-sm"></div>
+            <!-- 빠르게 이동하는 메뉴 Grid -->
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-grip-vertical text-blue-600"></i> 포털 주요 기능 바로가기
+                </h3>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+                    <button onclick="navigateTo('score')" class="p-3 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200 text-center font-semibold text-slate-700 transition">실시간 점수판</button>
+                    <button onclick="navigateTo('schedule')" class="p-3 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200 text-center font-semibold text-slate-700 transition">세부 타임테이블</button>
+                    <button onclick="navigateTo('bracket')" class="p-3 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200 text-center font-semibold text-slate-700 transition">대진표 및 규칙</button>
+                    <button onclick="navigateTo('poll')" class="p-3 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200 text-center font-semibold text-slate-700 transition">우승팀 예측 투표</button>
+                    <button onclick="navigateTo('chat')" class="p-3 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200 text-center font-semibold text-slate-700 transition">실시간 소통방</button>
+                    <button onclick="navigateTo('board')" class="p-3 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200 text-center font-semibold text-slate-700 transition">자유 게시판</button>
+                    <button onclick="navigateTo('tools')" class="p-3 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200 text-center font-semibold text-slate-700 transition">팀 추첨기 / 메모</button>
+                    <button onclick="resetData()" class="p-3 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-lg border border-rose-200 text-center font-semibold transition">데이터 초기화</button>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <!-- [모듈 1] 실시간 점수판 -->
+        <section id="page-score" class="hidden space-y-6 fade-in">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+                    <div>
+                        <h2 class="font-bold text-lg text-slate-900">실시간 점수 집계표</h2>
+                        <p class="text-xs text-slate-500">종목별 실시간 취합 점수를 확인할 수 있습니다.</p>
+                    </div>
+                    <button onclick="navigateTo('home')" class="text-xs text-slate-500 hover:text-slate-800">닫기</button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 청팀 카운터 -->
+                    <div class="bg-blue-50/50 border border-blue-200 p-6 rounded-xl text-center space-y-4">
+                        <div class="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full font-bold text-xs">청 팀 (BLUE)</div>
+                        <div class="text-6xl font-black text-blue-600 tracking-tight" id="score-blue-display">0</div>
+                        <div class="flex justify-center gap-2 pt-2">
+                            <button onclick="adjustScore('blue', -10)" class="px-3 py-1.5 bg-white border border-blue-200 text-blue-700 text-xs font-bold rounded-md hover:bg-blue-100 transition">-10</button>
+                            <button onclick="adjustScore('blue', -1)" class="px-3 py-1.5 bg-white border border-blue-200 text-blue-700 text-xs font-bold rounded-md hover:bg-blue-100 transition">-1</button>
+                            <button onclick="adjustScore('blue', 1)" class="px-3 py-1.5 bg-blue-600 text-white text-xs font-bold rounded-md hover:bg-blue-700 transition">+1</button>
+                            <button onclick="adjustScore('blue', 10)" class="px-3 py-1.5 bg-blue-600 text-white text-xs font-bold rounded-md hover:bg-blue-700 transition">+10</button>
+                        </div>
+                    </div>
+
+                    <!-- 백팀 카운터 -->
+                    <div class="bg-rose-50/50 border border-rose-200 p-6 rounded-xl text-center space-y-4">
+                        <div class="inline-block px-3 py-1 bg-rose-100 text-rose-700 rounded-full font-bold text-xs">백 팀 (WHITE)</div>
+                        <div class="text-6xl font-black text-rose-600 tracking-tight" id="score-white-display">0</div>
+                        <div class="flex justify-center gap-2 pt-2">
+                            <button onclick="adjustScore('white', -10)" class="px-3 py-1.5 bg-white border border-rose-200 text-rose-700 text-xs font-bold rounded-md hover:bg-rose-100 transition">-10</button>
+                            <button onclick="adjustScore('white', -1)" class="px-3 py-1.5 bg-white border border-rose-200 text-rose-700 text-xs font-bold rounded-md hover:bg-rose-100 transition">-1</button>
+                            <button onclick="adjustScore('white', 1)" class="px-3 py-1.5 bg-rose-600 text-white text-xs font-bold rounded-md hover:bg-rose-700 transition">+1</button>
+                            <button onclick="adjustScore('white', 10)" class="px-3 py-1.5 bg-rose-600 text-white text-xs font-bold rounded-md hover:bg-rose-700 transition">+10</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 점수 기록 이력 로그 -->
+                <div class="border-t border-slate-100 pt-4">
+                    <h4 class="font-bold text-xs text-slate-700 mb-2">점수 갱신 이력</h4>
+                    <div id="score-history" class="bg-slate-50 p-3 rounded-lg text-xs font-mono text-slate-600 max-h-32 overflow-y-auto space-y-1 border border-slate-200">
+                        <div class="text-slate-400 text-center">아직 갱신된 점수 이력이 없습니다.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [모듈 2] 세부 타임테이블 -->
+        <section id="page-schedule" class="hidden space-y-6 fade-in">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+                    <div>
+                        <h2 class="font-bold text-lg text-slate-900">상세 운영 타임테이블</h2>
+                        <p class="text-xs text-slate-500">2026. 10. 16.(금) 체육활동 시간표 안내입니다[cite: 1].</p>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-slate-700 font-bold">
+                                <th class="p-3 w-16 text-center">순서</th>
+                                <th class="p-3 w-32">시간대</th>
+                                <th class="p-3 w-28">3학년</th>
+                                <th class="p-3 w-28">2학년</th>
+                                <th class="p-3 w-28">1학년</th>
+                                <th class="p-3">비고</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-slate-600">
+                            <tr>
+                                <td class="p-3 text-center font-bold text-slate-400">-</td>
+                                <td class="p-3 font-semibold text-slate-900">08:50 ~ 09:00</td>
+                                <td colspan="3" class="p-3 text-center bg-slate-50/50">각반 출석체크 및 운동장 집결 완료[cite: 3]</td>
+                                <td class="p-3 text-slate-400">학급 담임 지도</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-center font-bold text-slate-400">-</td>
+                                <td class="p-3 font-semibold text-slate-900">09:00 ~ 09:20</td>
+                                <td colspan="3" class="p-3 text-center bg-slate-50/50">개회선언 및 준비운동[cite: 3]</td>
+                                <td class="p-3 text-slate-400">전교생 운동장</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-center font-bold text-blue-600">1부</td>
+                                <td class="p-3 font-semibold text-slate-900">09:20 ~ 10:20</td>
+                                <td class="p-3 font-medium text-blue-600 bg-blue-50/30">운동장 (단체경기)[cite: 3]</td>
+                                <td class="p-3 font-medium text-indigo-600 bg-indigo-50/30">체육관 (피구)[cite: 3]</td>
+                                <td class="p-3 font-medium text-emerald-600 bg-emerald-50/30">각반교실 (협동)[cite: 3]</td>
+                                <td class="p-3 text-slate-400">순환 경기 1차</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-center font-bold text-slate-400">-</td>
+                                <td class="p-3 font-semibold text-slate-900">10:20 ~ 10:30</td>
+                                <td colspan="3" class="p-3 text-center">휴식시간 및 장소 이동 (경기전 보조준비운동)[cite: 3]</td>
+                                <td class="p-3 text-slate-400">안전 지휘</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-center font-bold text-blue-600">2부</td>
+                                <td class="p-3 font-semibold text-slate-900">10:30 ~ 11:30</td>
+                                <td class="p-3 font-medium text-indigo-600 bg-indigo-50/30">체육관 (피구)[cite: 3]</td>
+                                <td class="p-3 font-medium text-emerald-600 bg-emerald-50/30">각반교실 (협동)[cite: 3]</td>
+                                <td class="p-3 font-medium text-blue-600 bg-blue-50/30">운동장 (단체경기)[cite: 3]</td>
+                                <td class="p-3 text-slate-400">순환 경기 2차</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-center font-bold text-slate-400">-</td>
+                                <td class="p-3 font-semibold text-slate-900">11:30 ~ 11:40</td>
+                                <td colspan="3" class="p-3 text-center">휴식시간 및 장소 이동 (경기전 보조준비운동)[cite: 3]</td>
+                                <td class="p-3 text-slate-400">안전 지휘</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-center font-bold text-blue-600">3부</td>
+                                <td class="p-3 font-semibold text-slate-900">11:40 ~ 12:40</td>
+                                <td class="p-3 font-medium text-emerald-600 bg-emerald-50/30">각반교실 (협동)[cite: 3]</td>
+                                <td class="p-3 font-medium text-blue-600 bg-blue-50/30">운동장 (단체경기)[cite: 3]</td>
+                                <td class="p-3 font-medium text-indigo-600 bg-indigo-50/30">체육관 (피구)[cite: 3]</td>
+                                <td class="p-3 text-slate-400">순환 경기 3차</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-center font-bold text-amber-600">점심</td>
+                                <td class="p-3 font-semibold text-slate-900">12:40 ~ 13:30</td>
+                                <td colspan="3" class="p-3 text-center bg-amber-50/30">점심시간 및 스포츠 부스 운영 (체육관: 학생자치회)[cite: 3]</td>
+                                <td class="p-3 text-slate-400">자율 스포츠 체험</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-center font-bold text-rose-600">4부</td>
+                                <td class="p-3 font-semibold text-slate-900">13:30 ~ 14:15</td>
+                                <td colspan="3" class="p-3 text-center bg-rose-50/30">전교생 운동장 집결 / 댄스동아리 축하공연 / 단체줄넘기 / 이어달리기 결승 / 시상식</td>
+                                <td class="p-3 text-slate-400">피날레 행사</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 text-center font-bold text-slate-400">정리</td>
+                                <td class="p-3 font-semibold text-slate-900">14:15 ~ 15:00</td>
+                                <td colspan="3" class="p-3 text-center bg-slate-50/50">교내 정화활동 및 봉사활동 마무리 후 종례[cite: 3]</td>
+                                <td class="p-3 text-slate-400">환경 정화</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- [모듈 3] 대진표 및 상세 규칙 -->
+        <section id="page-bracket" class="hidden space-y-6 fade-in">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <h2 class="font-bold text-lg text-slate-900">종목별 대진표 및 경기 규정</h2>
+                    <p class="text-xs text-slate-500">안전하고 정정당한 스포츠 활동을 위해 아래 규칙을 준수해 주세요.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div class="border border-slate-200 p-4 rounded-xl space-y-2 bg-slate-50/50">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-sm text-slate-900"><i class="fa-solid fa-flag text-blue-600 mr-1.5"></i>달리는 줄다리기</h3>
+                            <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-[10px] font-bold">운동장 경기</span>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">제한시간 30초 내에 중앙선 기준 자국 방향으로 줄을 끌어오는 팀이 승리합니다[cite: 3]. 3판 2선승제 토너먼트로 진행됩니다[cite: 3].</p>
+                    </div>
+
+                    <div class="border border-slate-200 p-4 rounded-xl space-y-2 bg-slate-50/50">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-sm text-slate-900"><i class="fa-solid fa-circle-notch text-indigo-600 mr-1.5"></i>공 & 후프 릴레이</h3>
+                            <span class="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded text-[10px] font-bold">운동장 경기</span>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">반별 대표 주자들이 공을 전달한 후 후프를 통과하여 고무 기둥에 먼저 후프를 거는 순서대로 반환점을 도는 장애물 레이스입니다[cite: 3].</p>
+                    </div>
+
+                    <div class="border border-slate-200 p-4 rounded-xl space-y-2 bg-slate-50/50">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-sm text-slate-900"><i class="fa-solid fa-person-running text-emerald-600 mr-1.5"></i>학년별 이어달리기</h3>
+                            <span class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded text-[10px] font-bold">피날레 메인</span>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">각 반 남학생 4명, 여학생 4명 총 8명의 주자로 구성되며, 여-남 교대 순서로 리턴 터치 바통을 이어받아 달리게 됩니다[cite: 3].</p>
+                    </div>
+
+                    <div class="border border-slate-200 p-4 rounded-xl space-y-2 bg-slate-50/50">
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-bold text-sm text-slate-900"><i class="fa-solid fa-volleyball text-rose-600 mr-1.5"></i>피구 경기 규정</h3>
+                            <span class="bg-rose-100 text-rose-700 px-2 py-0.5 rounded text-[10px] font-bold">체육관 경기</span>
+                        </div>
+                        <p class="text-slate-600 leading-relaxed">남학생 8명, 여학생 8명 구성[cite: 3]. 제한시간 7분 단세트로 진행되며, 상대 방어선 안면/헤드샷 공격 및 더블아웃 행위는 Strict Foul 처리됩니다[cite: 3].</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [모듈 4] 우승팀 예측 투표 -->
+        <section id="page-poll" class="hidden space-y-6 fade-in">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-6 max-w-xl mx-auto">
+                <div class="text-center border-b border-slate-100 pb-4">
+                    <h2 class="font-bold text-lg text-slate-900">2026 한가람 우승팀 예측 투표</h2>
+                    <p class="text-xs text-slate-500">올해 종합 우승의 영예를 안을 팀은 어디일까요? 투표해 보세요!</p>
+                </div>
+
+                <div class="space-y-4 text-xs">
+                    <div onclick="castVote('blue')" class="border border-slate-200 hover:border-blue-500 p-4 rounded-xl bg-slate-50/50 cursor-pointer transition flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm">청</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm">청 팀 승리 예측</h4>
+                                <p class="text-slate-500 text-[11px]">열정과 패기의 청팀 우승!</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="font-bold text-blue-600 text-sm" id="poll-blue-count">0표</span>
+                            <div class="text-[10px] text-slate-400" id="poll-blue-percent">(0%)</div>
+                        </div>
+                    </div>
+
+                    <div onclick="castVote('white')" class="border border-slate-200 hover:border-rose-500 p-4 rounded-xl bg-slate-50/50 cursor-pointer transition flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-rose-600 text-white flex items-center justify-center font-bold text-sm">백</div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 text-sm">백 팀 승리 예측</h4>
+                                <p class="text-slate-500 text-[11px]">단합과 투지의 백팀 우승!</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="font-bold text-rose-600 text-sm" id="poll-white-count">0표</span>
+                            <div class="text-[10px] text-slate-400" id="poll-white-percent">(0%)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 프로그래스 바 시각화 -->
+                <div class="space-y-1 pt-2">
+                    <div class="flex justify-between text-[11px] font-bold text-slate-600">
+                        <span>청팀</span>
+                        <span>백팀</span>
+                    </div>
+                    <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden flex">
+                        <div id="bar-blue" class="bg-blue-600 h-full transition-all duration-300" style="width: 50%;"></div>
+                        <div id="bar-white" class="bg-rose-600 h-full transition-all duration-300" style="width: 50%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [모듈 5] 실시간 소통방 (초기 빈 대화창 기반) -->
+        <section id="page-chat" class="hidden space-y-6 fade-in">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                    <div>
+                        <h2 class="font-bold text-lg text-slate-900">한가람 실시간 오픈 소통방</h2>
+                        <p class="text-xs text-slate-500">대화명을 설정한 후 메시지를 입력해보세요.</p>
+                    </div>
+                    <button onclick="clearChatLog()" class="text-xs text-slate-400 hover:text-slate-700">대화 비우기</button>
+                </div>
+
+                <!-- 닉네임 설정 바 -->
+                <div class="flex items-center space-x-2 bg-slate-50 border border-slate-200 p-2.5 rounded-lg text-xs">
+                    <span class="font-bold text-slate-700 shrink-0">내 대화명:</span>
+                    <input type="text" id="chat-nick-input" placeholder="대화명을 입력하세요 (예: 2반 홍길동)" class="flex-1 bg-white border border-slate-200 rounded px-2.5 py-1 text-slate-800 outline-none focus:border-blue-500">
+                    <button onclick="saveNickname()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-3 py-1 rounded transition">저장</button>
+                </div>
+
+                <!-- 대화창 영역 (초기엔 완전 비어있음) -->
+                <div class="border border-slate-200 rounded-xl bg-slate-50/50 p-4 h-80 flex flex-col justify-between">
+                    <div id="chat-messages-container" class="overflow-y-auto space-y-3 pr-2 text-xs">
+                        <div class="text-center text-slate-400 text-[11px] my-4" id="chat-empty-notice">
+                            -- 소통방에 연결되었습니다. 첫 메시지를 남겨보세요! --
+                        </div>
+                    </div>
+
+                    <!-- 메시지 입력 영역 -->
+                    <div class="flex gap-2 pt-3 border-t border-slate-200">
+                        <input type="text" id="chat-text-input" placeholder="메시지를 입력하세요..." class="flex-1 bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs outline-none focus:border-blue-500" onkeypress="if(event.key==='Enter') sendChatMessage()">
+                        <button onclick="sendChatMessage()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2 rounded-lg text-xs transition">전송</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [모듈 6] 자유 게시판 -->
+        <section id="page-board" class="hidden space-y-6 fade-in">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-6">
+                <div class="border-b border-slate-100 pb-3">
+                    <h2 class="font-bold text-lg text-slate-900">자유 게시판</h2>
+                    <p class="text-xs text-slate-500">응원 메시지나 자유로운 이야기를 남겨보세요.</p>
+                </div>
+
+                <!-- 글 작성 폼 -->
+                <form onsubmit="submitPost(event)" class="bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-3 text-xs">
+                    <div class="flex gap-2">
+                        <input type="text" id="board-author-input" placeholder="작성자 닉네임" required class="flex-1 bg-white border border-slate-200 rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                        <label class="flex items-center space-x-1 cursor-pointer select-none text-slate-600">
+                            <input type="checkbox" id="board-anon-checkbox" onchange="toggleAnonMode()" class="rounded text-blue-600">
+                            <span>익명 작성</span>
+                        </label>
+                    </div>
+                    <input type="text" id="board-title-input" placeholder="글 제목" required class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                    <textarea id="board-content-input" placeholder="내용을 작성하세요..." rows="3" required class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 outline-none focus:border-blue-500"></textarea>
+                    <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded-lg transition">게시물 등록</button>
+                </form>
+
+                <!-- 게시글 목록 -->
+                <div id="board-posts-container" class="space-y-3 text-xs">
+                    <div class="text-center text-slate-400 py-6" id="board-empty-notice">등록된 게시글이 없습니다. 첫 글을 등록해 보세요!</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- [모듈 7] 편의 도구함 (팀 추첨기 / 메모장) -->
+        <section id="page-tools" class="hidden space-y-6 fade-in">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-6">
+                <div class="border-b border-slate-100 pb-3">
+                    <h2 class="font-bold text-lg text-slate-900">편의 도구함</h2>
+                    <p class="text-xs text-slate-500">팀 추첨 및 간이 메모장 기능을 이용하세요.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                    <!-- 랜덤 추첨기 -->
+                    <div class="border border-slate-200 p-4 rounded-xl space-y-3 bg-slate-50/50">
+                        <h3 class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
+                            <i class="fa-solid fa-shuffle text-blue-600"></i> 랜덤 추첨기
+                        </h3>
+                        <p class="text-slate-500 text-[11px]">이름을 쉼표(,)로 구분하여 입력해 주세요.</p>
+                        <input type="text" id="picker-names-input" placeholder="예: 김철수, 이영희, 박민수" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 outline-none focus:border-blue-500">
+                        <button onclick="runRandomPicker()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg transition">추첨 실행</button>
+                        <div id="picker-result-display" class="text-center font-bold text-blue-700 text-sm min-h-[20px] pt-1"></div>
+                    </div>
+
+                    <!-- 간이 메모장 -->
+                    <div class="border border-slate-200 p-4 rounded-xl space-y-3 bg-slate-50/50">
+                        <h3 class="font-bold text-sm text-slate-900 flex items-center gap-1.5">
+                            <i class="fa-regular fa-note-sticky text-amber-500"></i> 간이 메모장
+                        </h3>
+                        <p class="text-slate-500 text-[11px]">메모 내용은 브라우저에 자동 저장됩니다.</p>
+                        <textarea id="memo-textarea" oninput="autoSaveMemo()" placeholder="메모할 내용을 입력하세요..." rows="4" class="w-full bg-white border border-slate-200 rounded-lg p-3 outline-none focus:border-blue-500"></textarea>
+                        <div class="text-[10px] text-slate-400 text-right" id="memo-save-status">자동 저장됨</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
 
-    <!-- 푸터 -->
-    <footer class="text-center py-4 text-xs text-slate-400">
-        <p>&copy; 2026 한가람 체육활동 포털</p>
+    <!-- 3. 푸터 -->
+    <footer class="bg-white border-t border-slate-200 text-center py-6 text-xs text-slate-500 mt-12">
+        <p>덕소중학교장 [직인생략] | &copy; 2026 한가람 체육활동 운영위원회</p>
     </footer>
 
-    <!-- 자바스크립트 로직 -->
+    <!-- 4. 자바스크립트 전체 기능 통합 구현 -->
     <script>
-        function switchTab(tabId) {
-            ['home', 'score', 'board', 'chat', 'tools'].forEach(id => {
-                document.getElementById('content-' + id).classList.add('hidden');
+        // [1] 페이지 이동 핸들러
+        function navigateTo(pageId) {
+            const pages = ['home', 'score', 'schedule', 'bracket', 'poll', 'chat', 'board', 'tools'];
+            pages.forEach(id => {
+                const el = document.getElementById(`page-${id}`);
+                const navBtn = document.getElementById(`nav-${id}`);
+                
+                if (id === pageId) {
+                    el.classList.remove('hidden');
+                    if (navBtn) {
+                        navBtn.className = "nav-btn px-3 py-2 rounded-md bg-slate-900 text-white transition";
+                    }
+                } else {
+                    el.classList.add('hidden');
+                    if (navBtn) {
+                        navBtn.className = "nav-btn px-3 py-2 rounded-md hover:bg-slate-100 text-slate-600 transition";
+                    }
+                }
             });
-            document.getElementById('content-' + tabId).classList.remove('hidden');
-
-            document.querySelectorAll('nav button').forEach(btn => {
-                btn.className = "tab-btn px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-600";
-            });
-            event.target.className = "tab-btn px-3 py-1.5 rounded-md bg-slate-900 text-white";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        let scores = { blue: 0, white: 0 };
-        function updateScore(team, val) {
-            scores[team] = Math.max(0, scores[team] + val);
-            document.getElementById('score-' + team).innerText = scores[team];
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
         }
 
-        function toggleAnon() {
-            const isAnon = document.getElementById('post-anon').checked;
-            const authorInput = document.getElementById('post-author');
+        // [2] 점수판 상태 및 스토리지
+        let currentScores = { blue: 0, white: 0 };
+
+        function adjustScore(team, amount) {
+            currentScores[team] = Math.max(0, currentScores[team] + amount);
+            document.getElementById(`score-${team}-display`).innerText = currentScores[team];
+            
+            // 이력 기록
+            const historyBox = document.getElementById('score-history');
+            if (historyBox.querySelector('.text-slate-400')) {
+                historyBox.innerHTML = '';
+            }
+            const now = new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const teamName = team === 'blue' ? '청팀' : '백팀';
+            const changeStr = amount > 0 ? `+${amount}` : `${amount}`;
+            
+            const item = document.createElement('div');
+            item.innerText = `[${now}] ${teamName} 점수 변경: ${changeStr} (현재: ${currentScores[team]}점)`;
+            historyBox.prepend(item);
+
+            saveAppData();
+        }
+
+        // [3] 우승 예측 투표 상태
+        let pollVotes = { blue: 0, white: 0 };
+
+        function castVote(team) {
+            pollVotes[team]++;
+            const total = pollVotes.blue + pollVotes.white;
+            
+            const bluePercent = Math.round((pollVotes.blue / total) * 100);
+            const whitePercent = Math.round((pollVotes.white / total) * 100);
+
+            document.getElementById('poll-blue-count').innerText = `${pollVotes.blue}표`;
+            document.getElementById('poll-blue-percent').innerText = `(${bluePercent}%)`;
+            document.getElementById('poll-white-count').innerText = `${pollVotes.white}표`;
+            document.getElementById('poll-white-percent').innerText = `(${whitePercent}%)`;
+
+            document.getElementById('bar-blue').style.width = `${bluePercent}%`;
+            document.getElementById('bar-white').style.width = `${whitePercent}%`;
+
+            saveAppData();
+            alert("투표가 반영되었습니다!");
+        }
+
+        // [4] 실시간 소통방 로직
+        function saveNickname() {
+            const nick = document.getElementById('chat-nick-input').value.trim();
+            if (!nick) {
+                alert("대화명을 입력해 주세요!");
+                return;
+            }
+            localStorage.setItem('user_app_nickname', nick);
+            alert(`대화명이 [ ${nick} ] (으)로 설정되었습니다.`);
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chat-text-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const nick = localStorage.getItem('user_app_nickname') || '방문자';
+            const container = document.getElementById('chat-messages-container');
+            const emptyNotice = document.getElementById('chat-empty-notice');
+            if (emptyNotice) {
+                emptyNotice.remove();
+            }
+
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = "flex flex-col items-end space-y-1";
+            msgDiv.innerHTML = `
+                <span class="text-[10px] font-bold text-slate-600">${nick}</span>
+                <div class="flex items-end space-x-1.5">
+                    <span class="text-[9px] text-slate-400">${timeStr}</span>
+                    <div class="chat-bubble-me px-3.5 py-2 text-xs shadow-sm max-w-xs">${text}</div>
+                </div>
+            `;
+
+            container.appendChild(msgDiv);
+            input.value = '';
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function clearChatLog() {
+            const container = document.getElementById('chat-messages-container');
+            container.innerHTML = `<div class="text-center text-slate-400 text-[11px] my-4" id="chat-empty-notice">-- 소통방에 연결되었습니다. 첫 메시지를 남겨보세요! --</div>`;
+        }
+
+        // [5] 게시판 로직
+        function toggleAnonMode() {
+            const isAnon = document.getElementById('board-anon-checkbox').checked;
+            const authorInput = document.getElementById('board-author-input');
             authorInput.value = isAnon ? '익명' : '';
             authorInput.disabled = isAnon;
         }
 
-        function writePost(event) {
+        function submitPost(event) {
             event.preventDefault();
-            const author = document.getElementById('post-author').value;
-            const title = document.getElementById('post-title').value;
-            const content = document.getElementById('post-content').value;
-            const list = document.getElementById('post-list');
+            const author = document.getElementById('board-author-input').value.trim();
+            const title = document.getElementById('board-title-input').value.trim();
+            const content = document.getElementById('board-content-input').value.trim();
 
-            if (list.querySelector('.text-center')) {
-                list.innerHTML = '';
+            const container = document.getElementById('board-posts-container');
+            const emptyNotice = document.getElementById('board-empty-notice');
+            if (emptyNotice) {
+                emptyNotice.remove();
             }
 
-            const item = document.createElement('div');
-            item.className = "bg-slate-50 border border-slate-200 p-3 rounded-lg space-y-1";
-            item.innerHTML = `
-                <div class="flex justify-between font-bold text-slate-700">
-                    <span>${title}</span>
-                    <span class="text-slate-400 font-normal">${author}</span>
+            const now = new Date().toLocaleDateString('ko-KR');
+
+            const postCard = document.createElement('div');
+            postCard.className = "border border-slate-200 p-4 rounded-xl bg-slate-50/50 space-y-1.5";
+            postCard.innerHTML = `
+                <div class="flex justify-between items-center text-slate-500 text-[11px]">
+                    <span class="font-bold text-slate-800">${author}</span>
+                    <span>${now}</span>
                 </div>
-                <p class="text-slate-600">${content}</p>
+                <h4 class="font-bold text-slate-900 text-sm">${title}</h4>
+                <p class="text-slate-600 leading-relaxed">${content}</p>
             `;
-            list.prepend(item);
-            event.target.reset();
-            document.getElementById('post-author').disabled = false;
+
+            container.prepend(postCard);
+
+            // 초기화
+            document.getElementById('board-title-input').value = '';
+            document.getElementById('board-content-input').value = '';
         }
 
-        function saveNick() {
-            const nick = document.getElementById('chat-nickname').value.trim();
-            if(!nick) return alert("닉네임을 입력하세요.");
-            localStorage.setItem('user_nick', nick);
-            alert("닉네임이 저장되었습니다.");
-        }
-
-        function sendChat() {
-            const input = document.getElementById('chat-input');
-            const text = input.value.trim();
-            if(!text) return;
-            const nick = localStorage.getItem('user_nick') || '방문자';
-            const box = document.getElementById('chat-messages');
-
-            const msg = document.createElement('div');
-            msg.className = "flex flex-col items-end space-y-0.5";
-            msg.innerHTML = `
-                <span class="text-[10px] text-slate-600 font-bold">${nick}</span>
-                <div class="bg-yellow-300 text-slate-900 px-3 py-1.5 rounded-lg max-w-xs shadow-sm">${text}</div>
-            `;
-            box.appendChild(msg);
-            input.value = '';
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function runRandom() {
-            const val = document.getElementById('tool-names').value;
+        // [6] 랜덤 추첨기 및 메모장
+        function runRandomPicker() {
+            const val = document.getElementById('picker-names-input').value;
             const arr = val.split(',').map(s => s.trim()).filter(s => s);
-            if(arr.length === 0) return alert("이름을 입력해주세요.");
+            if (arr.length === 0) {
+                alert("이름을 쉼표(,)로 구분하여 입력해 주세요.");
+                return;
+            }
             const picked = arr[Math.floor(Math.random() * arr.length)];
-            document.getElementById('tool-result').innerText = `결과: [ ${picked} ]`;
+            document.getElementById('picker-result-display').innerText = `🎉 당첨 결과: [ ${picked} ]`;
         }
+
+        function autoSaveMemo() {
+            const val = document.getElementById('memo-textarea').value;
+            localStorage.setItem('user_app_memo', val);
+            document.getElementById('memo-save-status').innerText = "저장됨";
+        }
+
+        // [7] 전체 데이터 저장 및 동기화
+        function saveAppData() {
+            const data = {
+                scores: currentScores,
+                votes: pollVotes
+            };
+            localStorage.setItem('user_app_data', JSON.stringify(data));
+        }
+
+        function resetData() {
+            if (confirm("모든 저장 데이터를 초기화하시겠습니까?")) {
+                localStorage.clear();
+                location.reload();
+            }
+        }
+
+        // [8] 초기 로드 설정
+        window.onload = function() {
+            navigateTo('home');
+
+            // 저장된 데이터 복원
+            const savedData = localStorage.getItem('user_app_data');
+            if (savedData) {
+                try {
+                    const parsed = JSON.parse(savedData);
+                    if (parsed.scores) {
+                        currentScores = parsed.scores;
+                        document.getElementById('score-blue-display').innerText = currentScores.blue;
+                        document.getElementById('score-white-display').innerText = currentScores.white;
+                    }
+                    if (parsed.votes) {
+                        pollVotes = parsed.votes;
+                        const total = pollVotes.blue + pollVotes.white;
+                        if (total > 0) {
+                            const bPct = Math.round((pollVotes.blue / total) * 100);
+                            const wPct = Math.round((pollVotes.white / total) * 100);
+                            document.getElementById('poll-blue-count').innerText = `${pollVotes.blue}표`;
+                            document.getElementById('poll-blue-percent').innerText = `(${bPct}%)`;
+                            document.getElementById('poll-white-count').innerText = `${pollVotes.white}표`;
+                            document.getElementById('poll-white-percent').innerText = `(${wPct}%)`;
+                            document.getElementById('bar-blue').style.width = `${bPct}%`;
+                            document.getElementById('bar-white').style.width = `${wPct}%`;
+                        }
+                    }
+                } catch(e) {}
+            }
+
+            const memo = localStorage.getItem('user_app_memo');
+            if (memo) {
+                document.getElementById('memo-textarea').value = memo;
+            }
+
+            const nick = localStorage.getItem('user_app_nickname');
+            if (nick) {
+                document.getElementById('chat-nick-input').value = nick;
+            }
+        };
     </script>
 </body>
 </html>
