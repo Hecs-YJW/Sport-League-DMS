@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 덕소중학교 체육대회</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 아이콘 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 font-sans text-slate-800">
+
+    <!-- 네비게이션 바 -->
+    <nav class="bg-indigo-600 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-xl font-bold tracking-tight">
+                <i class="fa-solid fa-flag-checkered mr-2"></i> 덕소중학교 체육대회
+            </h1>
+            <div class="space-x-6 text-sm font-medium">
+                <a href="#score" class="hover:text-indigo-200 transition">점수판</a>
+                <a href="#schedule" class="hover:text-indigo-200 transition">상세일정</a>
+                <a href="#cheer" class="hover:text-indigo-200 transition">응원마당</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 배너 -->
+    <header class="bg-gradient-to-r from-indigo-500 to-violet-600 text-white py-16 px-4 text-center shadow-lg">
+        <div class="max-w-3xl mx-auto">
+            <span class="bg-indigo-400 bg-opacity-40 text-indigo-100 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">2026년 10월 16일 (금)</span>
+            <h2 class="text-4xl sm:text-5xl font-extrabold mt-3 mb-4">덕소중학교 가을 대운동회</h2>
+            <p class="text-indigo-100 text-lg">달리자, 외치자, 하나되자! 열정과 협동이 빛나는 축제의 장</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 py-10 space-y-16">
+
+        <!-- 1. 실시간 점수판 섹션 -->
+        <section id="score" class="bg-white rounded-2xl shadow-md p-6 sm:p-8">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold text-slate-900">실시간 점수판</h3>
+                <p class="text-slate-500 text-sm mt-1">경기가 진행될 때마다 점수가 실시간으로 반영됩니다!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 청팀 -->
+                <div class="bg-blue-50 border-2 border-blue-200 rounded-2xl p-6 text-center flex flex-col justify-between">
+                    <div>
+                        <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">TEAM BLUE</span>
+                        <h4 class="text-3xl font-black text-blue-700 mt-3">청 팀</h4>
+                        <div class="text-6xl font-extrabold text-blue-800 my-6" id="blue-score">120</div>
+                    </div>
+                    <div class="flex justify-center space-x-3">
+                        <button onclick="updateScore('blue', -10)" class="bg-blue-200 hover:bg-blue-300 text-blue-800 font-bold px-4 py-2 rounded-xl transition">-10</button>
+                        <button onclick="updateScore('blue', 10)" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 rounded-xl transition">+10</button>
+                    </div>
+                </div>
+
+                <!-- 백팀 -->
+                <div class="bg-rose-50 border-2 border-rose-200 rounded-2xl p-6 text-center flex flex-col justify-between">
+                    <div>
+                        <span class="bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full">TEAM WHITE</span>
+                        <h4 class="text-3xl font-black text-rose-700 mt-3">백 팀</h4>
+                        <div class="text-6xl font-extrabold text-rose-800 my-6" id="white-score">110</div>
+                    </div>
+                    <div class="flex justify-center space-x-3">
+                        <button onclick="updateScore('white', -10)" class="bg-rose-200 hover:bg-rose-300 text-rose-800 font-bold px-4 py-2 rounded-xl transition">-10</button>
+                        <button onclick="updateScore('white', 10)" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-6 py-2 rounded-xl transition">+10</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 경기 일정 섹션 (상세 타임테이블) -->
+        <section id="schedule" class="bg-white rounded-2xl shadow-md p-6 sm:p-8">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold text-slate-900">체육대회 상세 타임테이블</h3>
+                <p class="text-slate-500 text-sm mt-1">2026년 10월 16일 금요일 일정 안내</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- 08:50 ~ 09:00 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <span class="bg-indigo-100 text-indigo-700 font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">08:50 ~ 09:00</span>
+                    <div>
+                        <h4 class="font-bold text-slate-800">각반 출석체크 및 운동장 집결 완료</h4>
+                        <p class="text-slate-600 text-sm">출석 확인 후 지정 구역 집결</p>
+                    </div>
+                </div>
+
+                <!-- 09:00 ~ 09:20 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <span class="bg-indigo-100 text-indigo-700 font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">09:00 ~ 09:20</span>
+                    <div>
+                        <h4 class="font-bold text-slate-800"><span class="text-indigo-600">[전체 운동장 집결]</span> 개회선언 및 준비운동</h4>
+                        <p class="text-slate-600 text-sm">개회선언 및 준비운동 실시 후 각 경기 장소로 이동</p>
+                    </div>
+                </div>
+
+                <!-- 09:20 ~ 10:20 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
+                    <span class="bg-indigo-600 text-white font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">09:20 ~ 10:20</span>
+                    <div>
+                        <h4 class="font-bold text-slate-900">1부 순환 경기</h4>
+                        <p class="text-slate-700 text-sm mt-1">
+                            • <strong class="text-indigo-700">[운동장]</strong> 단체 경기<br>
+                            • <strong class="text-rose-700">[체육관]</strong> 피구 경기<br>
+                            • <strong class="text-emerald-700">[각반교실]</strong> 협동 챌린지
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 10:20 ~ 10:30 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <span class="bg-slate-200 text-slate-700 font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">10:20 ~ 10:30</span>
+                    <div>
+                        <h4 class="font-bold text-slate-800">휴식시간 및 이동</h4>
+                        <p class="text-slate-600 text-sm">이동 및 경기 시작 전 보조 준비운동 실시</p>
+                    </div>
+                </div>
+
+                <!-- 10:30 ~ 11:30 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
+                    <span class="bg-indigo-600 text-white font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">10:30 ~ 11:30</span>
+                    <div>
+                        <h4 class="font-bold text-slate-900">2부 순환 경기</h4>
+                        <p class="text-slate-700 text-sm mt-1">
+                            • <strong class="text-rose-700">[체육관]</strong> 피구 경기<br>
+                            • <strong class="text-emerald-700">[각반교실]</strong> 협동 챌린지<br>
+                            • <strong class="text-indigo-700">[운동장]</strong> 단체 경기
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 11:30 ~ 11:40 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <span class="bg-slate-200 text-slate-700 font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">11:30 ~ 11:40</span>
+                    <div>
+                        <h4 class="font-bold text-slate-800">휴식시간 및 이동</h4>
+                        <p class="text-slate-600 text-sm">이동 및 경기 시작 전 보조 준비운동 실시</p>
+                    </div>
+                </div>
+
+                <!-- 11:40 ~ 12:40 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
+                    <span class="bg-indigo-600 text-white font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">11:40 ~ 12:40</span>
+                    <div>
+                        <h4 class="font-bold text-slate-900">3부 순환 경기</h4>
+                        <p class="text-slate-700 text-sm mt-1">
+                            • <strong class="text-emerald-700">[각반교실]</strong> 협동 챌린지<br>
+                            • <strong class="text-indigo-700">[운동장]</strong> 단체 경기<br>
+                            • <strong class="text-rose-700">[체육관]</strong> 피구 경기
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 12:40 ~ 13:30 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-amber-50 p-4 rounded-xl border border-amber-200">
+                    <span class="bg-amber-500 text-white font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">12:40 ~ 13:30</span>
+                    <div>
+                        <h4 class="font-bold text-amber-900">점심시간 및 휴식시간 및 이동</h4>
+                        <p class="text-amber-700 text-sm">중식 및 휴식 (체육관: 학생자치회 스포츠부스 운영)</p>
+                    </div>
+                </div>
+
+                <!-- 13:30 ~ 14:15 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-violet-50 p-4 rounded-xl border border-violet-200">
+                    <span class="bg-violet-600 text-white font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">13:30 ~ 14:15</span>
+                    <div>
+                        <h4 class="font-bold text-violet-900"><span class="text-violet-700">[전교생 운동장 집결]</span> 피날레 행사</h4>
+                        <p class="text-violet-700 text-sm mt-1">
+                            • 축하공연 (덕소중 댄스동아리)<br>
+                            • 학년별 단체 줄넘기<br>
+                            • 이어달리기 결승<br>
+                            • 시상 및 마무리
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 14:15 ~ 15:00 -->
+                <div class="flex flex-col sm:flex-row items-start sm:items-center bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <span class="bg-slate-600 text-white font-bold text-sm px-3 py-1 rounded-lg mb-2 sm:mb-0 sm:mr-4 whitespace-nowrap">14:15 ~ 15:00</span>
+                    <div>
+                        <h4 class="font-bold text-slate-800">교내정화활동 (봉사)</h4>
+                        <p class="text-slate-600 text-sm">체육대회 행사장 주변 정리 및 교내 청결 활동</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. 응원 메시지 게시판 섹션 -->
+        <section id="cheer" class="bg-white rounded-2xl shadow-md p-6 sm:p-8">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold text-slate-900">응원 마당</h3>
+                <p class="text-slate-500 text-sm mt-1">우리 반, 우리 팀을 응원하는 한마디를 남겨주세요!</p>
+            </div>
+
+            <!-- 입력 폼 -->
+            <form id="cheer-form" onsubmit="addCheerMessage(event)" class="space-y-4 mb-8">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <input type="text" id="author" placeholder="이름 (또는 학급)" required class="border border-slate-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                    <select id="team-select" class="border border-slate-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm">
+                        <option value="청팀">청팀 응원</option>
+                        <option value="백팀">백팀 응원</option>
+                    </select>
+                </div>
+                <textarea id="message" placeholder="응원 메시지를 입력하세요 (예: 3반 피구 파이팅! 역전하자!)" rows="2" required class="w-full border border-slate-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm"></textarea>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 rounded-xl transition text-sm">응원 등록하기</button>
+            </form>
+
+            <!-- 메시지 목록 -->
+            <div id="cheer-list" class="space-y-3">
+                <div class="p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-xl">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-bold text-sm text-blue-800">김덕소 (청팀)</span>
+                        <span class="text-xs text-slate-400">방금 전</span>
+                    </div>
+                    <p class="text-slate-700 text-sm">청팀 무조건 우승한다! 다들 다치지 말고 화이팅!</p>
+                </div>
+                <div class="p-4 bg-rose-50 border-l-4 border-rose-500 rounded-r-xl">
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="font-bold text-sm text-rose-800">이중축 (백팀)</span>
+                        <span class="text-xs text-slate-400">1분 전</span>
+                    </div>
+                    <p class="text-slate-700 text-sm">우리 댄스동아리 공연도 기대해주고 백팀 이어달리기 가보자고~!</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="bg-slate-800 text-slate-400 text-center py-6 mt-16 text-sm">
+        <p>&copy; 2026 덕소중학교 체육대회 위원회. All rights reserved.</p>
+    </footer>
+
+    <!-- 자바스크립트 기능 구현 -->
+    <script>
+        // 점수판 관리 로직
+        let scores = { blue: 120, white: 110 };
+
+        function updateScore(team, delta) {
+            scores[team] = Math.max(0, scores[team] + delta);
+            document.getElementById(`${team}-score`).innerText = scores[team];
+        }
+
+        // 응원 메시지 추가 로직
+        function addCheerMessage(event) {
+            event.preventDefault();
+            
+            const author = document.getElementById('author').value;
+            const team = document.getElementById('team-select').value;
+            const message = document.getElementById('message').value;
+
+            const listContainer = document.getElementById('cheer-list');
+            const isBlue = team === '청팀';
+            
+            const borderColor = isBlue ? 'border-blue-500 text-blue-800 bg-blue-50' : 'border-rose-500 text-rose-800 bg-rose-50';
+            const nameColor = isBlue ? 'text-blue-800' : 'text-rose-800';
+            
+            const newItem = document.createElement('div');
+            newItem.className = `p-4 border-l-4 rounded-r-xl ${borderColor.split(' ')[2]} ${borderColor.split(' ')[0]}`;
+            newItem.innerHTML = `
+                <div class="flex justify-between items-center mb-1">
+                    <span class="font-bold text-sm ${nameColor}">${author} (${team})</span>
+                    <span class="text-xs text-slate-400">방금 전</span>
+                </div>
+                <p class="text-slate-700 text-sm">${message}</p>
+            `;
+
+            listContainer.prepend(newItem);
+            document.getElementById('cheer-form').reset();
+        }
+    </script>
+</body>
+</html>
