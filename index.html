@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 한가람 체육활동 올인원 포털</title>
+    <title>2026 한가람 체육활동 가정통신문 포털</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome 아이콘 CDN -->
@@ -13,282 +13,242 @@
             darkMode: 'class',
         }
     </script>
+    <style>
+        /* 사각사각한 공문서 느낌을 위한 커스텀 스타일 */
+        body {
+            font-family: 'Malgun Gothic', 'Dotum', sans-serif;
+        }
+        .paper-border {
+            border: 2px solid #334155;
+        }
+        .paper-box {
+            border: 1px solid #cbd5e1;
+            background-color: #ffffff;
+        }
+        .dark .paper-box {
+            border: 1px solid #475569;
+            background-color: #1e293b;
+        }
+        .document-header {
+            border-bottom: 3px double #334155;
+        }
+    </style>
 </head>
-<body id="body-tag" class="bg-slate-100 dark:bg-slate-900 font-sans text-slate-800 dark:text-slate-100 min-h-screen flex flex-col justify-between transition-colors duration-200">
+<body id="body-tag" class="bg-slate-200 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen flex flex-col justify-between">
 
-    <!-- 네비게이션 바 -->
-    <nav class="bg-indigo-600 dark:bg-indigo-950 text-white shadow-md sticky top-0 z-50 transition-colors duration-200">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-4">
-                <h1 class="text-lg sm:text-xl font-bold tracking-tight cursor-pointer" onclick="showPage('home')">
-                    <i class="fa-solid fa-flag-checkered mr-2"></i> 한가람 체육활동
-                </h1>
-                <span class="bg-indigo-700 dark:bg-indigo-900 text-indigo-100 text-xs font-semibold px-2.5 py-1 rounded-full hidden md:inline-block">
-                    <i class="fa-solid fa-users mr-1"></i> 접속자 <span id="online-count">42</span>명
-                </span>
-                <span id="nav-clock" class="text-xs text-indigo-200 hidden lg:inline-block"></span>
+    <!-- 상단 공문서 결재선 스타일 네비게이션 -->
+    <nav class="bg-white dark:bg-slate-900 border-b-2 border-slate-400 dark:border-slate-700 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-2 flex justify-between items-center text-xs sm:text-sm font-bold">
+            <div class="flex items-center space-x-3">
+                <span class="bg-slate-800 text-white px-2 py-1 uppercase tracking-widest text-[10px]">공식문서</span>
+                <span class="cursor-pointer" onclick="showPage('home')">한가람 체육활동 포털</span>
             </div>
-            <div class="space-x-1 sm:space-x-3 text-xs sm:text-sm font-medium flex items-center">
-                <button onclick="showPage('home')" class="hover:text-indigo-200 transition px-2 py-1 rounded">홈</button>
-                <button onclick="showPage('score')" class="hover:text-indigo-200 transition px-2 py-1 rounded">점수판</button>
-                <button onclick="showPage('schedule')" class="hover:text-indigo-200 transition px-2 py-1 rounded">일정</button>
-                <button onclick="showPage('bracket')" class="hover:text-indigo-200 transition px-2 py-1 rounded">대진표</button>
-                <button onclick="showPage('poll')" class="hover:text-indigo-200 transition px-2 py-1 rounded">투표</button>
-                <button onclick="showPage('chat')" class="hover:text-indigo-200 transition px-2 py-1 rounded">채팅</button>
-                <button onclick="showPage('board')" class="hover:text-indigo-200 transition px-2 py-1 rounded">게시판</button>
-                <button onclick="showPage('tools')" class="hover:text-indigo-200 transition px-2 py-1 rounded">도구함</button>
-                <button onclick="showPage('settings')" class="hover:text-indigo-200 transition px-2 py-1 rounded text-base" title="설정"><i class="fa-solid fa-gear"></i></button>
+            <div class="space-x-1 sm:space-x-2 flex items-center">
+                <button onclick="showPage('home')" class="paper-box px-2.5 py-1 hover:bg-slate-100 dark:hover:bg-slate-800">홈</button>
+                <button onclick="showPage('score')" class="paper-box px-2.5 py-1 hover:bg-slate-100 dark:hover:bg-slate-800">점수판</button>
+                <button onclick="showPage('schedule')" class="paper-box px-2.5 py-1 hover:bg-slate-100 dark:hover:bg-slate-800">일정</button>
+                <button onclick="showPage('bracket')" class="paper-box px-2.5 py-1 hover:bg-slate-100 dark:hover:bg-slate-800">대진표</button>
+                <button onclick="showPage('poll')" class="paper-box px-2.5 py-1 hover:bg-slate-100 dark:hover:bg-slate-800">투표</button>
+                <button onclick="showPage('chat')" class="paper-box px-2.5 py-1 hover:bg-slate-100 dark:hover:bg-slate-800">채팅</button>
+                <button onclick="showPage('board')" class="paper-box px-2.5 py-1 hover:bg-slate-100 dark:hover:bg-slate-800">게시판</button>
+                <button onclick="showPage('tools')" class="paper-box px-2.5 py-1 hover:bg-slate-100 dark:hover:bg-slate-800">도구함</button>
+                <button onclick="showPage('settings')" class="paper-box px-2 py-1 hover:bg-slate-100 dark:hover:bg-slate-800"><i class="fa-solid fa-gear"></i></button>
             </div>
         </div>
     </nav>
 
-    <!-- 메인 컨테이너 -->
-    <main class="max-w-6xl mx-auto px-4 py-8 flex-1 w-full flex items-center justify-center">
+    <!-- 메인 컨테이너 (종이 문서 형태) -->
+    <main class="max-w-5xl mx-auto px-4 py-8 flex-1 w-full flex items-center justify-center">
 
-        <!-- 0. 홈 화면 (메인 로비 및 위젯 모음) -->
-        <div id="page-home" class="space-y-8 w-full max-w-4xl mx-auto">
-            <div class="bg-gradient-to-r from-indigo-600 to-violet-600 text-white py-14 px-6 text-center shadow-xl rounded-3xl">
-                <span class="bg-white bg-opacity-20 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">2026년 10월 16일 (금)</span>
-                <h2 class="text-3xl sm:text-5xl font-black mt-4 mb-2 tracking-tight">한가람 체육활동 종합 포털</h2>
-                <p class="text-indigo-100 text-sm sm:text-base mt-2">디스코드, 카카오톡, 종합 누리집의 편리한 기능을 모두 담았습니다.</p>
+        <!-- 0. 가정통신문 메인 홈 화면 -->
+        <div id="page-home" class="space-y-6 w-full paper-box p-6 sm:p-10 shadow-lg">
+            <div class="document-header pb-4 text-center space-y-2">
+                <p class="text-xs text-slate-500 dark:text-slate-400">참여와 소통으로 함께 성장하는 행복한 학교</p>
+                <h2 class="text-2xl sm:text-3xl font-black tracking-tight">2026학년도 한가람 체육활동 안내</h2>
+                <p class="text-xs font-bold text-slate-700 dark:text-slate-300">일시 : 2026. 10. 16.(금) 09:00 ~ 15:00[cite: 1, 6]</p>
             </div>
 
-            <!-- 빠른 바로가기 카드 그리드 -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div onclick="showPage('score')" class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow hover:shadow-lg transition cursor-pointer text-center space-y-2 border border-slate-100 dark:border-slate-700">
-                    <i class="fa-solid fa-trophy text-2xl text-indigo-600 dark:text-indigo-400"></i>
-                    <h4 class="font-bold text-sm">실시간 점수판</h4>
-                </div>
-                <div onclick="showPage('chat')" class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow hover:shadow-lg transition cursor-pointer text-center space-y-2 border border-slate-100 dark:border-slate-700">
-                    <i class="fa-solid fa-comments text-2xl text-emerald-600 dark:text-emerald-400"></i>
-                    <h4 class="font-bold text-sm">실시간 채팅방</h4>
-                </div>
-                <div onclick="showPage('tools')" class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow hover:shadow-lg transition cursor-pointer text-center space-y-2 border border-slate-100 dark:border-slate-700">
-                    <i class="fa-solid fa-toolbox text-2xl text-amber-600 dark:text-amber-400"></i>
-                    <h4 class="font-bold text-sm">편의 도구함</h4>
-                </div>
-                <div onclick="showPage('board')" class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow hover:shadow-lg transition cursor-pointer text-center space-y-2 border border-slate-100 dark:border-slate-700">
-                    <i class="fa-solid fa-rectangle-list text-2xl text-violet-600 dark:text-violet-400"></i>
-                    <h4 class="font-bold text-sm">자유 게시판</h4>
-                </div>
+            <div class="space-y-4 text-xs sm:text-sm leading-relaxed text-slate-800 dark:text-slate-200">
+                <p>학부모님 및 학생 여러분 안녕하십니까.</p>
+                <p>단풍의 계절을 맞이하여 본교에서는 학생들의 심신 단련과 협동심 함양을 위한 <strong>2026년도 한가람 체육활동</strong>을 개최합니다[cite: 6]. 아래의 바로가기 메뉴를 통해 세부 일정, 대진표, 실시간 점수판 및 커뮤니티 기능을 이용하실 수 있습니다.</p>
             </div>
 
-            <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-md p-6 sm:p-8 space-y-6 text-slate-700 dark:text-slate-200">
-                <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center">
-                    <i class="fa-solid fa-circle-info text-indigo-600 dark:text-indigo-400 mr-2"></i> 시스템 안내
-                </h3>
-                <p class="text-sm leading-relaxed">
-                    본 누리집은 50여 가지의 편리한 기능(채팅, 팀 추첨기, 메모장, 타이머, 다크모드, 익명 게시판 등)을 지원합니다. 상단 메뉴를 통해 언제든 원하는 기능을 이용하실 수 있습니다.
-                </p>
+            <!-- 사각사각한 메뉴 바로가기 격자 -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+                <button onclick="showPage('score')" class="paper-box p-3 text-center font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition">실시간 점수판</button>
+                <button onclick="showPage('schedule')" class="paper-box p-3 text-center font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition">상세 타임테이블</button>
+                <button onclick="showPage('bracket')" class="paper-box p-3 text-center font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition">대진표 및 규칙</button>
+                <button onclick="showPage('poll')" class="paper-box p-3 text-center font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition">우승팀 투표</button>
+                <button onclick="showPage('chat')" class="paper-box p-3 text-center font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition">오픈 채팅방</button>
+                <button onclick="showPage('board')" class="paper-box p-3 text-center font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition">자유 게시판</button>
+                <button onclick="showPage('tools')" class="paper-box p-3 text-center font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition">편의 도구함</button>
+                <button onclick="showPage('settings')" class="paper-box p-3 text-center font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition">환경 설정</button>
             </div>
         </div>
 
         <!-- 1. 실시간 점수판 페이지 -->
-        <section id="page-score" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full">
-            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-4">
-                <h3 class="text-2xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-trophy text-indigo-600 dark:text-indigo-400 mr-2"></i>실시간 점수판</h3>
-                <button onclick="showPage('home')" class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-sm font-bold transition">홈으로</button>
+        <section id="page-score" class="hidden paper-box p-6 sm:p-8 space-y-6 w-full shadow-lg">
+            <div class="document-header pb-3 flex items-center justify-between">
+                <h3 class="text-lg font-bold">실시간 점수 집계표</h3>
+                <button onclick="showPage('home')" class="paper-box px-3 py-1 text-xs font-bold">목록으로</button>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-                <div class="bg-blue-50 dark:bg-blue-950/40 border-2 border-blue-200 dark:border-blue-800 rounded-2xl p-6 text-center flex flex-col justify-between">
-                    <div>
-                        <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">TEAM BLUE</span>
-                        <h4 class="text-3xl font-black text-blue-700 dark:text-blue-400 mt-3">청 팀</h4>
-                        <div class="text-6xl font-extrabold text-blue-800 dark:text-blue-300 my-6" id="blue-score">0</div>
-                    </div>
-                    <div class="flex justify-center space-x-3">
-                        <button onclick="updateScore('blue', -10)" class="bg-blue-200 dark:bg-blue-900 text-blue-800 dark:text-blue-200 font-bold px-4 py-2 rounded-xl">-10</button>
-                        <button onclick="updateScore('blue', 10)" class="bg-blue-600 text-white font-bold px-6 py-2 rounded-xl">+10</button>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="paper-box p-4 text-center space-y-4">
+                    <h4 class="font-bold text-lg text-blue-700 dark:text-blue-400">청 팀</h4>
+                    <div class="text-5xl font-black" id="blue-score">0</div>
+                    <div class="space-x-2">
+                        <button onclick="updateScore('blue', -10)" class="paper-box px-3 py-1 font-bold">-10</button>
+                        <button onclick="updateScore('blue', 10)" class="paper-box px-3 py-1 font-bold bg-slate-100 dark:bg-slate-700">+10</button>
                     </div>
                 </div>
-                <div class="bg-rose-50 dark:bg-rose-950/40 border-2 border-rose-200 dark:border-rose-800 rounded-2xl p-6 text-center flex flex-col justify-between">
-                    <div>
-                        <span class="bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full">TEAM WHITE</span>
-                        <h4 class="text-3xl font-black text-rose-700 dark:text-rose-400 mt-3">백 팀</h4>
-                        <div class="text-6xl font-extrabold text-rose-800 dark:text-rose-300 my-6" id="white-score">0</div>
-                    </div>
-                    <div class="flex justify-center space-x-3">
-                        <button onclick="updateScore('white', -10)" class="bg-rose-200 dark:bg-rose-900 text-rose-800 dark:text-rose-200 font-bold px-4 py-2 rounded-xl">-10</button>
-                        <button onclick="updateScore('white', 10)" class="bg-rose-600 text-white font-bold px-6 py-2 rounded-xl">+10</button>
+                <div class="paper-box p-4 text-center space-y-4">
+                    <h4 class="font-bold text-lg text-rose-700 dark:text-rose-400">백 팀</h4>
+                    <div class="text-5xl font-black" id="white-score">0</div>
+                    <div class="space-x-2">
+                        <button onclick="updateScore('white', -10)" class="paper-box px-3 py-1 font-bold">-10</button>
+                        <button onclick="updateScore('white', 10)" class="paper-box px-3 py-1 font-bold bg-slate-100 dark:bg-slate-700">+10</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 2. 상세 일정 페이지 -->
-        <section id="page-schedule" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full">
-            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-4">
-                <h3 class="text-2xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-calendar-days text-indigo-600 dark:text-indigo-400 mr-2"></i>상세 타임테이블</h3>
-                <button onclick="showPage('home')" class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-sm font-bold">홈으로</button>
+        <!-- 2. 일정 페이지 -->
+        <section id="page-schedule" class="hidden paper-box p-6 sm:p-8 space-y-6 w-full shadow-lg">
+            <div class="document-header pb-3 flex items-center justify-between">
+                <h3 class="text-lg font-bold">시간대별 운영 일정</h3>
+                <button onclick="showPage('home')" class="paper-box px-3 py-1 text-xs font-bold">목록으로</button>
             </div>
-            <div class="space-y-4 pt-2 text-sm">
-                <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700 flex justify-between">
-                    <span class="font-bold text-indigo-600 dark:text-indigo-400">08:50 ~ 09:00</span>
-                    <span>각반 출석체크 및 운동장 집결 완료[cite: 3]</span>
-                </div>
-                <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700 flex justify-between">
-                    <span class="font-bold text-indigo-600 dark:text-indigo-400">09:00 ~ 09:20</span>
-                    <span>전체 운동장 집결 및 준비운동[cite: 3]</span>
-                </div>
-                <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700 flex justify-between">
-                    <span class="font-bold text-indigo-600 dark:text-indigo-400">09:20 ~ 12:40</span>
-                    <span>1~3부 순환 경기 진행 (운동장, 체육관, 교실)[cite: 3]</span>
-                </div>
-                <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700 flex justify-between">
-                    <span class="font-bold text-indigo-600 dark:text-indigo-400">12:40 ~ 13:30</span>
-                    <span>점심시간 및 스포츠 부스 운영[cite: 3]</span>
-                </div>
-                <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700 flex justify-between">
-                    <span class="font-bold text-indigo-600 dark:text-indigo-400">13:30 ~ 15:00</span>
-                    <span>피날레 행사(공연, 계주) 및 교내정화[cite: 3]</span>
-                </div>
+            <div class="space-y-2 text-xs sm:text-sm">
+                <div class="paper-box p-3 flex justify-between"><span>08:50 ~ 09:00</span><span>각반 출석체크 및 운동장 집결 완료[cite: 3]</span></div>
+                <div class="paper-box p-3 flex justify-between"><span>09:00 ~ 09:20</span><span>개회선언 및 준비운동[cite: 3]</span></div>
+                <div class="paper-box p-3 flex justify-between"><span>09:20 ~ 12:40</span><span>1~3부 순환 경기 진행[cite: 3]</span></div>
+                <div class="paper-box p-3 flex justify-between"><span>12:40 ~ 13:30</span><span>점심시간 및 스포츠 부스 운영[cite: 3]</span></div>
+                <div class="paper-box p-3 flex justify-between"><span>13:30 ~ 15:00</span><span>피날레 행사 및 교내정화[cite: 3]</span></div>
             </div>
         </section>
 
         <!-- 3. 대진표 및 규칙 페이지 -->
-        <section id="page-bracket" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full">
-            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-4">
-                <h3 class="text-2xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-sitemap text-indigo-600 dark:text-indigo-400 mr-2"></i>대진표 및 규칙</h3>
-                <button onclick="showPage('home')" class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-sm font-bold">홈으로</button>
+        <section id="page-bracket" class="hidden paper-box p-6 sm:p-8 space-y-6 w-full shadow-lg">
+            <div class="document-header pb-3 flex items-center justify-between">
+                <h3 class="text-lg font-bold">종목별 대진표 및 규칙</h3>
+                <button onclick="showPage('home')" class="paper-box px-3 py-1 text-xs font-bold">목록으로</button>
             </div>
-            <div class="space-y-4 text-xs sm:text-sm">
-                <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <h4 class="font-bold text-indigo-600 dark:text-indigo-400 text-base mb-1">달리는 줄다리기[cite: 3]</h4>
-                    <p class="text-slate-600 dark:text-slate-300">제한시간 30초, 3판 2선승제 토너먼트 방식[cite: 3].</p>
+            <div class="space-y-3 text-xs sm:text-sm">
+                <div class="paper-box p-4">
+                    <h4 class="font-bold mb-1">달리는 줄다리기[cite: 3]</h4>
+                    <p class="text-slate-600 dark:text-slate-400">제한시간 30초, 3판 2선승제 토너먼트 진행[cite: 3].</p>
                 </div>
-                <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <h4 class="font-bold text-indigo-600 dark:text-indigo-400 text-base mb-1">이어달리기[cite: 3]</h4>
-                    <p class="text-slate-600 dark:text-slate-300">남학생 4명, 여학생 4명 구성, 여-남 교대 순서로 진행[cite: 3].</p>
+                <div class="paper-box p-4">
+                    <h4 class="font-bold mb-1">이어달리기[cite: 3]</h4>
+                    <p class="text-slate-600 dark:text-slate-400">남학생 4명, 여학생 4명 구성, 여-남 교대 순서[cite: 3].</p>
                 </div>
-                <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <h4 class="font-bold text-indigo-600 dark:text-indigo-400 text-base mb-1">피구 경기[cite: 3]</h4>
-                    <p class="text-slate-600 dark:text-slate-300">남학생 8명, 여학생 8명 구성, 7분 단세트 조별 토너먼트[cite: 3].</p>
+                <div class="paper-box p-4">
+                    <h4 class="font-bold mb-1">피구 경기[cite: 3]</h4>
+                    <p class="text-slate-600 dark:text-slate-400">남학생 8명, 여학생 8명 구성, 7분 단세트 조별 토너먼트[cite: 3].</p>
                 </div>
             </div>
         </section>
 
         <!-- 4. 투표 페이지 -->
-        <section id="page-poll" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full">
-            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-4">
-                <h3 class="text-2xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-square-poll-vertical text-indigo-600 dark:text-indigo-400 mr-2"></i>우승팀 예측 투표</h3>
-                <button onclick="showPage('home')" class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-sm font-bold">홈으로</button>
+        <section id="page-poll" class="hidden paper-box p-6 sm:p-8 space-y-6 w-full shadow-lg">
+            <div class="document-header pb-3 flex items-center justify-between">
+                <h3 class="text-lg font-bold">우승팀 예측 투표</h3>
+                <button onclick="showPage('home')" class="paper-box px-3 py-1 text-xs font-bold">목록으로</button>
             </div>
-            <div class="max-w-xl mx-auto space-y-4 pt-4">
-                <button onclick="vote('blue')" class="w-full bg-blue-50 dark:bg-blue-950/40 border-2 border-blue-200 dark:border-blue-800 p-4 rounded-2xl flex justify-between items-center transition">
-                    <span class="font-bold text-blue-800 dark:text-blue-300 text-lg">청팀 우승 예상</span>
-                    <span id="blue-votes" class="bg-blue-600 text-white px-3 py-1 rounded-full font-bold text-sm">0표 (0%)</span>
+            <div class="max-w-xl mx-auto space-y-3 pt-2">
+                <button onclick="vote('blue')" class="paper-box w-full p-4 flex justify-between font-bold">
+                    <span>청팀 우승 예상</span>
+                    <span id="blue-votes">0표 (0%)</span>
                 </button>
-                <button onclick="vote('white')" class="w-full bg-rose-50 dark:bg-rose-950/40 border-2 border-rose-200 dark:border-rose-800 p-4 rounded-2xl flex justify-between items-center transition">
-                    <span class="font-bold text-rose-800 dark:text-rose-300 text-lg">백팀 우승 예상</span>
-                    <span id="white-votes" class="bg-rose-600 text-white px-3 py-1 rounded-full font-bold text-sm">0표 (0%)</span>
+                <button onclick="vote('white')" class="paper-box w-full p-4 flex justify-between font-bold">
+                    <span>백팀 우승 예상</span>
+                    <span id="white-votes">0표 (0%)</span>
                 </button>
             </div>
         </section>
 
-        <!-- 5. 실시간 채팅 페이지 (카톡/디스코드 스타일) -->
-        <section id="page-chat" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 sm:p-8 space-y-4 w-full">
-            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-4">
-                <h3 class="text-2xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-comments text-emerald-600 dark:text-emerald-400 mr-2"></i>실시간 오픈 채팅방</h3>
-                <button onclick="showPage('home')" class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-sm font-bold">홈으로</button>
+        <!-- 5. 채팅 페이지 -->
+        <section id="page-chat" class="hidden paper-box p-6 sm:p-8 space-y-4 w-full shadow-lg">
+            <div class="document-header pb-3 flex items-center justify-between">
+                <h3 class="text-lg font-bold">실시간 소통방</h3>
+                <button onclick="showPage('home')" class="paper-box px-3 py-1 text-xs font-bold">목록으로</button>
             </div>
-            <div id="chat-box" class="h-64 sm:h-80 overflow-y-auto bg-slate-50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3 text-sm">
-                <div class="text-xs text-center text-slate-400">실시간 체육활동 오픈채팅방에 입장하셨습니다. 매너챗 부탁드립니다!</div>
+            <div id="chat-box" class="h-64 overflow-y-auto paper-box p-3 space-y-2 text-xs">
+                <div class="text-slate-500">실시간 소통방에 입장하셨습니다.</div>
             </div>
             <div class="flex gap-2">
-                <input type="text" id="chat-input" placeholder="메시지를 입력하세요..." onkeypress="if(event.key==='Enter') sendChat()" class="flex-1 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                <button onclick="sendChat()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-xl text-sm font-bold transition">전송</button>
+                <input type="text" id="chat-input" placeholder="내용 입력..." onkeypress="if(event.key==='Enter') sendChat()" class="paper-box flex-1 px-3 py-2 text-xs">
+                <button onclick="sendChat()" class="paper-box px-4 py-2 text-xs font-bold">전송</button>
             </div>
         </section>
 
-        <!-- 6. 자유 게시판 페이지 -->
-        <section id="page-board" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full">
-            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-4">
-                <h3 class="text-2xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-rectangle-list text-violet-600 dark:text-violet-400 mr-2"></i>자유 게시판</h3>
-                <button onclick="showPage('home')" class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-sm font-bold">홈으로</button>
+        <!-- 6. 게시판 페이지 -->
+        <section id="page-board" class="hidden paper-box p-6 sm:p-8 space-y-6 w-full shadow-lg">
+            <div class="document-header pb-3 flex items-center justify-between">
+                <h3 class="text-lg font-bold">자유 게시판</h3>
+                <button onclick="showPage('home')" class="paper-box px-3 py-1 text-xs font-bold">목록으로</button>
             </div>
-            <form id="board-form" onsubmit="addPost(event)" class="space-y-3 bg-slate-50 dark:bg-slate-700/50 p-4 rounded-2xl border border-slate-200 dark:border-slate-700">
-                <div class="flex gap-4">
-                    <input type="text" id="post-author" placeholder="닉네임" required class="flex-1 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 rounded-xl px-3 py-2 text-sm">
-                    <label class="flex items-center space-x-2 text-sm cursor-pointer select-none">
-                        <input type="checkbox" id="is-anonymous" onchange="toggleAnon()" class="w-4 h-4 text-violet-600 rounded">
+            <form id="board-form" onsubmit="addPost(event)" class="paper-box p-4 space-y-3">
+                <div class="flex gap-3">
+                    <input type="text" id="post-author" placeholder="작성자" required class="paper-box flex-1 px-3 py-1.5 text-xs">
+                    <label class="flex items-center space-x-1 text-xs cursor-pointer">
+                        <input type="checkbox" id="is-anonymous" onchange="toggleAnon()">
                         <span>익명</span>
                     </label>
                 </div>
-                <input type="text" id="post-title" placeholder="제목" required class="w-full border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 rounded-xl px-3 py-2 text-sm">
-                <textarea id="post-content" placeholder="내용을 입력하세요..." rows="2" required class="w-full border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 rounded-xl px-3 py-2 text-sm"></textarea>
-                <button type="submit" class="w-full bg-violet-600 hover:bg-violet-700 text-white font-bold py-2 rounded-xl text-sm">글 등록</button>
+                <input type="text" id="post-title" placeholder="제목" required class="paper-box w-full px-3 py-1.5 text-xs">
+                <textarea id="post-content" placeholder="내용" rows="2" required class="paper-box w-full px-3 py-1.5 text-xs"></textarea>
+                <button type="submit" class="paper-box w-full py-2 text-xs font-bold">게시물 등록</button>
             </form>
-            <div id="post-list" class="space-y-4"></div>
+            <div id="post-list" class="space-y-3"></div>
         </section>
 
-        <!-- 7. 편의 도구함 페이지 (누리집 유틸리티 기능들) -->
-        <section id="page-tools" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full">
-            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-4">
-                <h3 class="text-2xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-toolbox text-amber-600 dark:text-amber-400 mr-2"></i>편의 도구함</h3>
-                <button onclick="showPage('home')" class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-sm font-bold">홈으로</button>
+        <!-- 7. 도구함 페이지 -->
+        <section id="page-tools" class="hidden paper-box p-6 sm:p-8 space-y-6 w-full shadow-lg">
+            <div class="document-header pb-3 flex items-center justify-between">
+                <h3 class="text-lg font-bold">편의 도구함</h3>
+                <button onclick="showPage('home')" class="paper-box px-3 py-1 text-xs font-bold">목록으로</button>
             </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <!-- 1. 팀 추첨기 -->
-                <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl border border-slate-200 dark:border-slate-700 space-y-3">
-                    <h4 class="font-bold text-slate-800 dark:text-slate-200"><i class="fa-solid fa-shuffle mr-2 text-amber-600"></i>랜덤 팀 뽑기</h4>
-                    <input type="text" id="team-members-input" placeholder="이름을 쉼표로 구분 (예: 철수, 영희, 민수)" class="w-full border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 rounded-xl px-3 py-2 text-xs">
-                    <button onclick="pickRandomTeam()" class="w-full bg-amber-600 hover:bg-amber-700 text-white py-2 rounded-xl text-xs font-bold">추첨하기</button>
-                    <div id="team-result" class="text-xs font-semibold text-center text-indigo-600 dark:text-indigo-300"></div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                <div class="paper-box p-4 space-y-2">
+                    <h4 class="font-bold">랜덤 팀 뽑기</h4>
+                    <input type="text" id="team-members-input" placeholder="이름 쉼표 구분" class="paper-box w-full px-2 py-1">
+                    <button onclick="pickRandomTeam()" class="paper-box w-full py-1 font-bold">추첨</button>
+                    <div id="team-result" class="font-bold text-center"></div>
                 </div>
-
-                <!-- 2. 빠른 메모장 -->
-                <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl border border-slate-200 dark:border-slate-700 space-y-3">
-                    <h4 class="font-bold text-slate-800 dark:text-slate-200"><i class="fa-solid fa-note-sticky mr-2 text-amber-600"></i>개인 메모장 (자동저장)</h4>
-                    <textarea id="quick-memo" oninput="saveQuickMemo()" placeholder="자유롭게 메모를 남기세요..." rows="3" class="w-full border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 rounded-xl p-2 text-xs"></textarea>
-                </div>
-
-                <!-- 3. 스톱워치 -->
-                <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl border border-slate-200 dark:border-slate-700 space-y-3 text-center">
-                    <h4 class="font-bold text-slate-800 dark:text-slate-200"><i class="fa-solid fa-stopwatch mr-2 text-amber-600"></i>간이 스톱워치</h4>
-                    <div id="stopwatch-display" class="text-3xl font-black font-mono text-slate-700 dark:text-slate-200">00:00.0</div>
-                    <div class="flex justify-center space-x-2">
-                        <button onclick="startStopwatch()" class="bg-emerald-600 text-white px-3 py-1 rounded-lg text-xs font-bold">시작</button>
-                        <button onclick="stopStopwatch()" class="bg-rose-600 text-white px-3 py-1 rounded-lg text-xs font-bold">정지</button>
-                        <button onclick="resetStopwatch()" class="bg-slate-600 text-white px-3 py-1 rounded-lg text-xs font-bold">초기화</button>
-                    </div>
-                </div>
-
-                <!-- 4. 메뉴 추천기 -->
-                <div class="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl border border-slate-200 dark:border-slate-700 space-y-3 text-center">
-                    <h4 class="font-bold text-slate-800 dark:text-slate-200"><i class="fa-solid fa-utensils mr-2 text-amber-600"></i>오늘 점심 메뉴 추천</h4>
-                    <div id="lunch-recommendation" class="text-lg font-bold text-indigo-600 dark:text-indigo-400">버튼을 눌러보세요!</div>
-                    <button onclick="recommendLunch()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded-xl text-xs font-bold">메뉴 추천 받기</button>
+                <div class="paper-box p-4 space-y-2">
+                    <h4 class="font-bold">개인 메모장</h4>
+                    <textarea id="quick-memo" oninput="saveQuickMemo()" placeholder="메모..." rows="2" class="paper-box w-full p-2"></textarea>
                 </div>
             </div>
         </section>
 
         <!-- 8. 설정 페이지 -->
-        <section id="page-settings" class="hidden bg-white dark:bg-slate-800 rounded-2xl shadow-md p-6 sm:p-8 space-y-6 w-full">
-            <div class="flex items-center justify-between border-b dark:border-slate-700 pb-4">
-                <h3 class="text-2xl font-bold text-slate-900 dark:text-white"><i class="fa-solid fa-gear text-indigo-600 dark:text-indigo-400 mr-2"></i>환경 설정</h3>
-                <button onclick="showPage('home')" class="bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl text-sm font-bold">홈으로</button>
+        <section id="page-settings" class="hidden paper-box p-6 sm:p-8 space-y-6 w-full shadow-lg">
+            <div class="document-header pb-3 flex items-center justify-between">
+                <h3 class="text-lg font-bold">환경 설정</h3>
+                <button onclick="showPage('home')" class="paper-box px-3 py-1 text-xs font-bold">목록으로</button>
             </div>
-            <div class="space-y-4">
-                <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700/50 rounded-xl border border-slate-200 dark:border-slate-700">
-                    <span class="font-bold text-sm">다크 모드 전환</span>
-                    <button onclick="toggleTheme()" class="bg-indigo-600 text-white px-4 py-2 rounded-xl text-xs font-bold">테마 변경</button>
+            <div class="space-y-3 text-xs sm:text-sm">
+                <div class="paper-box p-4 flex justify-between items-center">
+                    <span>다크 모드 전환 (야간 공문서 모드)</span>
+                    <button onclick="toggleTheme()" class="paper-box px-3 py-1 font-bold">변경</button>
                 </div>
-                <div class="flex items-center justify-between p-4 bg-rose-50 dark:bg-rose-950/30 rounded-xl border border-rose-200 dark:border-rose-900">
-                    <span class="font-bold text-sm text-rose-800 dark:text-rose-300">데이터 전체 초기화</span>
-                    <button onclick="localStorage.clear(); location.reload();" class="bg-rose-600 text-white px-4 py-2 rounded-xl text-xs font-bold">초기화</button>
+                <div class="paper-box p-4 flex justify-between items-center">
+                    <span>모든 데이터 초기화</span>
+                    <button onclick="localStorage.clear(); location.reload();" class="paper-box px-3 py-1 font-bold">초기화</button>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- 푸터 -->
-    <footer class="bg-slate-800 dark:bg-slate-950 text-slate-400 text-center py-6 mt-10 text-sm">
-        <p>&copy; 2026 한가람 체육활동 운영 위원회. All rights reserved.</p>
+    <!-- 사각 공문서 푸터 -->
+    <footer class="bg-white dark:bg-slate-900 border-t-2 border-slate-400 dark:border-slate-700 text-center py-4 text-xs">
+        <p>덕소중학교장 [직인생략] | &copy; 2026 한가람 체육활동 운영 위원회</p>
     </footer>
 
-    <!-- 자바스크립트 통합 구현 -->
+    <!-- 자바스크립트 기능 구현 -->
     <script>
         function showPage(pageId) {
             const pages = ['home', 'score', 'schedule', 'bracket', 'poll', 'chat', 'board', 'tools', 'settings'];
@@ -312,43 +272,32 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 시계 및 접속자 위젯
-        setInterval(() => {
-            const now = new Date();
-            document.getElementById('nav-clock').innerText = now.toLocaleTimeString();
-        }, 1000);
-
-        // 점수판 로직
         let scores = { blue: 0, white: 0 };
         function updateScore(team, delta) {
             scores[team] = Math.max(0, scores[team] + delta);
             document.getElementById(`${team}-score`).innerText = scores[team];
         }
 
-        // 투표 로직
         let pollData = { blue: 0, white: 0 };
         function vote(team) {
             pollData[team]++;
             const total = pollData.blue + pollData.white;
             document.getElementById('blue-votes').innerText = `${pollData.blue}표 (${Math.round(pollData.blue/total*100)}%)`;
             document.getElementById('white-votes').innerText = `${pollData.white}표 (${Math.round(pollData.white/total*100)}%)`;
-            alert("투표 완료!");
+            alert("투표 완료");
         }
 
-        // 실시간 채팅 로직
         function sendChat() {
             const input = document.getElementById('chat-input');
-            const text = input.value.trim();
-            if (!text) return;
+            if (!input.value.trim()) return;
             const chatBox = document.getElementById('chat-box');
             const msg = document.createElement('div');
-            msg.innerHTML = `<span class="font-bold text-emerald-600 dark:text-emerald-400">방문자:</span> ${text}`;
+            msg.innerText = `방문자: ${input.value}`;
             chatBox.appendChild(msg);
             input.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        // 자유 게시판 로직
         function toggleAnon() {
             const anon = document.getElementById('is-anonymous').checked;
             const author = document.getElementById('post-author');
@@ -364,67 +313,24 @@
             const postList = document.getElementById('post-list');
 
             const post = document.createElement('div');
-            post.className = 'bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700 space-y-1 text-sm';
-            post.innerHTML = `
-                <div class="flex justify-between font-bold text-violet-600 dark:text-violet-400">
-                    <span>${title}</span>
-                    <span class="text-xs text-slate-400">${author}</span>
-                </div>
-                <p class="text-slate-600 dark:text-slate-300 text-xs">${content}</p>
-            `;
+            post.className = 'paper-box p-3 space-y-1 text-xs';
+            post.innerHTML = `<div class="font-bold">[ ${title} ] - ${author}</div><div>${content}</div>`;
             postList.prepend(post);
             document.getElementById('board-form').reset();
         }
 
-        // 도구함: 팀 추첨기
         function pickRandomTeam() {
             const input = document.getElementById('team-members-input').value;
             const members = input.split(',').map(m => m.trim()).filter(m => m);
-            if (members.length === 0) {
-                alert("이름을 입력해주세요!");
-                return;
-            }
+            if (members.length === 0) return;
             const picked = members[Math.floor(Math.random() * members.length)];
-            document.getElementById('team-result').innerText = `추첨 결과: [ ${picked} ] 당첨!`;
+            document.getElementById('team-result').innerText = `당첨: ${picked}`;
         }
 
-        // 도구함: 메모장 자동저장
         function saveQuickMemo() {
-            const memo = document.getElementById('quick-memo').value;
-            localStorage.setItem('quick_memo', memo);
+            localStorage.setItem('quick_memo', document.getElementById('quick-memo').value);
         }
 
-        // 도구함: 스톱워치
-        let stopwatchInterval;
-        let stopwatchTime = 0;
-        function startStopwatch() {
-            if (stopwatchInterval) return;
-            stopwatchInterval = setInterval(() => {
-                stopwatchTime += 100;
-                let min = String(Math.floor(stopwatchTime / 60000)).padStart(2, '0');
-                let sec = String(Math.floor((stopwatchTime % 60000) / 1000)).padStart(2, '0');
-                let ms = Math.floor((stopwatchTime % 1000) / 100);
-                document.getElementById('stopwatch-display').innerText = `${min}:${sec}.${ms}`;
-            }, 100);
-        }
-        function stopStopwatch() {
-            clearInterval(stopwatchInterval);
-            stopwatchInterval = null;
-        }
-        function resetStopwatch() {
-            stop();
-            stopwatchTime = 0;
-            document.getElementById('stopwatch-display').innerText = "00:00.0";
-        }
-
-        // 도구함: 점심 메뉴 추천
-        function recommendLunch() {
-            const menus = ["제육볶음", "돈가스", "김치찌개", "짜장면", "햄버거", "치킨마요덮밥", "쌀국수", "피자", "초밥"];
-            const selected = menus[Math.floor(Math.random() * menus.length)];
-            document.getElementById('lunch-recommendation').innerText = selected;
-        }
-
-        // 테마 토글
         function toggleTheme() {
             const html = document.documentElement;
             if (html.classList.contains('dark')) {
@@ -441,10 +347,8 @@
             if (localStorage.getItem('theme') === 'dark') {
                 document.documentElement.classList.add('dark');
             }
-            const savedMemo = localStorage.getItem('quick_memo');
-            if (savedMemo) {
-                document.getElementById('quick-memo').value = savedMemo;
-            }
+            const memo = localStorage.getItem('quick_memo');
+            if (memo) document.getElementById('quick-memo').value = memo;
         };
     </script>
 </body>
