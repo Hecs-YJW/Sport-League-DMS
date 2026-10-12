@@ -310,52 +310,25 @@
             </div>
         </section>
 
-        <!-- 5. 카카오톡 스타일 소통방 페이지 -->
+        <!-- 5. 카카오톡 스타일 소통방 페이지 (빈 대화창) -->
         <section id="page-chat" class="hidden official-paper p-6 sm:p-8 space-y-4 w-full shadow-md">
             <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 한가람 체육활동 카톡 단톡방 &gt;</h3>
+                <h3 class="font-bold text-base">&lt; 한가람 체육활동 오픈 소통방 &gt;</h3>
                 <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
             </div>
             
-            <!-- 카톡 채팅방 영역 (스크린샷 대화 적용) -->
-            <div class="kakao-bg border-2 border-slate-800 p-3 rounded-lg flex flex-col justify-between h-[420px]">
-                <!-- 메시지 리스트 -->
+            <!-- 닉네임 설정 영역 -->
+            <div class="flex items-center space-x-2 bg-slate-100 dark:bg-slate-800 p-2 rounded text-xs">
+                <span class="font-bold">내 대화명:</span>
+                <input type="text" id="chat-nickname" placeholder="이름 (예: 3반 홍길동)" class="border border-slate-300 rounded px-2 py-1 bg-white text-slate-900 flex-1 text-xs">
+                <button onclick="saveChatNickname()" class="doc-btn py-1">설정</button>
+            </div>
+
+            <!-- 카톡 채팅방 영역 (완전히 빈 상태로 시작) -->
+            <div class="kakao-bg border-2 border-slate-800 p-3 rounded-lg flex flex-col justify-between h-[380px]">
+                <!-- 대화 내용 영역 (초기엔 안내 문구만 표시) -->
                 <div id="kakao-chat-box" class="overflow-y-auto space-y-3 pr-2 text-xs">
-                    <!-- 상대방 메시지 1 -->
-                    <div class="flex items-start space-x-2">
-                        <div class="w-8 h-8 rounded-full bg-slate-300 flex items-center justify-center font-bold text-slate-700 text-xs">이</div>
-                        <div>
-                            <div class="text-[11px] text-slate-700 mb-0.5">이나미</div>
-                            <div class="flex items-end space-x-1">
-                                <div class="kakao-balloon-other p-2.5 shadow-sm max-w-xs">와 오늘 야구 경기 대박[cite: 8]</div>
-                                <span class="text-[9px] text-slate-600">오후 1:54[cite: 8]</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 내 메시지 1 -->
-                    <div class="flex justify-end items-end space-x-1">
-                        <span class="text-[9px] text-slate-600">오후 1:54[cite: 8]</span>
-                        <div class="kakao-balloon-me p-2.5 shadow-sm max-w-xs">왜? 못 보고 있는데 ㅠㅠ[cite: 8]</div>
-                    </div>
-
-                    <!-- 상대방 메시지 2 -->
-                    <div class="flex items-start space-x-2">
-                        <div class="w-8 h-8 rounded-full bg-slate-300 flex items-center justify-center font-bold text-slate-700 text-xs">이</div>
-                        <div>
-                            <div class="text-[11px] text-slate-700 mb-0.5">이나미</div>
-                            <div class="flex items-end space-x-1">
-                                <div class="kakao-balloon-other p-2.5 shadow-sm max-w-xs">아 진짜 대박인데[cite: 8]</div>
-                                <span class="text-[9px] text-slate-600">오후 1:54[cite: 8]</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 내 메시지 2 -->
-                    <div class="flex justify-end items-end space-x-1">
-                        <span class="text-[9px] text-slate-600">오후 1:55[cite: 8]</span>
-                        <div class="kakao-balloon-me p-2.5 shadow-sm max-w-xs">센스만점이네 ㅋㅋ[cite: 8]</div>
-                    </div>
+                    <div class="text-center text-slate-600 text-[11px] my-2">-- 오픈 단톡방에 입장하셨습니다. 대화를 시작해보세요! --</div>
                 </div>
 
                 <!-- 카톡 하단 입력 바 -->
@@ -465,12 +438,25 @@
             alert("투표가 반영되었습니다.");
         }
 
+        // 실시간 톡방 닉네임 설정 및 메시지 전송
+        function saveChatNickname() {
+            const nick = document.getElementById('chat-nickname').value.trim();
+            if (!nick) {
+                alert("대화명을 입력해주세요!");
+                return;
+            }
+            localStorage.setItem('chat_nickname', nick);
+            alert(`대화명이 [ ${nick} ] (으)로 설정되었습니다.`);
+        }
+
         function sendKakaoChat() {
             const input = document.getElementById('kakao-input');
             const text = input.value.trim();
             if (!text) return;
 
+            const nickname = localStorage.getItem('chat_nickname') || '방문자';
             const chatBox = document.getElementById('kakao-chat-box');
+            
             const now = new Date();
             let hours = now.getHours();
             let minutes = now.getMinutes();
@@ -480,10 +466,13 @@
             const timeStr = `${ampm} ${hours}:${minutes}`;
 
             const myMsg = document.createElement('div');
-            myMsg.className = "flex justify-end items-end space-x-1";
+            myMsg.className = "flex flex-col items-end space-y-0.5";
             myMsg.innerHTML = `
-                <span class="text-[9px] text-slate-600">${timeStr}</span>
-                <div class="kakao-balloon-me p-2.5 shadow-sm max-w-xs">${text}</div>
+                <span class="text-[10px] text-slate-700 font-bold">${nickname}</span>
+                <div class="flex items-end space-x-1">
+                    <span class="text-[9px] text-slate-600">${timeStr}</span>
+                    <div class="kakao-balloon-me p-2.5 shadow-sm max-w-xs">${text}</div>
+                </div>
             `;
             chatBox.appendChild(myMsg);
             input.value = '';
@@ -541,6 +530,11 @@
             }
             const memo = localStorage.getItem('quick_memo');
             if (memo) document.getElementById('quick-memo').value = memo;
+
+            const savedNick = localStorage.getItem('chat_nickname');
+            if (savedNick) {
+                document.getElementById('chat-nickname').value = savedNick;
+            }
         };
     </script>
 </body>
