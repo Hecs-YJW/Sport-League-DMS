@@ -8,6 +8,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome 아이콘 CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Firebase SDK (실시간 데이터 연동용) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
     <style>
         /* 기본 폰트 설정 및 스크롤바 커스텀 */
         body {
@@ -397,15 +400,14 @@
             </div>
         </section>
 
-        <!-- [모듈 5] 실시간 소통방 (초기 빈 대화창 기반) -->
+        <!-- [모듈 5] 실시간 소통방 (실시간 데이터 연동) -->
         <section id="page-chat" class="hidden space-y-6 fade-in">
             <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
                 <div class="flex justify-between items-center border-b border-slate-100 pb-3">
                     <div>
                         <h2 class="font-bold text-lg text-slate-900">한가람 실시간 오픈 소통방</h2>
-                        <p class="text-xs text-slate-500">대화명을 설정한 후 메시지를 입력해보세요.</p>
+                        <p class="text-xs text-slate-500">다른 접속자와 실시간으로 대화할 수 있습니다.</p>
                     </div>
-                    <button onclick="clearChatLog()" class="text-xs text-slate-400 hover:text-slate-700">대화 비우기</button>
                 </div>
 
                 <!-- 닉네임 설정 바 -->
@@ -415,11 +417,11 @@
                     <button onclick="saveNickname()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-3 py-1 rounded transition">저장</button>
                 </div>
 
-                <!-- 대화창 영역 (초기엔 완전 비어있음) -->
+                <!-- 대화창 영역 -->
                 <div class="border border-slate-200 rounded-xl bg-slate-50/50 p-4 h-80 flex flex-col justify-between">
                     <div id="chat-messages-container" class="overflow-y-auto space-y-3 pr-2 text-xs">
                         <div class="text-center text-slate-400 text-[11px] my-4" id="chat-empty-notice">
-                            -- 소통방에 연결되었습니다. 첫 메시지를 남겨보세요! --
+                            -- 실시간 소통방 연결 중... --
                         </div>
                     </div>
 
@@ -503,6 +505,13 @@
 
     <!-- 4. 자바스크립트 전체 기능 통합 구현 -->
     <script>
+        // [Firebase 무료 공용 테스트 실시간 데이터베이스 설정]
+        const firebaseConfig = {
+            databaseURL: "https://doksosports-default-rtdb.firebaseio.com/"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
         // [1] 페이지 이동 핸들러
         function navigateTo(pageId) {
             const pages = ['home', 'score', 'schedule', 'bracket', 'poll', 'chat', 'board', 'tools'];
@@ -537,7 +546,6 @@
             currentScores[team] = Math.max(0, currentScores[team] + amount);
             document.getElementById(`score-${team}-display`).innerText = currentScores[team];
             
-            // 이력 기록
             const historyBox = document.getElementById('score-history');
             if (historyBox.querySelector('.text-slate-400')) {
                 historyBox.innerHTML = '';
@@ -575,7 +583,7 @@
             alert("투표가 반영되었습니다!");
         }
 
-        // [4] 실시간 소통방 로직
+        // [4] 실시간 소통방 로직 (파이어베이스 실시간 연동)
         function saveNickname() {
             const nick = document.getElementById('chat-nick-input').value.trim();
             if (!nick) {
@@ -592,34 +600,39 @@
             if (!text) return;
 
             const nick = localStorage.getItem('user_app_nickname') || '방문자';
+            const now = new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+
+            // 파이어베이스 데이터베이스에 메시지 푸시 (진짜 실시간 연동)
+            db.ref('messages').push({
+                nick: nick,
+                text: text,
+                time: now
+            });
+
+            input.value = '';
+        }
+
+        // 파이어베이스에서 실시간으로 메시지 수신 감지
+        db.ref('messages').on('child_added', (snapshot) => {
+            const msg = snapshot.val();
             const container = document.getElementById('chat-messages-container');
             const emptyNotice = document.getElementById('chat-empty-notice');
             if (emptyNotice) {
                 emptyNotice.remove();
             }
 
-            const now = new Date();
-            const timeStr = now.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
-
             const msgDiv = document.createElement('div');
             msgDiv.className = "flex flex-col items-end space-y-1";
             msgDiv.innerHTML = `
-                <span class="text-[10px] font-bold text-slate-600">${nick}</span>
+                <span class="text-[10px] font-bold text-slate-600">${msg.nick}</span>
                 <div class="flex items-end space-x-1.5">
-                    <span class="text-[9px] text-slate-400">${timeStr}</span>
-                    <div class="chat-bubble-me px-3.5 py-2 text-xs shadow-sm max-w-xs">${text}</div>
+                    <span class="text-[9px] text-slate-400">${msg.time}</span>
+                    <div class="chat-bubble-me px-3.5 py-2 text-xs shadow-sm max-w-xs">${msg.text}</div>
                 </div>
             `;
-
             container.appendChild(msgDiv);
-            input.value = '';
             container.scrollTop = container.scrollHeight;
-        }
-
-        function clearChatLog() {
-            const container = document.getElementById('chat-messages-container');
-            container.innerHTML = `<div class="text-center text-slate-400 text-[11px] my-4" id="chat-empty-notice">-- 소통방에 연결되었습니다. 첫 메시지를 남겨보세요! --</div>`;
-        }
+        });
 
         // [5] 게시판 로직
         function toggleAnonMode() {
@@ -656,7 +669,6 @@
 
             container.prepend(postCard);
 
-            // 초기화
             document.getElementById('board-title-input').value = '';
             document.getElementById('board-content-input').value = '';
         }
@@ -699,7 +711,6 @@
         window.onload = function() {
             navigateTo('home');
 
-            // 저장된 데이터 복원
             const savedData = localStorage.getItem('user_app_data');
             if (savedData) {
                 try {
