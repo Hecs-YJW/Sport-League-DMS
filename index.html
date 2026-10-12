@@ -2,243 +2,218 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>2026 한가람 체육활동 시스템</title>
-    <style>
-        body {
-            background-color: #ffffff;
-            color: #000000;
-            font-family: monospace, sans-serif;
-            margin: 15px;
-            padding: 0;
-        }
-        table {
-            border: 1px solid #000000;
-            border-collapse: collapse;
-            width: 100%;
-            margin-bottom: 10px;
-        }
-        th, td {
-            border: 1px solid #000000;
-            padding: 5px;
-            font-size: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #dddddd;
-        }
-        input, textarea, button {
-            font-family: monospace, sans-serif;
-            font-size: 12px;
-            border: 1px solid #000000;
-            background: #ffffff;
-            padding: 3px 6px;
-        }
-        button {
-            background: #e0e0e0;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #cccccc;
-        }
-        .box {
-            border: 1px solid #000000;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 한가람 체육활동 포털</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col font-sans">
 
-    <!-- 상단 텍스트 메뉴 바 -->
-    <div class="box">
-        <strong>[ 시스템 메뉴 ]</strong> 
-        <a href="#" onclick="showTab('home')">HOME</a> | 
-        <a href="#" onclick="showTab('score')">SCORE</a> | 
-        <a href="#" onclick="showTab('schedule')">SCHEDULE</a> | 
-        <a href="#" onclick="showTab('bracket')">BRACKET</a> | 
-        <a href="#" onclick="showTab('poll')">POLL</a> | 
-        <a href="#" onclick="showTab('chat')">CHAT</a> | 
-        <a href="#" onclick="showTab('board')">BOARD</a> | 
-        <a href="#" onclick="showTab('tools')">TOOLS</a>
-    </div>
-
-    <!-- 1. HOME 탭 -->
-    <div id="tab-home" class="box">
-        <h3>[ HOME ] 2026학년도 한가람 체육활동 안내</h3>
-        <p>기존의 화려한 디자인을 모두 제거하고 날것의 텍스트와 테이블로 구성된 시스템입니다.</p>
-        <table>
-            <tr><th>행사 일시</th><td>2026. 10. 16. (금) 09:00 ~ 15:00[cite: 1, 6]</td></tr>
-            <tr><th>개최 장소</th><td>본교 운동장, 체육관, 각반 교실[cite: 6]</td></tr>
-            <tr><th>담당 부서</th><td>체육보건부 (찬조금/간식 일절 사절)[cite: 6]</td></tr>
-        </table>
-    </div>
-
-    <!-- 2. SCORE 탭 -->
-    <div id="tab-score" class="box hidden">
-        <h3>[ SCORE ] 실시간 점수판</h3>
-        <table>
-            <tr>
-                <th>청 팀 점수: <span id="blue-score">0</span></th>
-                <td>
-                    <button onclick="addScore('blue', -10)">-10</button>
-                    <button onclick="addScore('blue', 10)">+10</button>
-                </td>
-            </tr>
-            <tr>
-                <th>백 팀 점수: <span id="white-score">0</span></th>
-                <td>
-                    <button onclick="addScore('white', -10)">-10</button>
-                    <button onclick="addScore('white', 10)">+10</button>
-                </td>
-            </tr>
-        </table>
-    </div>
-
-    <!-- 3. SCHEDULE 탭 -->
-    <div id="tab-schedule" class="box hidden">
-        <h3>[ SCHEDULE ] 상세 타임테이블</h3>
-        <table>
-            <tr><th>시간</th><th>내용</th></tr>
-            <tr><td>08:50 ~ 09:00</td><td>각반 출석체크 및 운동장 집결 완료[cite: 3]</td></tr>
-            <tr><td>09:00 ~ 09:20</td><td>개회선언 및 준비운동[cite: 3]</td></tr>
-            <tr><td>09:20 ~ 12:40</td><td>1~3부 순환 경기 진행 (운동장, 체육관, 교실)[cite: 3]</td></tr>
-            <tr><td>12:40 ~ 13:30</td><td>점심시간 및 스포츠 부스 운영[cite: 3]</td></tr>
-            <tr><td>13:30 ~ 15:00</td><td>피날레 행사이벤트 및 교내정화[cite: 3, 6]</td></tr>
-        </table>
-    </div>
-
-    <!-- 4. BRACKET 탭 -->
-    <div id="tab-bracket" class="box hidden">
-        <h3>[ BRACKET ] 종목별 규칙 및 대진</h3>
-        <table>
-            <tr><th>종목</th><th>규칙 설명</th></tr>
-            <tr><td>달리는 줄다리기</td><td>제한시간 30초, 3판 2선승제 토너먼트[cite: 3]</td></tr>
-            <tr><td>공&후프 릴레이</td><td>공 전달 후 후프 통과하여 고무에 후프 걸기[cite: 3]</td></tr>
-            <tr><td>이어달리기</td><td>남녀 교대(여-남-여-남...) 8명 주자[cite: 3]</td></tr>
-            <tr><td>피구 경기</td><td>남녀 각 8명, 포커스/헤드샷/더블아웃 금지[cite: 3]</td></tr>
-        </table>
-    </div>
-
-    <!-- 5. POLL 탭 -->
-    <div id="tab-poll" class="box hidden">
-        <h3>[ POLL ] 우승팀 예측 투표</h3>
-        <p>예상하는 우승팀을 선택하세요.</p>
-        <button onclick="vote('blue')">[ 청팀 투표 ]</button> <span id="blue-votes">0표 (0%)</span><br><br>
-        <button onclick="vote('white')">[ 백팀 투표 ]</button> <span id="white-votes">0표 (0%)</span>
-    </div>
-
-    <!-- 6. CHAT 탭 -->
-    <div id="tab-chat" class="box hidden">
-        <h3>[ CHAT ] 실시간 소통방</h3>
-        <div style="margin-bottom: 5px;">
-            닉네임: <input type="text" id="chat-nickname" value="익명" style="width: 100px;">
+    <!-- 상단 심플 내비게이션 -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 h-14 flex justify-between items-center">
+            <h1 class="font-bold text-base text-slate-900 cursor-pointer" onclick="switchTab('home')">
+                <i class="fa-solid fa-medal text-blue-500 mr-1.5"></i> 한가람 체육활동
+            </h1>
+            <nav class="space-x-1 sm:space-x-2 text-xs font-medium">
+                <button onclick="switchTab('home')" class="tab-btn px-3 py-1.5 rounded-md bg-slate-900 text-white">안내</button>
+                <button onclick="switchTab('score')" class="tab-btn px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-600">점수판</button>
+                <button onclick="switchTab('board')" class="tab-btn px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-600">게시판</button>
+                <button onclick="switchTab('chat')" class="tab-btn px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-600">소통방</button>
+                <button onclick="switchTab('tools')" class="tab-btn px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-600">도구함</button>
+            </nav>
         </div>
-        <div id="chat-log" style="border:1px solid #000; height:180px; overflow-y:scroll; padding:5px; margin-bottom:5px; font-size:11px; background:#fafafa;">
-            [시스템] 소통방에 접속했습니다. 대화 기록은 비어있습니다.<br>
+    </header>
+
+    <!-- 메인 콘텐츠 영역 -->
+    <main class="max-w-4xl mx-auto px-4 py-6 flex-1 w-full space-y-4">
+
+        <!-- 1. 홈(안내) 탭 -->
+        <div id="content-home" class="bg-white p-6 rounded-xl shadow-sm space-y-4">
+            <h2 class="text-lg font-bold text-slate-900">2026학년도 한가람 체육활동 안내</h2>
+            <p class="text-xs text-slate-600 leading-relaxed">안전하고 즐거운 체육활동 진행을 위한 정보 안내 페이지입니다[cite: 6].</p>
+            
+            <div class="bg-slate-50 p-4 rounded-lg space-y-2 text-xs">
+                <div class="flex justify-between border-b border-slate-200 pb-2">
+                    <span class="font-bold text-slate-700">일시</span>
+                    <span class="text-slate-600">2026. 10. 16. (금) 09:00 ~ 15:00[cite: 1, 6]</span>
+                </div>
+                <div class="flex justify-between border-b border-slate-200 pb-2">
+                    <span class="font-bold text-slate-700">장소</span>
+                    <span class="text-slate-600">본교 운동장 및 체육관[cite: 6]</span>
+                </div>
+                <div class="flex justify-between pt-1">
+                    <span class="font-bold text-slate-700">참고사항</span>
+                    <span class="text-slate-600">찬조금 및 간식 제공 일절 없음[cite: 6]</span>
+                </div>
+            </div>
         </div>
-        <input type="text" id="chat-msg" placeholder="메시지 입력 후 엔터" style="width:80%;" onkeypress="if(event.key==='Enter') sendChat()">
-        <button onclick="sendChat()">전송</button>
-    </div>
 
-    <!-- 7. BOARD 탭 -->
-    <div id="tab-board" class="box hidden">
-        <h3>[ BOARD ] 자유 게시판</h3>
-        <div style="margin-bottom: 10px;">
-            <input type="text" id="board-author" placeholder="작성자" style="width: 100px;">
-            <input type="text" id="board-title" placeholder="제목" style="width: 200px;">
-            <br>
-            <textarea id="board-content" placeholder="내용 입력" style="width: 310px; height: 40px; margin-top: 3px;"></textarea>
-            <br>
-            <button onclick="addPost()">글 등록</button>
+        <!-- 2. 점수판 탭 -->
+        <div id="content-score" class="hidden bg-white p-6 rounded-xl shadow-sm space-y-4">
+            <h2 class="text-lg font-bold text-slate-900">실시간 점수 집계</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-blue-50 border border-blue-100 p-4 rounded-lg text-center space-y-2">
+                    <div class="font-bold text-blue-600 text-sm">청 팀</div>
+                    <div class="text-4xl font-black text-blue-700" id="score-blue">0</div>
+                    <div class="space-x-1">
+                        <button onclick="updateScore('blue', -10)" class="bg-white border border-blue-200 px-2.5 py-1 rounded text-xs font-bold text-blue-600">-10</button>
+                        <button onclick="updateScore('blue', 10)" class="bg-blue-600 text-white px-3 py-1 rounded text-xs font-bold">+10</button>
+                    </div>
+                </div>
+                <div class="bg-rose-50 border border-rose-100 p-4 rounded-lg text-center space-y-2">
+                    <div class="font-bold text-rose-600 text-sm">백 팀</div>
+                    <div class="text-4xl font-black text-rose-700" id="score-white">0</div>
+                    <div class="space-x-1">
+                        <button onclick="updateScore('white', -10)" class="bg-white border border-rose-200 px-2.5 py-1 rounded text-xs font-bold text-rose-600">-10</button>
+                        <button onclick="updateScore('white', 10)" class="bg-rose-600 text-white px-3 py-1 rounded text-xs font-bold">+10</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="board-list"></div>
-    </div>
 
-    <!-- 8. TOOLS 탭 -->
-    <div id="tab-tools" class="box hidden">
-        <h3>[ TOOLS ] 편의 도구함</h3>
-        <p><strong>랜덤 팀 추첨기:</strong></p>
-        <input type="text" id="tool-input" placeholder="이름1, 이름2, 이름3" style="width:250px;">
-        <button onclick="runTool()">추첨</button>
-        <div id="tool-result" style="margin-top:5px; font-weight:bold;"></div>
+        <!-- 3. 게시판 탭 -->
+        <div id="content-board" class="hidden bg-white p-6 rounded-xl shadow-sm space-y-4">
+            <h2 class="text-lg font-bold text-slate-900">자유 게시판</h2>
+            <form onsubmit="writePost(event)" class="space-y-3 bg-slate-50 p-4 rounded-lg border border-slate-200 text-xs">
+                <div class="flex gap-2">
+                    <input type="text" id="post-author" placeholder="작성자" required class="flex-1 bg-white border border-slate-300 rounded px-3 py-1.5 outline-none">
+                    <label class="flex items-center space-x-1 cursor-pointer">
+                        <input type="checkbox" id="post-anon" onchange="toggleAnon()">
+                        <span>익명</span>
+                    </label>
+                </div>
+                <input type="text" id="post-title" placeholder="제목" required class="w-full bg-white border border-slate-300 rounded px-3 py-1.5 outline-none">
+                <textarea id="post-content" placeholder="내용을 입력하세요..." rows="2" required class="w-full bg-white border border-slate-300 rounded px-3 py-1.5 outline-none"></textarea>
+                <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded">글 등록</button>
+            </form>
+            <div id="post-list" class="space-y-2 text-xs">
+                <div class="text-center text-slate-400 py-6">등록된 게시글이 없습니다.</div>
+            </div>
+        </div>
 
-        <p style="margin-top: 15px;"><strong>개인 메모장:</strong></p>
-        <textarea id="quick-memo" oninput="saveMemo()" placeholder="메모를 입력하세요..." style="width:250px; height:60px;"></textarea>
-    </div>
+        <!-- 4. 소통방 탭 -->
+        <div id="content-chat" class="hidden bg-white p-6 rounded-xl shadow-sm space-y-4">
+            <h2 class="text-lg font-bold text-slate-900">실시간 소통방</h2>
+            <div class="flex items-center space-x-2 text-xs bg-slate-50 p-2 rounded border border-slate-200">
+                <span class="font-bold">내 닉네임:</span>
+                <input type="text" id="chat-nickname" placeholder="닉네임 입력" class="flex-1 bg-white border border-slate-300 rounded px-2 py-1 outline-none">
+                <button onclick="saveNick()" class="bg-slate-900 text-white px-3 py-1 rounded font-bold">저장</button>
+            </div>
+            <div class="bg-sky-100 border border-slate-300 rounded-lg p-3 h-64 flex flex-col justify-between">
+                <div id="chat-messages" class="overflow-y-auto space-y-2 pr-1 text-xs">
+                    <div class="text-center text-slate-500 text-[11px] my-1">소통방에 입장했습니다.</div>
+                </div>
+                <div class="flex gap-2 pt-2 border-t border-slate-300">
+                    <input type="text" id="chat-input" placeholder="메시지 입력..." class="flex-1 bg-white border border-slate-300 rounded px-3 py-1.5 text-xs outline-none" onkeypress="if(event.key==='Enter') sendChat()">
+                    <button onclick="sendChat()" class="bg-yellow-400 font-bold px-4 py-1.5 rounded text-xs">전송</button>
+                </div>
+            </div>
+        </div>
 
+        <!-- 5. 도구함 탭 -->
+        <div id="content-tools" class="hidden bg-white p-6 rounded-xl shadow-sm space-y-4">
+            <h2 class="text-lg font-bold text-slate-900">편의 도구함</h2>
+            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 space-y-3 text-xs">
+                <div class="font-bold text-slate-700">랜덤 추첨기</div>
+                <input type="text" id="tool-names" placeholder="이름을 쉼표(,)로 구분하여 입력" class="w-full bg-white border border-slate-300 rounded px-3 py-1.5 outline-none">
+                <button onclick="runRandom()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2 rounded">추첨 실행</button>
+                <div id="tool-result" class="text-center font-bold text-blue-600 text-sm"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="text-center py-4 text-xs text-slate-400">
+        <p>&copy; 2026 한가람 체육활동 포털</p>
+    </footer>
+
+    <!-- 자바스크립트 로직 -->
     <script>
-        function showTab(tabId) {
-            const tabs = ['home', 'score', 'schedule', 'bracket', 'poll', 'chat', 'board', 'tools'];
-            tabs.forEach(id => {
-                document.getElementById('tab-' + id).classList.add('hidden');
+        function switchTab(tabId) {
+            ['home', 'score', 'board', 'chat', 'tools'].forEach(id => {
+                document.getElementById('content-' + id).classList.add('hidden');
             });
-            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            document.getElementById('content-' + tabId).classList.remove('hidden');
+
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.className = "tab-btn px-3 py-1.5 rounded-md hover:bg-slate-100 text-slate-600";
+            });
+            event.target.className = "tab-btn px-3 py-1.5 rounded-md bg-slate-900 text-white";
         }
 
         let scores = { blue: 0, white: 0 };
-        function addScore(team, val) {
+        function updateScore(team, val) {
             scores[team] = Math.max(0, scores[team] + val);
-            document.getElementById(team + '-score').innerText = scores[team];
+            document.getElementById('score-' + team).innerText = scores[team];
         }
 
-        let pollData = { blue: 0, white: 0 };
-        function vote(team) {
-            pollData[team]++;
-            const total = pollData.blue + pollData.white;
-            document.getElementById('blue-votes').innerText = `${pollData.blue}표 (${Math.round(pollData.blue/total*100)}%)`;
-            document.getElementById('white-votes').innerText = `${pollData.white}표 (${Math.round(pollData.white/total*100)}%)`;
-            alert("투표 완료");
+        function toggleAnon() {
+            const isAnon = document.getElementById('post-anon').checked;
+            const authorInput = document.getElementById('post-author');
+            authorInput.value = isAnon ? '익명' : '';
+            authorInput.disabled = isAnon;
+        }
+
+        function writePost(event) {
+            event.preventDefault();
+            const author = document.getElementById('post-author').value;
+            const title = document.getElementById('post-title').value;
+            const content = document.getElementById('post-content').value;
+            const list = document.getElementById('post-list');
+
+            if (list.querySelector('.text-center')) {
+                list.innerHTML = '';
+            }
+
+            const item = document.createElement('div');
+            item.className = "bg-slate-50 border border-slate-200 p-3 rounded-lg space-y-1";
+            item.innerHTML = `
+                <div class="flex justify-between font-bold text-slate-700">
+                    <span>${title}</span>
+                    <span class="text-slate-400 font-normal">${author}</span>
+                </div>
+                <p class="text-slate-600">${content}</p>
+            `;
+            list.prepend(item);
+            event.target.reset();
+            document.getElementById('post-author').disabled = false;
+        }
+
+        function saveNick() {
+            const nick = document.getElementById('chat-nickname').value.trim();
+            if(!nick) return alert("닉네임을 입력하세요.");
+            localStorage.setItem('user_nick', nick);
+            alert("닉네임이 저장되었습니다.");
         }
 
         function sendChat() {
-            const nick = document.getElementById('chat-nickname').value || '익명';
-            const input = document.getElementById('chat-msg');
-            if(!input.value.trim()) return;
-            const log = document.getElementById('chat-log');
-            log.innerHTML += `[${nick}] ${input.value}<br>`;
+            const input = document.getElementById('chat-input');
+            const text = input.value.trim();
+            if(!text) return;
+            const nick = localStorage.getItem('user_nick') || '방문자';
+            const box = document.getElementById('chat-messages');
+
+            const msg = document.createElement('div');
+            msg.className = "flex flex-col items-end space-y-0.5";
+            msg.innerHTML = `
+                <span class="text-[10px] text-slate-600 font-bold">${nick}</span>
+                <div class="bg-yellow-300 text-slate-900 px-3 py-1.5 rounded-lg max-w-xs shadow-sm">${text}</div>
+            `;
+            box.appendChild(msg);
             input.value = '';
-            log.scrollTop = log.scrollHeight;
+            box.scrollTop = box.scrollHeight;
         }
 
-        function addPost() {
-            const author = document.getElementById('board-author').value || '익명';
-            const title = document.getElementById('board-title').value;
-            const content = document.getElementById('board-content').value;
-            if(!title || !content) {
-                alert("제목과 내용을 입력하세요.");
-                return;
-            }
-            const list = document.getElementById('board-list');
-            const item = document.createElement('div');
-            item.style.border = "1px solid #000";
-            item.style.padding = "5px";
-            item.style.marginBottom = "5px";
-            item.innerHTML = `<strong>[${title}]</strong> (${author})<br>${content}`;
-            list.prepend(item);
-            document.getElementById('board-title').value = '';
-            document.getElementById('board-content').value = '';
-        }
-
-        function runTool() {
-            const val = document.getElementById('tool-input').value;
+        function runRandom() {
+            const val = document.getElementById('tool-names').value;
             const arr = val.split(',').map(s => s.trim()).filter(s => s);
-            if(arr.length === 0) return;
-            const res = arr[Math.floor(Math.random() * arr.length)];
-            document.getElementById('tool-result').innerText = `결과: ${res}`;
+            if(arr.length === 0) return alert("이름을 입력해주세요.");
+            const picked = arr[Math.floor(Math.random() * arr.length)];
+            document.getElementById('tool-result').innerText = `결과: [ ${picked} ]`;
         }
-
-        function saveMemo() {
-            localStorage.setItem('raw_memo', document.getElementById('quick-memo').value);
-        }
-
-        window.onload = function() {
-            showTab('home');
-            const memo = localStorage.getItem('raw_memo');
-            if(memo) document.getElementById('quick-memo').value = memo;
-        };
     </script>
 </body>
 </html>
