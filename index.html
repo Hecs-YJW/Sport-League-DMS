@@ -40,7 +40,7 @@
         <section id="score" class="bg-white rounded-2xl shadow-md p-6 sm:p-8">
             <div class="text-center mb-8">
                 <h3 class="text-2xl font-bold text-slate-900">실시간 점수판</h3>
-                <p class="text-slate-500 text-sm mt-1">경기가 진행될 때마다 점수가 실시간으로 반영됩니다!</p>
+                <p id="score-status-msg" class="text-slate-500 text-sm mt-1">경기가 진행될 때마다 점수가 실시간으로 반영됩니다!</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -51,9 +51,9 @@
                         <h4 class="text-3xl font-black text-blue-700 mt-3">청 팀</h4>
                         <div class="text-6xl font-extrabold text-blue-800 my-6" id="blue-score">120</div>
                     </div>
-                    <div class="flex justify-center space-x-3">
-                        <button onclick="updateScore('blue', -10)" class="bg-blue-200 hover:bg-blue-300 text-blue-800 font-bold px-4 py-2 rounded-xl transition">-10</button>
-                        <button onclick="updateScore('blue', 10)" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 rounded-xl transition">+10</button>
+                    <div id="blue-buttons" class="flex justify-center space-x-3">
+                        <button onclick="updateScore('blue', -10)" class="score-btn bg-blue-200 hover:bg-blue-300 text-blue-800 font-bold px-4 py-2 rounded-xl transition">-10</button>
+                        <button onclick="updateScore('blue', 10)" class="score-btn bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 rounded-xl transition">+10</button>
                     </div>
                 </div>
 
@@ -64,9 +64,9 @@
                         <h4 class="text-3xl font-black text-rose-700 mt-3">백 팀</h4>
                         <div class="text-6xl font-extrabold text-rose-800 my-6" id="white-score">110</div>
                     </div>
-                    <div class="flex justify-center space-x-3">
-                        <button onclick="updateScore('white', -10)" class="bg-rose-200 hover:bg-rose-300 text-rose-800 font-bold px-4 py-2 rounded-xl transition">-10</button>
-                        <button onclick="updateScore('white', 10)" class="bg-rose-600 hover:bg-rose-700 text-white font-bold px-6 py-2 rounded-xl transition">+10</button>
+                    <div id="white-buttons" class="flex justify-center space-x-3">
+                        <button onclick="updateScore('white', -10)" class="score-btn bg-rose-200 hover:bg-rose-300 text-rose-800 font-bold px-4 py-2 rounded-xl transition">-10</button>
+                        <button onclick="updateScore('white', 10)" class="score-btn bg-rose-600 hover:bg-rose-700 text-white font-bold px-6 py-2 rounded-xl transition">+10</button>
                     </div>
                 </div>
             </div>
@@ -238,8 +238,38 @@
 
     <!-- 자바스크립트 기능 구현 -->
     <script>
-        // 점수판 관리 로직
+        // 점수판 관리 로직 (체육대회 당일 제한 기능 포함)
         let scores = { blue: 120, white: 110 };
+
+        function checkEventDay() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate).padStart(2, '0');
+            const todayStr = `${year}-${month}-${day}`;
+
+            // 체육대회 당일 날짜 설정 (2026년 10월 16일)
+            const eventDay = "2026-10-16";
+
+            // ★ 테스트를 원하실 때는 아래 줄의 주석을 풀고 강제로 당일로 설정하실 수 있습니다.
+            // const isEventDay = true; 
+            const isEventDay = (todayStr === eventDay);
+
+            if (!isEventDay) {
+                // 점수 수정 버튼 숨기기 또는 비활성화
+                document.getElementById('blue-buttons').style.display = 'none';
+                document.getElementById('white-buttons').style.display = 'none';
+                
+                // 안내 문구 변경
+                const statusMsg = document.getElementById('score-status-msg');
+                statusMsg.innerHTML = `<span class="text-rose-600 font-semibold"><i class="fa-solid fa-lock mr-1"></i> 점수 수정은 체육대회 당일(2026년 10월 16일)에만 가능합니다.</span>`;
+            }
+        }
+
+        // 페이지 로드 시 당일 여부 체크 실행
+        window.onload = function() {
+            checkEventDay();
+        };
 
         function updateScore(team, delta) {
             scores[team] = Math.max(0, scores[team] + delta);
