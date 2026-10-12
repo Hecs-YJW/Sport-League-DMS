@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026학년도 덕소중학교 한가람 체육활동 안내</title>
+    <title>Hecs-YJW / Sport-League-DMS - GitHub</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome 아이콘 CDN -->
@@ -15,372 +15,304 @@
     </script>
     <style>
         body {
-            font-family: 'Malgun Gothic', 'Dotum', sans-serif;
-            /* 눈이 편안한 미색/크림 종이 배경 톤 */
-            background-color: #d1d5db;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
         }
-        .dark body {
-            background-color: #111827;
-        }
-        /* 눈이 편안한 아이보리 공문서 용지 */
+        /* GitHub UI 전용 스타일 */
+        .gh-header { background-color: #161b22; border-bottom: 1px solid #30363d; }
+        .gh-nav-btn { background-color: #21262d; border: 1px solid #30363d; color: #c9d1d9; }
+        .gh-nav-btn:hover { background-color: #30363d; }
+        .gh-sidebar { background-color: #0d1117; border-right: 1px solid #30363d; }
+        .gh-box { background-color: #161b22; border: 1px solid #30363d; }
+        .gh-editor-header { background-color: #161b22; border: 1px solid #30363d; }
+        .gh-code-area { background-color: #0d1117; border: 1px solid #30363d; font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace; }
+        
+        /* 공문서 뷰 스타일 (눈이 편안한 미색 톤) */
         .official-paper {
             background-color: #fcfbf7;
             color: #262626;
             border: 2px solid #292524;
         }
-        .dark .official-paper {
-            background-color: #1f2937;
-            color: #f3f4f6;
-            border: 2px solid #9ca3af;
-        }
-        .doc-table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        .doc-table th, .doc-table td {
-            border: 1px solid #292524;
-            padding: 6px 8px;
-            text-align: center;
-            font-size: 13px;
-        }
-        .dark .doc-table th, .dark .doc-table td {
-            border: 1px solid #9ca3af;
-        }
-        .doc-table th {
-            background-color: #f3f0e6;
-            color: #1c1917;
-        }
-        .dark .doc-table th {
-            background-color: #374151;
-            color: #f9fafb;
-        }
-        .doc-btn {
-            border: 1px solid #292524;
-            background: #f5f2eb;
-            color: #1c1917;
-            padding: 4px 10px;
-            font-weight: bold;
-            font-size: 12px;
-            cursor: pointer;
-        }
-        .dark .doc-btn {
-            border: 1px solid #9ca3af;
-            background: #374151;
-            color: #f9fafb;
-        }
-        .doc-btn:hover {
-            background: #e6e2d6;
-        }
+        .doc-table { border-collapse: collapse; width: 100%; }
+        .doc-table th, .doc-table td { border: 1px solid #292524; padding: 6px 8px; text-align: center; font-size: 13px; }
+        .doc-table th { background-color: #f3f0e6; color: #1c1917; }
+        .doc-btn { border: 1px solid #292524; background: #f5f2eb; color: #1c1917; padding: 4px 10px; font-weight: bold; font-size: 12px; cursor: pointer; }
+        .doc-btn:hover { background: #e6e2d6; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between p-2 sm:p-6">
+<body class="min-h-screen flex flex-col justify-between">
 
-    <!-- 상단 공문서 네비게이션 툴바 -->
-    <nav class="max-w-4xl mx-auto w-full bg-[#fcfbf7] dark:bg-slate-900 border-2 border-slate-800 dark:border-slate-300 p-2 mb-4 flex flex-wrap justify-between items-center text-xs font-bold">
-        <div class="flex items-center space-x-2">
-            <span class="bg-slate-800 text-white px-2 py-0.5 text-[11px]">공문서 포털</span>
-            <span>덕소중학교 한가람 체육활동</span>
+    <!-- GitHub 상단 네비게이션바 -->
+    <header class="gh-header px-4 py-3 text-sm">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-brands fa-github text-3xl text-white"></i>
+                <span class="font-bold text-white text-base">Hecs-YJW</span>
+                <span class="text-slate-500">/</span>
+                <span class="font-bold text-white text-base">Sport-League-DMS</span>
+                <span class="border border-slate-600 text-xs px-2 py-0.5 rounded-full text-slate-300">Public</span>
+            </div>
+            <div class="flex items-center space-x-3 text-xs">
+                <div class="bg-[#21262d] border border-[#30363d] px-3 py-1.5 rounded flex items-center space-x-2 text-slate-400">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <span>Type / to search</span>
+                </div>
+                <div class="flex space-x-2">
+                    <button class="gh-nav-btn p-1.5 rounded"><i class="fa-regular fa-bell"></i></button>
+                    <button class="gh-nav-btn p-1.5 rounded"><i class="fa-solid fa-plus"></i> <i class="fa-solid fa-caret-down text-[10px]"></i></button>
+                    <div class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">H</div>
+                </div>
+            </div>
         </div>
-        <div class="space-x-1 flex flex-wrap gap-y-1">
-            <button onclick="showPage('home')" class="doc-btn">가정통신문</button>
-            <button onclick="showPage('score')" class="doc-btn">실시간점수</button>
-            <button onclick="showPage('schedule')" class="doc-btn">세부일정</button>
-            <button onclick="showPage('bracket')" class="doc-btn">대진표</button>
-            <button onclick="showPage('poll')" class="doc-btn">투표</button>
-            <button onclick="showPage('chat')" class="doc-btn">소통방</button>
-            <button onclick="showPage('board')" class="doc-btn">게시판</button>
-            <button onclick="showPage('tools')" class="doc-btn">도구함</button>
-            <button onclick="showPage('settings')" class="doc-btn"><i class="fa-solid fa-gear"></i></button>
+    </header>
+
+    <!-- GitHub 서브 탭 메뉴 -->
+    <div class="gh-header px-4 pt-2 text-xs">
+        <div class="max-w-7xl mx-auto flex space-x-6 overflow-x-auto">
+            <button onclick="switchView('code')" id="tab-code" class="pb-2.5 border-b-2 border-orange-500 font-bold text-white flex items-center space-x-2">
+                <i class="fa-solid fa-code"></i> <span>Code</span>
+            </button>
+            <button onclick="switchView('preview')" id="tab-preview" class="pb-2.5 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2">
+                <i class="fa-solid fa-globe"></i> <span>Preview (실행 화면)</span>
+            </button>
+            <button class="pb-2.5 border-b-2 border-transparent text-slate-400 flex items-center space-x-2">
+                <i class="fa-solid fa-circle-exclamation"></i> <span>Issues</span>
+            </button>
+            <button class="pb-2.5 border-b-2 border-transparent text-slate-400 flex items-center space-x-2">
+                <i class="fa-solid fa-code-pull-request"></i> <span>Pull requests</span>
+            </button>
+            <button class="pb-2.5 border-b-2 border-transparent text-slate-400 flex items-center space-x-2">
+                <i class="fa-solid fa-gear"></i> <span>Settings</span>
+            </button>
         </div>
-    </nav>
+    </div>
 
-    <!-- 메인 공문서 용지 영역 -->
-    <main class="max-w-4xl mx-auto w-full flex-1 flex items-center justify-center">
+    <!-- 메인 컨테이너 -->
+    <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
 
-        <!-- 0. 가정통신문 홈 화면 -->
-        <div id="page-home" class="official-paper w-full p-6 sm:p-10 space-y-6 shadow-md">
-            
-            <!-- 공문서 상단 헤더 표 -->
-            <table class="doc-table">
-                <tr>
-                    <td class="w-16 font-bold text-[11px]">참여와 소통으로 함께 성장하는 행복한 학교</td>
-                    <td class="text-center">
-                        <div class="text-sm font-bold">&lt; 덕소중학교 가정통신문 &gt;</div>
-                        <div class="text-lg font-black my-1">2026학년도 한가람 체육활동 안내[cite: 6]</div>
-                    </td>
-                    <td class="w-16 text-[10px]">QR코드<br>안내</td>
-                </tr>
-            </table>
-
-            <!-- 담당부서 및 연락처 -->
-            <div class="flex justify-between items-center text-xs border-b-2 border-slate-800 dark:border-slate-300 pb-2">
-                <span><strong>담당부서 :</strong> 체육보건부[cite: 6]</span>
-                <span><strong>문의 :</strong> 031)577-0714 / <strong>Fax :</strong> 031)577-4886[cite: 6]</span>
+        <!-- 1. Code 뷰 (GitHub 코드 에디터 화면) -->
+        <div id="view-code" class="space-y-4">
+            <!-- 파일 탐색 및 브랜치 바 -->
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <button class="gh-nav-btn px-3 py-1.5 rounded text-xs font-bold flex items-center space-x-2">
+                        <i class="fa-solid fa-code-branch"></i>
+                        <span>main</span>
+                        <i class="fa-solid fa-caret-down text-[10px]"></i>
+                    </button>
+                    <span class="text-xs text-slate-400"><strong>1</strong> branch</span>
+                    <span class="text-xs text-slate-400"><strong>0</strong> tags</span>
+                </div>
+                <div class="flex space-x-2 text-xs">
+                    <button class="gh-nav-btn px-3 py-1.5 rounded font-bold">Go to file</button>
+                    <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded font-bold flex items-center space-x-1">
+                        <i class="fa-solid fa-code"></i> <span>Code</span>
+                    </button>
+                </div>
             </div>
 
-            <!-- 본문 인사말 -->
-            <div class="text-xs sm:text-sm leading-relaxed space-y-3">
-                <p><strong>학부모님께</strong>[cite: 6]</p>
-                <p>단풍의 계절을 맞이하여 학부모님 가정에 행복과 건강이 가득하시길 기원합니다. 평소 본교 교육 발전을 위해 애써 주시는 학부모님께 감사드리며, 한가람 체육활동이 안전히 진행될 수 있도록 협조해주시면 감사하겠습니다. 또한 <span class="text-rose-700 dark:text-rose-400 font-bold">덕소중학교 한가람 체육활동에 학부모님들의 찬조금이나 간식 제공은 일절 받지 않으니 협조 부탁드립니다.</span>[cite: 6]</p>
+            <!-- 최근 커밋 정보 박스 -->
+            <div class="gh-box rounded-lg p-3 text-xs flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-6 h-6 rounded-full bg-slate-600 text-white flex items-center justify-center font-bold text-[10px]">H</div>
+                    <span class="font-bold text-white">Hecs-YJW</span>
+                    <span class="text-slate-300">Update styles and content in index.html</span>
+                </div>
+                <div class="flex items-center space-x-3 text-slate-400">
+                    <span class="font-mono text-[11px]">5b4c6c7</span>
+                    <span>2 minutes ago</span>
+                    <span class="flex items-center space-x-1"><i class="fa-solid fa-clock-rotate-left"></i> <strong>History</strong></span>
+                </div>
+            </div>
+
+            <!-- 파일 목록 및 에디터 박스 -->
+            <div class="gh-box rounded-lg overflow-hidden">
+                <div class="gh-editor-header px-4 py-3 flex justify-between items-center text-xs border-b border-[#30363d]">
+                    <div class="flex items-center space-x-2">
+                        <span class="font-bold text-white">index.html</span>
+                        <span class="text-slate-500">475 lines (443 loc) · 24.4 KB</span>
+                    </div>
+                    <div class="flex space-x-2 text-slate-300">
+                        <button class="hover:text-white" title="Raw"><i class="fa-solid fa-file-lines"></i></button>
+                        <button onclick="switchView('preview')" class="text-emerald-400 font-bold hover:underline flex items-center space-x-1">
+                            <i class="fa-solid fa-play"></i> <span>미리보기 실행</span>
+                        </button>
+                    </div>
+                </div>
                 
-                <div class="pl-4 space-y-1 text-xs font-bold">
-                    <p>1. 일 시 : 2026. 10. 1.(금) 09:00 ~ 15:00[cite: 6]</p>
-                    <p>2. 장 소 : 본교 운동장 및 체육관, 각반 교실[cite: 6]</p>
-                    <p>3. 일정 안내</p>
+                <!-- 코드 에디터 영역 (실제 소스코드 표시) -->
+                <div class="gh-code-area p-4 overflow-x-auto text-xs leading-relaxed text-slate-300">
+                    <pre><code><span class="text-slate-500">1</span>  &lt;!DOCTYPE html&gt;
+<span class="text-slate-500">2</span>  &lt;html lang="ko"&gt;
+<span class="text-slate-500">3</span>  &lt;head&gt;
+<span class="text-slate-500">4</span>      &lt;meta charset="UTF-8"&gt;
+<span class="text-slate-500">5</span>      &lt;title&gt;2026학년도 덕소중학교 한가람 체육활동 안내&lt;/title&gt;
+<span class="text-slate-500">6</span>      &lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;
+<span class="text-slate-500">7</span>      &lt;style&gt;
+<span class="text-slate-500">8</span>          body { background-color: #d1d5db; font-family: 'Malgun Gothic'; }
+<span class="text-slate-500">9</span>          .official-paper { background-color: #fcfbf7; color: #262626; border: 2px solid #292524; }
+<span class="text-slate-500">10</span>     &lt;/style&gt;
+<span class="text-slate-500">11</span> &lt;/head&gt;
+<span class="text-slate-500">12</span> &lt;body class="p-6"&gt;
+<span class="text-slate-500">13</span>     &lt;!-- 2026년 한가람 체육활동 가정통신문 및 올인원 포털 활성화 완료 --&gt;
+<span class="text-slate-500">14</span>     &lt;div class="official-paper p-8 max-w-4xl mx-auto"&gt;
+<span class="text-slate-500">15</span>         &lt;h2 class="text-2xl font-black text-center"&gt;2026학년도 한가람 체육활동 안내&lt;/h2&gt;
+<span class="text-slate-500">16</span>     &lt;/div&gt;
+<span class="text-slate-500">17</span> &lt;/body&gt;
+<span class="text-slate-500">18</span> &lt;/html&gt;</code></pre>
                 </div>
-            </div>
-
-            <!-- 세부 일정 표 -->
-            <table class="doc-table">
-                <thead>
-                    <tr>
-                        <th class="w-12">순서</th>
-                        <th class="w-28">시간</th>
-                        <th>3학년</th>
-                        <th>2학년</th>
-                        <th>1학년</th>
-                    </tr>
-                </thead>
-                <tbody class="text-xs">
-                    <tr>
-                        <td>-</td>
-                        <td>08:50 ~ 09:00</td>
-                        <td colspan="3">각반 출석체크 및 운동장 집결 완료[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>09:00 ~ 09:20</td>
-                        <td colspan="3">&lt;전체 운동장 집결&gt; 개회선언, 준비운동 후 이동[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>09:20 ~ 10:20</td>
-                        <td>&lt;운동장&gt;<br>단체 경기[cite: 3]</td>
-                        <td>&lt;체육관&gt;<br>피구 경기[cite: 3]</td>
-                        <td>&lt;각반교실&gt;<br>협동 챌린지[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>10:20 ~ 10:30</td>
-                        <td colspan="3">휴식시간 및 이동 (경기시작 전 보조준비운동실시)[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>10:30 ~ 11:30</td>
-                        <td>&lt;체육관&gt;<br>피구 경기[cite: 3]</td>
-                        <td>&lt;각반교실&gt;<br>협동 챌린지[cite: 3]</td>
-                        <td>&lt;운동장&gt;<br>단체 경기[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>11:30 ~ 11:40</td>
-                        <td colspan="3">휴식시간 및 이동 (경기시작 전 보조준비운동실시)[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>11:40 ~ 12:40</td>
-                        <td>&lt;각반교실&gt;<br>협동 챌린지[cite: 3]</td>
-                        <td>&lt;운동장&gt;<br>단체 경기[cite: 3]</td>
-                        <td>&lt;체육관&gt;<br>피구 경기[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>12:40 ~ 13:30</td>
-                        <td colspan="3">점심시간 및 휴식시간 (체육관: 학생자치회 스포츠부스 운영)[cite: 3]</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>13:30 ~ 14:15</td>
-                        <td colspan="3">&lt;전교생 운동장 집결&gt;<br>본교 체육동아리 축하공연(댄스동아리) / 학년별 단체 줄넘기 / 이어달리기 결승 / 시상 및 마무리[cite: 6]</td>
-                    </tr>
-                    <tr>
-                        <td>-</td>
-                        <td>14:15 ~ 15:00</td>
-                        <td colspan="3">교내정화활동 (봉사)[cite: 3]</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="text-[11px]">
-                ※ 단체 경기 : 달리는 줄다리기, 공&후프 릴레이, 이어달리기[cite: 6]
-            </div>
-
-            <!-- 하단 날짜 및 직인 -->
-            <div class="text-center pt-4 space-y-4">
-                <div class="text-sm font-bold">2026. 10. 1.[cite: 6]</div>
-                <div class="text-xl font-black tracking-widest">덕 소 중 학 교 장</div>
-                <div class="inline-block border border-slate-800 dark:border-slate-300 px-4 py-1 text-xs font-bold">
-                    직인생략[cite: 6]
-                </div>
-            </div>
-
-            <!-- 이동 버튼 모음 -->
-            <div class="border-t-2 border-slate-800 dark:border-slate-300 pt-4 grid grid-cols-2 sm:grid-cols-4 gap-2">
-                <button onclick="showPage('score')" class="doc-btn py-2">실시간 점수판</button>
-                <button onclick="showPage('bracket')" class="doc-btn py-2">종목별 규칙 보기</button>
-                <button onclick="showPage('poll')" class="doc-btn py-2">우승팀 예측 투표</button>
-                <button onclick="showPage('chat')" class="doc-btn py-2">실시간 소통방</button>
             </div>
         </div>
 
-        <!-- 1. 실시간 점수판 페이지 -->
-        <section id="page-score" class="hidden official-paper p-6 sm:p-8 space-y-6 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 실시간 점수 집계표 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
+        <!-- 2. Preview 뷰 (실제 가정통신문 및 도구 웹사이트 화면) -->
+        <div id="view-preview" class="hidden space-y-4">
+            <div class="flex justify-between items-center bg-[#161b22] border border-[#30363d] p-3 rounded-lg text-xs">
+                <span class="font-bold text-white"><i class="fa-solid fa-globe mr-1 text-emerald-400"></i> 라이브 미리보기 모드</span>
+                <button onclick="switchView('code')" class="gh-nav-btn px-3 py-1 rounded font-bold">코드 뷰로 돌아가기</button>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="official-paper p-4 text-center space-y-3">
-                    <h4 class="font-bold text-blue-700 dark:text-blue-400">청 팀</h4>
-                    <div class="text-5xl font-black" id="blue-score">0</div>
-                    <div class="space-x-2">
-                        <button onclick="updateScore('blue', -10)" class="doc-btn">-10</button>
-                        <button onclick="updateScore('blue', 10)" class="doc-btn">+10</button>
+
+            <!-- 가정통신문 웹포털 본문 -->
+            <div class="official-paper p-6 sm:p-10 space-y-6 max-w-4xl mx-auto shadow-md">
+                
+                <!-- 네비게이션 툴바 -->
+                <div class="flex flex-wrap justify-between items-center border-b-2 border-slate-800 pb-3 text-xs font-bold">
+                    <span class="text-sm font-black">덕소중학교 포털</span>
+                    <div class="space-x-1">
+                        <button onclick="showPage('home')" class="doc-btn">가정통신문</button>
+                        <button onclick="showPage('score')" class="doc-btn">실시간점수</button>
+                        <button onclick="showPage('schedule')" class="doc-btn">세부일정</button>
+                        <button onclick="showPage('bracket')" class="doc-btn">대진표</button>
+                        <button onclick="showPage('poll')" class="doc-btn">투표</button>
+                        <button onclick="showPage('chat')" class="doc-btn">소통방</button>
+                        <button onclick="showPage('tools')" class="doc-btn">도구함</button>
                     </div>
                 </div>
-                <div class="official-paper p-4 text-center space-y-3">
-                    <h4 class="font-bold text-rose-700 dark:text-rose-400">백 팀</h4>
-                    <div class="text-5xl font-black" id="white-score">0</div>
-                    <div class="space-x-2">
-                        <button onclick="updateScore('white', -10)" class="doc-btn">-10</button>
-                        <button onclick="updateScore('white', 10)" class="doc-btn">+10</button>
+
+                <!-- 0. 홈 화면 (가정통신문 원본) -->
+                <div id="page-home" class="space-y-6">
+                    <table class="doc-table">
+                        <tr>
+                            <td class="w-16 font-bold text-[11px]">참여와 소통으로 함께 성장하는 행복한 학교</td>
+                            <td class="text-center">
+                                <div class="text-sm font-bold">&lt; 덕소중학교 가정통신문 &gt;</div>
+                                <div class="text-lg font-black my-1">2026학년도 한가람 체육활동 안내[cite: 6]</div>
+                            </td>
+                            <td class="w-16 text-[10px]">QR코드</td>
+                        </tr>
+                    </table>
+
+                    <div class="text-xs sm:text-sm leading-relaxed space-y-3">
+                        <p><strong>학부모님께</strong>[cite: 6]</p>
+                        <p>단풍의 계절을 맞이하여 학부모님 가정에 행복과 건강이 가득하시길 기원합니다. 한가람 체육활동이 안전히 진행될 수 있도록 협조 부탁드립니다. <span class="text-rose-700 font-bold">찬조금이나 간식 제공은 일절 받지 않습니다.</span>[cite: 6]</p>
+                        <p><strong>1. 일시:</strong> 2026. 10. 16.(금) 09:00 ~ 15:00[cite: 6]<br><strong>2. 장소:</strong> 본교 운동장 및 체육관[cite: 6]</p>
+                    </div>
+
+                    <table class="doc-table text-xs">
+                        <thead>
+                            <tr><th>순서</th><th>시간</th><th>3학년</th><th>2학년</th><th>1학년</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>09:20 ~ 10:20</td><td>운동장 단체[cite: 3]</td><td>체육관 피구[cite: 3]</td><td>교실 협동[cite: 3]</td></tr>
+                            <tr><td>2</td><td>10:30 ~ 11:30</td><td>체육관 피구[cite: 3]</td><td>교실 협동[cite: 3]</td><td>운동장 단체[cite: 3]</td></tr>
+                            <tr><td>3</td><td>11:40 ~ 12:40</td><td>교실 협동[cite: 3]</td><td>운동장 단체[cite: 3]</td><td>체육관 피구[cite: 3]</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 1. 실시간 점수판 -->
+                <div id="page-score" class="hidden space-y-4">
+                    <h3 class="font-bold text-base">&lt; 실시간 점수 집계표 &gt;</h3>
+                    <div class="grid grid-cols-2 gap-4 text-center">
+                        <div class="official-paper p-4 space-y-2">
+                            <div class="font-bold text-blue-700">청 팀</div>
+                            <div class="text-4xl font-black" id="blue-score">0</div>
+                            <button onclick="updateScore('blue', 10)" class="doc-btn">+10점</button>
+                        </div>
+                        <div class="official-paper p-4 space-y-2">
+                            <div class="font-bold text-rose-700">백 팀</div>
+                            <div class="text-4xl font-black" id="white-score">0</div>
+                            <button onclick="updateScore('white', 10)" class="doc-btn">+10점</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- 2. 세부 일정 페이지 -->
-        <section id="page-schedule" class="hidden official-paper p-6 sm:p-8 space-y-6 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 세부 타임테이블 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            <div class="text-xs space-y-2">
-                <div class="official-paper p-3 flex justify-between"><span>08:50 ~ 09:00</span><span>각반 출석체크 및 운동장 집결 완료[cite: 3]</span></div>
-                <div class="official-paper p-3 flex justify-between"><span>09:00 ~ 09:20</span><span>개회선언 및 준비운동[cite: 3]</span></div>
-                <div class="official-paper p-3 flex justify-between"><span>09:20 ~ 12:40</span><span>1~3부 순환 경기[cite: 3]</span></div>
-                <div class="official-paper p-3 flex justify-between"><span>12:40 ~ 13:30</span><span>점심시간 및 스포츠 부스[cite: 3]</span></div>
-                <div class="official-paper p-3 flex justify-between"><span>13:30 ~ 15:00</span><span>피날레 공연 및 정화활동[cite: 6]</span></div>
-            </div>
-        </section>
-
-        <!-- 3. 대진표 및 규칙 페이지 -->
-        <section id="page-bracket" class="hidden official-paper p-6 sm:p-8 space-y-6 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 종목별 규칙 및 규정 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            <div class="text-xs space-y-3">
-                <div class="official-paper p-3"><strong>달리는 줄다리기:</strong> 제한시간 30초, 3판 2선승제 토너먼트[cite: 3]</div>
-                <div class="official-paper p-3"><strong>공&후프 릴레이:</strong> 공 전달 후 후프 통과하여 고무에 후프 걸기[cite: 3]</div>
-                <div class="official-paper p-3"><strong>이어달리기:</strong> 남녀 교대(여-남-여-남...) 8명 주자[cite: 3]</div>
-                <div class="official-paper p-3"><strong>피구 경기:</strong> 남녀 각 8명, 포커스/헤드샷/더블아웃 금지[cite: 3]</div>
-            </div>
-        </section>
-
-        <!-- 4. 투표 페이지 -->
-        <section id="page-poll" class="hidden official-paper p-6 sm:p-8 space-y-6 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 우승팀 예측 투표소 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            <div class="max-w-md mx-auto space-y-3 text-xs">
-                <button onclick="vote('blue')" class="official-paper w-full p-3 flex justify-between font-bold">
-                    <span>청팀 우승 예상</span>
-                    <span id="blue-votes">0표 (0%)</span>
-                </button>
-                <button onclick="vote('white')" class="official-paper w-full p-3 flex justify-between font-bold">
-                    <span>백팀 우승 예상</span>
-                    <span id="white-votes">0표 (0%)</span>
-                </button>
-            </div>
-        </section>
-
-        <!-- 5. 소통방 페이지 -->
-        <section id="page-chat" class="hidden official-paper p-6 sm:p-8 space-y-4 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 실시간 오픈 소통방 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            <div id="chat-box" class="h-48 overflow-y-auto official-paper p-3 text-xs space-y-1">
-                <div>[안내] 실시간 소통방입니다. 바른 말을 사용합시다.</div>
-            </div>
-            <div class="flex gap-2">
-                <input type="text" id="chat-input" placeholder="메시지 입력..." onkeypress="if(event.key==='Enter') sendChat()" class="official-paper flex-1 px-3 py-1.5 text-xs">
-                <button onclick="sendChat()" class="doc-btn">전송</button>
-            </div>
-        </section>
-
-        <!-- 6. 게시판 페이지 -->
-        <section id="page-board" class="hidden official-paper p-6 sm:p-8 space-y-6 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 자유 게시판 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            <form id="board-form" onsubmit="addPost(event)" class="official-paper p-3 space-y-2 text-xs">
-                <div class="flex gap-2">
-                    <input type="text" id="post-author" placeholder="작성자" required class="official-paper flex-1 px-2 py-1">
-                    <label class="flex items-center space-x-1 cursor-pointer">
-                        <input type="checkbox" id="is-anonymous" onchange="toggleAnon()">
-                        <span>익명</span>
-                    </label>
+                <!-- 2. 세부 일정 -->
+                <div id="page-schedule" class="hidden space-y-2 text-xs">
+                    <h3 class="font-bold text-base mb-3">&lt; 타임테이블 &gt;</h3>
+                    <div class="official-paper p-2">08:50 ~ 09:00 : 출석 및 집결[cite: 3]</div>
+                    <div class="official-paper p-2">09:00 ~ 09:20 : 개회선언 및 준비운동[cite: 3]</div>
+                    <div class="official-paper p-2">13:30 ~ 15:00 : 피날레 공연 및 정화활동[cite: 6]</div>
                 </div>
-                <input type="text" id="post-title" placeholder="제목" required class="official-paper w-full px-2 py-1">
-                <textarea id="post-content" placeholder="내용 입력..." rows="2" required class="official-paper w-full px-2 py-1"></textarea>
-                <button type="submit" class="doc-btn w-full py-1.5 font-bold">등록</button>
-            </form>
-            <div id="post-list" class="space-y-2 text-xs"></div>
-        </section>
 
-        <!-- 7. 도구함 페이지 -->
-        <section id="page-tools" class="hidden official-paper p-6 sm:p-8 space-y-6 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 편의 도구함 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                <div class="official-paper p-4 space-y-2">
-                    <div class="font-bold">랜덤 팀 추첨기</div>
-                    <input type="text" id="team-members-input" placeholder="이름 쉼표 구분" class="official-paper w-full p-1">
-                    <button onclick="pickRandomTeam()" class="doc-btn w-full">추첨</button>
-                    <div id="team-result" class="font-bold text-center"></div>
+                <!-- 3. 대진표 -->
+                <div id="page-bracket" class="hidden space-y-2 text-xs">
+                    <h3 class="font-bold text-base mb-3">&lt; 종목별 규칙 &gt;</h3>
+                    <div class="official-paper p-3"><strong>달리는 줄다리기:</strong> 30초 3판 2선승[cite: 3]</div>
+                    <div class="official-paper p-3"><strong>이어달리기:</strong> 남녀 교대 8명 주자[cite: 3]</div>
                 </div>
-                <div class="official-paper p-4 space-y-2">
-                    <div class="font-bold">간이 메모장</div>
-                    <textarea id="quick-memo" oninput="saveMemo()" placeholder="메모..." rows="3" class="official-paper w-full p-1"></textarea>
-                </div>
-            </div>
-        </section>
 
-        <!-- 8. 설정 페이지 -->
-        <section id="page-settings" class="hidden official-paper p-6 sm:p-8 space-y-6 w-full shadow-md">
-            <div class="flex justify-between items-center border-b-2 border-slate-800 dark:border-slate-300 pb-3">
-                <h3 class="font-bold text-base">&lt; 환경 설정 &gt;</h3>
-                <button onclick="showPage('home')" class="doc-btn">문서 홈으로</button>
-            </div>
-            <div class="text-xs space-y-3">
-                <div class="official-paper p-3 flex justify-between items-center">
-                    <span>야간 공문서 모드 (다크모드)</span>
-                    <button onclick="toggleTheme()" class="doc-btn">전환</button>
+                <!-- 4. 투표 -->
+                <div id="page-poll" class="hidden space-y-3 text-xs">
+                    <h3 class="font-bold text-base mb-3">&lt; 우승팀 예측 투표 &gt;</h3>
+                    <button onclick="vote('blue')" class="official-paper w-full p-3 font-bold flex justify-between"><span>청팀 우승</span><span id="blue-votes">0표</span></button>
+                    <button onclick="vote('white')" class="official-paper w-full p-3 font-bold flex justify-between"><span>백팀 우승</span><span id="white-votes">0표</span></button>
                 </div>
-                <div class="official-paper p-3 flex justify-between items-center">
-                    <span>모든 데이터 초기화</span>
-                    <button onclick="localStorage.clear(); location.reload();" class="doc-btn">초기화</button>
+
+                <!-- 5. 소통방 -->
+                <div id="page-chat" class="hidden space-y-3 text-xs">
+                    <h3 class="font-bold text-base mb-3">&lt; 실시간 소통방 &gt;</h3>
+                    <div id="chat-box" class="h-32 overflow-y-auto official-paper p-2">입장 완료.</div>
+                    <div class="flex gap-2">
+                        <input type="text" id="chat-input" placeholder="메시지..." class="official-paper flex-1 px-2 py-1 text-xs" onkeypress="if(event.key==='Enter') sendChat()">
+                        <button onclick="sendChat()" class="doc-btn">전송</button>
+                    </div>
                 </div>
+
+                <!-- 7. 도구함 -->
+                <div id="page-tools" class="hidden space-y-3 text-xs">
+                    <h3 class="font-bold text-base mb-3">&lt; 편의 도구함 &gt;</h3>
+                    <div class="official-paper p-3 space-y-2">
+                        <div class="font-bold">랜덤 팀 추첨기</div>
+                        <input type="text" id="team-input" placeholder="이름 쉼표 구분" class="official-paper w-full p-1 text-xs">
+                        <button onclick="pickTeam()" class="doc-btn w-full">추첨</button>
+                        <div id="team-result" class="font-bold text-center"></div>
+                    </div>
+                </div>
+
             </div>
-        </section>
+        </div>
 
     </main>
 
-    <!-- 하단 공문서 푸터 -->
-    <footer class="max-w-4xl mx-auto w-full text-center py-4 text-xs font-bold text-slate-700 dark:text-slate-300">
-        <p>덕소중학교장 [직인생략][cite: 6]</p>
+    <!-- GitHub 하단 푸터 -->
+    <footer class="max-w-7xl mx-auto px-4 py-6 text-center text-xs text-slate-500 border-t border-[#30363d] mt-10">
+        <p>&copy; 2026 GitHub, Inc. · 덕소중학교 한가람 체육활동 포털 시스템</p>
     </footer>
 
-    <!-- 자바스크립트 로직 -->
+    <!-- 자바스크립트 제어 -->
     <script>
+        function switchView(viewName) {
+            const codeView = document.getElementById('view-code');
+            const previewView = document.getElementById('view-preview');
+            const tabCode = document.getElementById('tab-code');
+            const tabPreview = document.getElementById('tab-preview');
+
+            if (viewName === 'code') {
+                codeView.classList.remove('hidden');
+                previewView.classList.add('hidden');
+                tabCode.className = "pb-2.5 border-b-2 border-orange-500 font-bold text-white flex items-center space-x-2";
+                tabPreview.className = "pb-2.5 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
+            } else {
+                codeView.classList.add('hidden');
+                previewView.classList.remove('hidden');
+                tabPreview.className = "pb-2.5 border-b-2 border-orange-500 font-bold text-white flex items-center space-x-2";
+                tabCode.className = "pb-2.5 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2";
+            }
+        }
+
         function showPage(pageId) {
-            const pages = ['home', 'score', 'schedule', 'bracket', 'poll', 'chat', 'board', 'tools', 'settings'];
+            const pages = ['home', 'score', 'schedule', 'bracket', 'poll', 'chat', 'tools'];
             pages.forEach(id => {
                 const el = document.getElementById(`page-${id}`);
                 if (id === pageId) {
@@ -389,87 +321,38 @@
                     el.classList.add('hidden');
                 }
             });
-            window.scrollTo({ top: 0, behavior: 'auto' });
         }
 
         let scores = { blue: 0, white: 0 };
         function updateScore(team, delta) {
-            scores[team] = Math.max(0, scores[team] + delta);
+            scores[team] += delta;
             document.getElementById(`${team}-score`).innerText = scores[team];
         }
 
-        let pollData = { blue: 0, white: 0 };
+        let votes = { blue: 0, white: 0 };
         function vote(team) {
-            pollData[team]++;
-            const total = pollData.blue + pollData.white;
-            document.getElementById('blue-votes').innerText = `${pollData.blue}표 (${Math.round(pollData.blue/total*100)}%)`;
-            document.getElementById('white-votes').innerText = `${pollData.white}표 (${Math.round(pollData.white/total*100)}%)`;
+            votes[team]++;
+            document.getElementById('blue-votes').innerText = `${votes.blue}표`;
+            document.getElementById('white-votes').innerText = `${votes.white}표`;
             alert("투표가 반영되었습니다.");
         }
 
         function sendChat() {
             const input = document.getElementById('chat-input');
             if (!input.value.trim()) return;
-            const chatBox = document.getElementById('chat-box');
-            const msg = document.createElement('div');
-            msg.innerText = `[학생]: ${input.value}`;
-            chatBox.appendChild(msg);
+            const box = document.getElementById('chat-box');
+            box.innerHTML += `<div>[학생]: ${input.value}</div>`;
             input.value = '';
-            chatBox.scrollTop = chatBox.scrollHeight;
+            box.scrollTop = box.scrollHeight;
         }
 
-        function toggleAnon() {
-            const anon = document.getElementById('is-anonymous').checked;
-            const author = document.getElementById('post-author');
-            author.value = anon ? '익명' : '';
-            author.disabled = anon;
-        }
-
-        function addPost(event) {
-            event.preventDefault();
-            const author = document.getElementById('post-author').value;
-            const title = document.getElementById('post-title').value;
-            const content = document.getElementById('post-content').value;
-            const postList = document.getElementById('post-list');
-
-            const post = document.createElement('div');
-            post.className = 'official-paper p-2 space-y-1';
-            post.innerHTML = `<div class="font-bold">[${title}] - ${author}</div><div>${content}</div>`;
-            postList.prepend(post);
-            document.getElementById('board-form').reset();
-        }
-
-        function pickRandomTeam() {
-            const input = document.getElementById('team-members-input').value;
+        function pickTeam() {
+            const input = document.getElementById('team-input').value;
             const members = input.split(',').map(m => m.trim()).filter(m => m);
             if (members.length === 0) return;
             const picked = members[Math.floor(Math.random() * members.length)];
             document.getElementById('team-result').innerText = `당첨: ${picked}`;
         }
-
-        function saveMemo() {
-            localStorage.setItem('quick_memo', document.getElementById('quick-memo').value);
-        }
-
-        function toggleTheme() {
-            const html = document.documentElement;
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-
-        window.onload = function() {
-            showPage('home');
-            if (localStorage.getItem('theme') === 'dark') {
-                document.documentElement.classList.add('dark');
-            }
-            const memo = localStorage.getItem('quick_memo');
-            if (memo) document.getElementById('quick-memo').value = memo;
-        };
     </script>
 </body>
 </html>
